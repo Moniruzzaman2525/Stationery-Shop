@@ -31,8 +31,8 @@ const Register = () => {
                 onSubmit={onSubmit}
                 style={formStyle}
             >
-                <Title level={3} style={{ textAlign: "center", marginBottom: "20px" }}>
-                    Sign Up
+                <Title level={3} style={{ textAlign: "center", marginBottom: "40px" }}>
+                    Register
                 </Title>
                 <SPInput
                     type="text"
@@ -72,7 +72,7 @@ const Register = () => {
                         border: "none",
                     }}
                 >
-                    Sign Up
+                    Register
                 </Button>
             </SPForm>
         </Row>
