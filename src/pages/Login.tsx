@@ -1,8 +1,10 @@
+import { Row } from "antd";
+
 const Login = () => {
     return (
-        <div>
-            Login
-        </div>
+        <Row>
+            
+        </Row>
     );
 };
 
