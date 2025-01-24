@@ -4,16 +4,18 @@ import { Controller } from "react-hook-form";
 type TInputProps = {
     type: string;
     name: string;
-    label: string;
+    label?: string;
+    placeholder?: string;
+    style?: React.CSSProperties;
 }
 
-const SPInput = ({ type, name, label }: TInputProps) => {
+const SPInput = ({ type, name, label, placeholder, style }: TInputProps) => {
     return (
         <div>
             <Controller
                 name={name} render={({ field, fieldState: { error } }) => (
                     <Form.Item label={label}>
-                        <Input type={type} id={name} {...field} size="large" />
+                        <Input type={type} style={style} id={name} placeholder={placeholder} {...field} size="large" />
                         <div>
                             {
                                 error ? (<small>{error.message}</small>) : (<small>&nbsp;</small>)

@@ -3,16 +3,17 @@ import { ReactNode } from "react";
 import { FieldValues, FormProvider, SubmitHandler, useForm } from "react-hook-form";
 
 type TFormConfig = {
-    defaultValues?: Record<string, any>,
+    defaultValues?: Record<string, any>;
     resolver?: any
 }
 
 type TFormProps = {
-    onSubmit: SubmitHandler<FieldValues>,
-    children: ReactNode
+    onSubmit: SubmitHandler<FieldValues>;
+    children: ReactNode;
+    style?: React.CSSProperties
 } & TFormConfig
 
-const SPForm = ({ onSubmit, children, defaultValues, resolver }: TFormProps) => {
+const SPForm = ({ onSubmit, children, defaultValues, resolver, style }: TFormProps) => {
 
     const formConfig: TFormConfig = {}
     if (defaultValues) {
@@ -30,7 +31,7 @@ const SPForm = ({ onSubmit, children, defaultValues, resolver }: TFormProps) => 
     }
 
     return <FormProvider {...methods}>
-        <Form layout='vertical' onFinish={methods.handleSubmit(onsubmit)}>{children}</Form>
+        <Form style={style} layout='vertical' onFinish={methods.handleSubmit(onsubmit)}>{children}</Form>
     </FormProvider>
 };
 
