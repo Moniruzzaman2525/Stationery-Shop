@@ -1,15 +1,16 @@
-import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query";
+import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 import { RootState } from "../store";
-import { toast } from "sonner";
 import { logOut, setUser } from "../feathers/auth/authSlice";
+import { toast } from "sonner";
+
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: '',
+    baseUrl: 'http://localhost:5000/api/v1',
     credentials: 'include',
-    prepareHeaders: (headers, {getState}) => {
+    prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token
         if (token) {
-            headers.set('authorization', `Bearer ${token}`)
+            headers.set('authorization', `${token}`)
         }
         return headers
     }
@@ -53,3 +54,4 @@ export const baseApi = createApi({
     baseQuery: baseQueryRefreshToken,
     endpoints: () => ({})
 })
+
