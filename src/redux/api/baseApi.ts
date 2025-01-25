@@ -1,6 +1,7 @@
 import { BaseQueryApi, BaseQueryFn, createApi, DefinitionType, FetchArgs, fetchBaseQuery } from "@reduxjs/toolkit/query";
 import { RootState } from "../store";
 import { toast } from "sonner";
+import { logOut, setUser } from "../feathers/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
     baseUrl: '',
@@ -39,7 +40,7 @@ const baseQueryRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType
             }))
             result = await baseQuery(args, api, extraOption)
         } else {
-            api.dispatch(logout())
+            api.dispatch(logOut())
         }
 
     }
