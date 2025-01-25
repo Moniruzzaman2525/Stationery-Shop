@@ -16,7 +16,7 @@ const Navbar = () => {
     }
     return (
         <nav className="flex justify-between items-center bg-[#001845] px-6 py-3 h-[70px] rounded-lg text-white shadow-md">
-            {/* Logo Section */}
+           
             <div className="flex items-center gap-2">
                 <Link to="/" className="flex items-center text-white gap-2 no-underline">
                     <img src={logo} alt="Logo" className="h-10 object-contain" />
@@ -24,7 +24,6 @@ const Navbar = () => {
                 </Link>
             </div>
 
-            {/* Hamburger Menu for Mobile */}
             <div className="md:hidden">
                 <button
                     onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -35,18 +34,16 @@ const Navbar = () => {
                 </button>
             </div>
 
-            {/* Navigation Links for Desktop */}
             <ul className="list-none hidden md:flex gap-8 text-sm font-medium">
-                <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li>
-                <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li>
-                <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li>
-                <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li>
+                <Link to='/books'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
+                <Link to='/art-cart'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
+                <Link to='/stationery'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
+                <Link to='/classroom-supplies'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
             </ul>
 
-            {/* Cart, Profile, and Login Section for Desktop */}
             <div className="hidden md:flex items-center gap-4">
-                <img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" />
-                <img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" />
+                <Link to='/user-cart'><img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
+                <Link to='/my-profile'><img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
                 {!user ? <Link to="/login">
                     <button className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
                         Login

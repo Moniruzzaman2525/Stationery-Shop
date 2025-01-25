@@ -6,6 +6,9 @@ import Books from "../pages/Books";
 import ArtAndCraft from "../pages/ArtAndCraft";
 import Stationery from "../pages/Stationery";
 import ClassRoomSupplies from "../pages/ClassRoomSupplies";
+import { ProtectedRoute } from "../components/layout/ProtectedRoute";
+import UserLayout from "../components/layout/UserLayout";
+import UserCart from "../pages/UserCart";
 
 
 const router = createBrowserRouter([
@@ -29,6 +32,10 @@ const router = createBrowserRouter([
                 path: '/classroom-supplies',
                 element: <ClassRoomSupplies />
             },
+            {
+                path: '/user-cart',
+                element: <ProtectedRoute><UserCart /> </ProtectedRoute>
+            },
         ]
     },
     {
@@ -38,6 +45,10 @@ const router = createBrowserRouter([
     {
         path: '/register',
         element: <Register />
+    },
+    {
+        path: '/my-profile',
+        element: <ProtectedRoute><UserLayout /> </ProtectedRoute>
     },
 
 ])
