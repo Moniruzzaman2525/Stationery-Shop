@@ -3,14 +3,23 @@ import SPForm from "../components/form/SPForm";
 import SPInput from "../components/form/SPInput";
 import { FieldValues } from "react-hook-form";
 import { formStyle, inputStyle } from "../styles/formStyles";
+import { useRegistrationMutation } from "../redux/feathers/auth/authApi";
 
 const { Title, Text } = Typography;
 
 
 
 const Register = () => {
-    const onSubmit = (data: FieldValues) => {
+    const [registration] = useRegistrationMutation()
+    const onSubmit = async(data: FieldValues) => {
         console.log(data);
+
+        try {
+            const res = await registration(data)
+            console.log(res)
+        } catch (err) {
+            console.log(err)
+        }
     };
 
     return (
@@ -24,7 +33,7 @@ const Register = () => {
                 </Title>
                 <SPInput
                     type="text"
-                    name="fullName"
+                    name="name"
                     placeholder="Full Name"
                     style={inputStyle}
                 />
