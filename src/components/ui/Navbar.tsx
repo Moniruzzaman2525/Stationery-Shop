@@ -3,10 +3,17 @@ import logo from "../../assets/images/logo1.png";
 import cart from "../../assets/images/add-card.png";
 import profile from "../../assets/images/profile.png";
 import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logOut, selectCurrentUser } from "../../redux/feathers/auth/authSlice";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const user = useAppSelector(selectCurrentUser)
+    const dispatch = useAppDispatch()
 
+    const handleLogout = () => {
+        dispatch(logOut())
+    }
     return (
         <nav className="flex justify-between items-center bg-[#001845] px-6 py-3 h-[70px] rounded-lg text-white shadow-md">
             {/* Logo Section */}
@@ -40,11 +47,14 @@ const Navbar = () => {
             <div className="hidden md:flex items-center gap-4">
                 <img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" />
                 <img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" />
-                <Link to="/login">
+                {!user ? <Link to="/login">
                     <button className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
                         Login
                     </button>
-                </Link>
+                </Link> :
+                    <button onClick={handleLogout} className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
+                        Logout
+                    </button>}
             </div>
 
             {/* Dropdown Menu for Mobile */}
