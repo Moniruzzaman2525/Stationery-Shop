@@ -1,3 +1,4 @@
+import Banner from "./components/ui/Banner"
 import Navbar from "./components/ui/Navbar"
 
 function App() {
@@ -5,6 +6,7 @@ function App() {
   return (
     <>
       <Navbar />
+      <Banner />
     </>
   )
 }
