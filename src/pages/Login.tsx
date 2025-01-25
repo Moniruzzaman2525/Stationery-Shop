@@ -3,13 +3,36 @@ import SPForm from "../components/form/SPForm";
 import SPInput from "../components/form/SPInput";
 import { FieldValues } from "react-hook-form";
 import { formStyle, inputStyle } from "../styles/formStyles";
+import { useLoginMutation } from "../redux/feathers/auth/authApi";
+import { verifyToken } from "../utils/verifyToken";
+import { useAppDispatch } from "../redux/hooks";
+import { setUser, TUser } from "../redux/feathers/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const { Title } = Typography;
 
 
 const Login = () => {
-    const onSubmit = (data: FieldValues) => {
-        console.log(data);
+
+    const [login] = useLoginMutation()
+    const navigate = useNavigate()
+    const dispatch = useAppDispatch()
+    const onSubmit = async (data: FieldValues) => {
+        const tostId = toast.loading('Login in')
+        try {
+            const res = await login(data).unwrap()
+            const user = verifyToken(res.data.token) as TUser
+            dispatch(setUser({
+                user: user,
+                token: res.data.accessToken
+            }))
+            navigate(`/`)
+            toast.success('Login successfully!', { id: tostId, duration: 2000 })
+        } catch (err) {
+            toast.error('Failed login!', { id: tostId, duration: 2000 })
+
+        }
     };
 
     return (

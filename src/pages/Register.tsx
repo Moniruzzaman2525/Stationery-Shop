@@ -4,21 +4,31 @@ import SPInput from "../components/form/SPInput";
 import { FieldValues } from "react-hook-form";
 import { formStyle, inputStyle } from "../styles/formStyles";
 import { useRegistrationMutation } from "../redux/feathers/auth/authApi";
+import { useAppDispatch } from "../redux/hooks";
+import { verifyToken } from "../utils/verifyToken";
+import { setUser, TUser } from "../redux/feathers/auth/authSlice";
+import { useNavigate } from "react-router-dom";
+import { toast } from "sonner";
 
 const { Title, Text } = Typography;
 
-
-
 const Register = () => {
     const [registration] = useRegistrationMutation()
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const onSubmit = async(data: FieldValues) => {
-        console.log(data);
-
+        const tostId = toast.loading('Registration..')
         try {
-            const res = await registration(data)
-            console.log(res)
+            const res = await registration(data).unwrap()
+            const user = verifyToken(res.data.accessToken) as TUser
+            dispatch(setUser({
+                user: user,
+                token: res.data.accessToken
+            }))
+            navigate(`/`)
+            toast.success('Registration successfully!', { id: tostId, duration: 2000 })
         } catch (err) {
-            console.log(err)
+            toast.error('Failed Registration!', { id: tostId, duration: 2000 })
         }
     };
 

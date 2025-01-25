@@ -1,8 +1,10 @@
+import Navbar from "./components/ui/Navbar"
+
 function App() {
 
   return (
     <>
-      <h1>Stationery Shop</h1>
+      <Navbar />
     </>
   )
 }
