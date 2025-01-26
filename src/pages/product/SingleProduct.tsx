@@ -1,18 +1,39 @@
 import { useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../redux/feathers/product/productApi";
+import { Skeleton, Alert } from "antd";
 
 const SingleProduct = () => {
+    const { productId } = useParams();
+    const { data: singleProductData, isFetching, isError } = useGetSingleProductQuery(productId);
 
-    const { productId } = useParams()
-    const { data: singleProductData } = useGetSingleProductQuery(productId)
-    console.log(singleProductData)
+    if (isFetching) {
+        return (
+            <div className="flex flex-col md:flex-row gap-8 p-8">
+                <div className="w-full md:w-1/2 flex items-center justify-center">
+                    <Skeleton.Image style={{ width: 200, height: 200 }} />
+                </div>
+                <div className="w-full md:w-1/2">
+                    <Skeleton active paragraph={{ rows: 6 }} />
+                </div>
+            </div>
+        );
+    }
 
-
-    console.log(productId)
+    if (isError) {
+        return (
+            <div className="flex items-center justify-center h-screen">
+                <Alert
+                    message="Error"
+                    description="Failed to fetch product details. Please try again later."
+                    type="error"
+                    showIcon
+                />
+            </div>
+        );
+    }
 
     return (
         <div className="flex flex-col md:flex-row gap-8 p-8">
-
             <div className="absolute top-8 left-8">
                 <button className="text-gray-500 hover:text-gray-800">
                     <svg
@@ -33,32 +54,37 @@ const SingleProduct = () => {
             </div>
             <div className="w-full md:w-1/2 flex items-center justify-center">
                 <img
-                    src={singleProductData?.photo}
-                    alt="Product"
+                    src={singleProductData?.photo || "/placeholder-image.png"}
+                    alt={singleProductData?.name || "Product"}
                     className="rounded-lg w-[50%] shadow-lg"
                 />
             </div>
 
             <div className="w-full md:w-1/2 flex flex-col justify-between">
                 <div className="text-sm text-gray-500 mb-2">
-                    <span>Stationery </span>
+                    <span>Stationery</span>
                     <span className="mx-1">→</span>
-                    <span>{singleProductData?.category} </span>
+                    <span>{singleProductData?.category || "N/A"}</span>
                 </div>
 
                 <h1 className="text-2xl font-semibold text-gray-800 mb-4">
-                    {singleProductData?.name} - {singleProductData?.brand} - {singleProductData?.category}
+                    {singleProductData?.name || "Product Name"} -{" "}
+                    {singleProductData?.brand || "Brand"} -{" "}
+                    {singleProductData?.category || "Category"}
                 </h1>
 
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                    {singleProductData?.description}
+                    {singleProductData?.description || "No description available for this product."}
                 </p>
 
                 <div className="mb-4">
                     <p className="text-sm text-gray-500 mb-2">
-                        <span className="font-medium text-gray-800">SKU:</span> 8901425031926
+                        <span className="font-medium text-gray-800">SKU:</span>{" "}
+                        {singleProductData?.sku || "Not available"}
                     </p>
-                    <p className="text-2xl font-bold text-gray-900">USD ${singleProductData?.price}</p>
+                    <p className="text-2xl font-bold text-gray-900">
+                        USD ${singleProductData?.price || "0.00"}
+                    </p>
                 </div>
 
                 <p className="text-sm text-gray-600 mb-4">

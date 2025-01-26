@@ -13,13 +13,9 @@ const categories = [
 
 const Category = () => {
     return (
-        <div className="w-full mt-10">
-            <div className="text-center mb-8">
-                <h2 className="text-2xl font-semibold">Shop by category</h2>
-                <p className="text-gray-600">
-                    Pick the category you are looking for and start shopping now!
-                </p>
-            </div>
+        <div className="mt-10">
+            <h1 className="text-[20px] font-bold text-center mb-2">Featured Category</h1>
+            <p className="text-[15px] text-center mb-6">Get Your Desired Product from Featured Category!</p>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {categories.map((category) => (

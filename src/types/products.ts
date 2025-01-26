@@ -7,4 +7,5 @@ export type TProduct = {
   brand: string;
   image: string;
   category?: string;
+  sku?: string;
 }
