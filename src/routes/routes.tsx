@@ -2,17 +2,18 @@ import { createBrowserRouter } from "react-router-dom";
 import App from "../App";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
-import Books from "../pages/Books";
-import ArtAndCraft from "../pages/ArtAndCraft";
-import Stationery from "../pages/Stationery";
-import ClassRoomSupplies from "../pages/ClassRoomSupplies";
+import Books from "../pages/product/Books";
+import ArtAndCraft from "../pages/product/ArtAndCraft";
+import Stationery from "../pages/product/Stationery";
+import ClassRoomSupplies from "../pages/product/ClassRoomSupplies";
 import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 import UserLayout from "../components/layout/UserLayout";
-import UserCart from "../pages/UserCart";
+import UserCart from "../pages/user/UserCart";
 import { routeGenerator } from "../utils/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import AllProduct from "../pages/product/AllProduct";
+import SingleProduct from "../pages/product/SingleProduct";
 
 
 const router = createBrowserRouter([
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
             {
                 path: '/all-products',
                 element: <AllProduct />
+            },
+            {
+                path: '/product/:productId',
+                element: <SingleProduct />
             },
         ]
     },
