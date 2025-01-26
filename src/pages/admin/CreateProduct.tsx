@@ -23,7 +23,6 @@ const CreateProduct = () => {
             setUploading(true);
             if (data.photo) {
                 const imageUrl = await uploadImageToImgBB(data.photo);
-                console.log(imageUrl);
                 if (imageUrl) {
                     data.photo = imageUrl;
                     const res = await addProduct(data);
@@ -80,7 +79,7 @@ const CreateProduct = () => {
                     <div className="mt-6">
                         <button
                             type="submit"
-                            className="w-full py-3 bg-[#001845] text-white rounded-lg hover:bg-[#00296b] transition"
+                            className="w-full cursor-pointer py-3 bg-[#001845] text-white rounded-lg hover:bg-[#00296b] transition"
                             disabled={uploading}
                         >
                             {uploading ? "Uploading..." : "Submit"}

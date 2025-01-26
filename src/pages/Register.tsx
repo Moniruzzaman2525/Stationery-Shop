@@ -1,4 +1,5 @@
-import { Button, Row, Typography } from "antd";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Button, message, Row, Typography } from "antd";
 import SPForm from "../components/form/SPForm";
 import SPInput from "../components/form/SPInput";
 import { FieldValues } from "react-hook-form";
@@ -7,8 +8,7 @@ import { useRegistrationMutation } from "../redux/feathers/auth/authApi";
 import { useAppDispatch } from "../redux/hooks";
 import { verifyToken } from "../utils/verifyToken";
 import { setUser, TUser } from "../redux/feathers/auth/authSlice";
-import { useNavigate } from "react-router-dom";
-import { toast } from "sonner";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const { Title, Text } = Typography;
 
@@ -16,19 +16,25 @@ const Register = () => {
     const [registration] = useRegistrationMutation()
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
-    const onSubmit = async(data: FieldValues) => {
-        const tostId = toast.loading('Registration..')
+    const location = useLocation();
+    const onSubmit = async (data: FieldValues) => {
+        const hide = message.loading("Registering...", 0);
+
         try {
-            const res = await registration(data).unwrap()
-            const user = verifyToken(res.data.accessToken) as TUser
-            dispatch(setUser({
-                user: user,
-                token: res.data.accessToken
-            }))
-            navigate(`/`)
-            toast.success('Registration successfully!', { id: tostId, duration: 2000 })
+            const res = await registration(data).unwrap();
+            const user = verifyToken(res.data.accessToken) as TUser;
+            dispatch(
+                setUser({
+                    user: user,
+                    token: res.data.accessToken,
+                })
+            );
+            const from = location.state?.from?.pathname || "/";
+            navigate(from);
+            message.success("Registration successfully!", 2); 
         } catch (err) {
-            toast.error('Failed Registration!', { id: tostId, duration: 2000 })
+            hide();
+            message.error("Failed Registration!", 2); 
         }
     };
 

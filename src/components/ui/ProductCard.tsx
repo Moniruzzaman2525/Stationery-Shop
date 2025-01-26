@@ -1,9 +1,11 @@
-import { Card } from 'antd';
+import { Card, message } from 'antd';
 import card from '../../assets/images/add-card.png';
 import { TProduct } from '../../types';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../../redux/feathers/cart/cartSlice';
+import { useAppSelector } from '../../redux/hooks';
+import { useCurrentToken } from '../../redux/feathers/auth/authSlice';
 
 interface ProductCardProps {
     product: TProduct;
@@ -12,13 +14,20 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const isLoggedIn = useAppSelector(useCurrentToken);
     const productDetails = () => {
         navigate(`/product/${product._id}`);
     };
 
-    const handleAddToCardFunction = (event: React.MouseEvent) => {
+    const handleAddToCartFunction = (event: React.MouseEvent) => {
         event.stopPropagation();
-        dispatch(addToCart(product))
+        if (!isLoggedIn) {
+            message.warning("Please log in to add products to the cart."); 
+            navigate("/login"); 
+            return;
+        }
+        dispatch(addToCart({ product, quantity: 1 }));
+        message.success("Product added to cart!"); 
     };
 
     return (
@@ -36,7 +45,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         >
             <button
                 className="absolute cursor-pointer top-[35%] right-3 p-2 rounded-full"
-                onClick={handleAddToCardFunction}
+                onClick={handleAddToCartFunction}
             >
                 <img className="w-[40px]" src={card} alt="" />
             </button>

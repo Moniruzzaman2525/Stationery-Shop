@@ -1,10 +1,39 @@
-import { useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../redux/feathers/product/productApi";
-import { Skeleton, Alert } from "antd";
+import { Skeleton, Alert, message } from "antd";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/feathers/cart/cartSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { useCurrentToken } from "../../redux/feathers/auth/authSlice";
 
 const SingleProduct = () => {
     const { productId } = useParams();
     const { data: singleProductData, isFetching, isError } = useGetSingleProductQuery(productId);
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
+    const isLoggedIn = useAppSelector(useCurrentToken);
+    const [quantity, setQuantity] = useState(1);
+
+    const handleQuantityChange = (value: number) => {
+        if (value >= 1) {
+            setQuantity(value);
+        }
+    };
+
+    const handleAddToCart = () => {
+        if (!isLoggedIn) {
+            message.warning("Please log in to add products to the cart."); 
+            localStorage.setItem("redirectAfterLogin", location.pathname);
+            navigate("/login");
+            return;
+        }
+        if (singleProductData) {
+            dispatch(addToCart({ product: singleProductData, quantity }));
+            message.success("Product added to cart!"); 
+            setQuantity(1);
+        }
+    };
 
     if (isFetching) {
         return (
@@ -93,17 +122,31 @@ const SingleProduct = () => {
 
                 <div className="flex items-center gap-6">
                     <div className="flex items-center border rounded-lg overflow-hidden">
-                        <button className="px-3 py-2 text-gray-500 hover:text-gray-800">-</button>
+                        <button
+                            className="px-3 py-2 text-gray-500 hover:text-gray-800"
+                            onClick={() => handleQuantityChange(quantity - 1)}
+                        >
+                            -
+                        </button>
                         <input
                             type="number"
-                            className="w-12 text-center text-gray-800 border-x outline-none"
-                            defaultValue={1}
+                            className="w-12 cursor-pointer text-center text-gray-800 border-x outline-none"
+                            value={quantity}
+                            onChange={(e) => handleQuantityChange(Number(e.target.value))}
                             min={1}
                         />
-                        <button className="px-3 py-2 text-gray-500 hover:text-gray-800">+</button>
+                        <button
+                            className="px-3 cursor-pointer py-2 text-gray-500 hover:text-gray-800"
+                            onClick={() => handleQuantityChange(quantity + 1)}
+                        >
+                            +
+                        </button>
                     </div>
 
-                    <button className="bg-[#001845] text-white px-6 py-2 rounded-lg">
+                    <button
+                        className="bg-[#001845] cursor-pointer text-white px-6 py-2 rounded-lg"
+                        onClick={handleAddToCart}
+                    >
                         Add to cart
                     </button>
                 </div>

@@ -1,4 +1,5 @@
-import { Button, Row, Typography } from "antd";
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Button, message, Row, Typography } from "antd";
 import SPForm from "../components/form/SPForm";
 import SPInput from "../components/form/SPInput";
 import { FieldValues } from "react-hook-form";
@@ -8,7 +9,6 @@ import { verifyToken } from "../utils/verifyToken";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser, TUser } from "../redux/feathers/auth/authSlice";
 import { useLocation, useNavigate } from "react-router-dom";
-import { toast } from "sonner";
 
 const { Title } = Typography;
 
@@ -19,22 +19,29 @@ const Login = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const location = useLocation();
+
     const onSubmit = async (data: FieldValues) => {
-        const tostId = toast.loading('Login in')
+        const hide = message.loading("Logging in...", 0);
         try {
-            const res = await login(data).unwrap()
-            const user = verifyToken(res.data.token) as TUser
-            dispatch(setUser({
-                user: user,
-                token: res.data.token
-            }))
+            const res = await login(data).unwrap();
+            const user = verifyToken(res.data.token) as TUser;
 
-            const from = location.state?.from?.pathname || "/";
+            dispatch(
+                setUser({
+                    user: user,
+                    token: res.data.token,
+                })
+            );
+
+            const from =
+                localStorage.getItem("redirectAfterLogin") || location.state?.from || "/";
+            localStorage.removeItem("redirectAfterLogin");
             navigate(from);
-            toast.success('Login successfully!', { id: tostId, duration: 2000 })
+            hide();
+            message.success("Login successfully!", 2);
         } catch (err) {
-            toast.error('Failed login!', { id: tostId, duration: 2000 })
-
+            hide();
+            message.error("Failed to login!", 2);
         }
     };
 
