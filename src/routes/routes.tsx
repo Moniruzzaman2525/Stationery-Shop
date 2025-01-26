@@ -9,6 +9,9 @@ import ClassRoomSupplies from "../pages/ClassRoomSupplies";
 import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 import UserLayout from "../components/layout/UserLayout";
 import UserCart from "../pages/UserCart";
+import { routeGenerator } from "../utils/routesGenerator";
+import { adminPaths } from "./admin.routes";
+import { userPaths } from "./user.routes";
 
 
 const router = createBrowserRouter([
@@ -47,8 +50,14 @@ const router = createBrowserRouter([
         element: <Register />
     },
     {
-        path: '/my-profile',
-        element: <ProtectedRoute><UserLayout /> </ProtectedRoute>
+        path: '/dashboard',
+        element: <ProtectedRoute><UserLayout /> </ProtectedRoute>,
+        children: routeGenerator(adminPaths)
+    },
+    {
+        path: '/dashboard',
+        element: <ProtectedRoute><UserLayout /> </ProtectedRoute>,
+        children: routeGenerator(userPaths)
     },
 
 ])

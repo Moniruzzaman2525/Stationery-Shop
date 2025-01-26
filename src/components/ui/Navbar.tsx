@@ -10,13 +10,15 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const user = useAppSelector(selectCurrentUser)
     const dispatch = useAppDispatch()
+   
 
     const handleLogout = () => {
         dispatch(logOut())
+
     }
     return (
         <nav className="flex justify-between items-center bg-[#001845] px-6 py-3 h-[70px] rounded-lg text-white shadow-md">
-           
+
             <div className="flex items-center gap-2">
                 <Link to="/" className="flex items-center text-white gap-2 no-underline">
                     <img src={logo} alt="Logo" className="h-10 object-contain" />
@@ -43,7 +45,7 @@ const Navbar = () => {
 
             <div className="hidden md:flex items-center gap-4">
                 <Link to='/user-cart'><img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
-                <Link to='/my-profile'><img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
+                <Link to='/dashboard'><img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
                 {!user ? <Link to="/login">
                     <button className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
                         Login
