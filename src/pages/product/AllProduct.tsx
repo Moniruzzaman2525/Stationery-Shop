@@ -16,6 +16,9 @@ const ProductPage: React.FC = () => {
         "Classroom Supplies",
     ];
 
+
+    console.log(products)
+
     const availabilityOptions: string[] = ["In Stock", "Out of Stock"];
 
     const debouncedUpdateParams = useCallback(
