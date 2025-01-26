@@ -3,8 +3,10 @@ import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
 import { Controller, FieldValues } from "react-hook-form";
 import { SPSelect } from "../../components/form/SPSelect";
-import axios from "axios";
+
 import { useState } from "react";
+import { uploadImageToImgBB } from "../../utils/uploadImageToImgBB";
+import { useCreateProductMutation } from "../../redux/feathers/product/productApi";
 const categoryOption = [
     { value: 'Books', label: 'books' },
     { value: 'Art and Craft', label: 'Art and Craft' },
@@ -12,32 +14,25 @@ const categoryOption = [
     { value: 'Classroom Supplies', label: 'Classroom Supplies' },
 ]
 const CreateProduct = () => {
-    const imgbbAPIKey = "5eece81bae3064a984a2456e43f75675";
+
     const [uploading, setUploading] = useState(false);
+    const [addProduct] = useCreateProductMutation()
 
-    const uploadImageToImgBB = async (file: File) => {
-        const formData = new FormData();
-        formData.append("image", file);
 
-        try {
-            const response = await axios.post(
-                `https://api.imgbb.com/1/upload?key=${imgbbAPIKey}`,
-                formData
-            );
-            return response.data.data.url;
-        } catch (error) {
-            console.error("Error uploading image to ImgBB:", error);
-            throw error;
-        }
-    };
 
     const onSubmit = async (data: FieldValues) => {
         try {
             setUploading(true);
-            if (data.image) {
-                const imageUrl = await uploadImageToImgBB(data.image);
-                data.image = imageUrl;
+            if (data.photo) {
+                const imageUrl = await uploadImageToImgBB(data.photo);
+                console.log(imageUrl)
+                if (imageUrl) {
+                    data.photo = imageUrl;
+                    const res = await addProduct(data)
+                    console.log(res)
+                }
             }
+
         } catch (error) {
             console.error("Error submitting form:", error);
         } finally {
@@ -57,7 +52,7 @@ const CreateProduct = () => {
                             <SPSelect name="category" label="Category" options={categoryOption} />
                             <Col span={24} md={{ span: 12 }} lg={{ span: 8 }}>
                                 <Controller
-                                    name="image"
+                                    name="photo"
                                     render={({ field: { onChange, value, ...field } }) => (
                                         <Form.Item label="Product Photo">
                                             <Input
