@@ -4,7 +4,7 @@ import { TQueryParam } from "../../types";
 import { Input, Checkbox, Slider } from "antd";
 import { debounce } from "lodash";
 import ProductCard from "../../components/ui/ProductCard";
-const ProductPage: React.FC = () => {
+const ProductPage= () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [params, setParams] = useState<TQueryParam[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([1, 60]);
@@ -70,7 +70,7 @@ const ProductPage: React.FC = () => {
     
 
     return (
-        <div className="p-6 bg-gray-100 min-h-screen">
+        <div className="p-6  min-h-screen">
             <h1 className="text-2xl font-bold text-center mb-6">All Products</h1>
             <div className="flex flex-col lg:flex-row gap-6">
                 {/* Filters Section */}

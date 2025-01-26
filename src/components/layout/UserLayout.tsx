@@ -1,4 +1,3 @@
-import React from 'react';
 import { Button, Layout } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 
@@ -8,7 +7,7 @@ import { Sidebar } from './Sidebar';
 
 const { Header, Content } = Layout;
 
-const UserLayout: React.FC = () => {
+const UserLayout = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
 
