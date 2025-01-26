@@ -1,5 +1,5 @@
 import { Card } from 'antd';
-import card from '../../assets/images/add-card.png'
+import card from '../../assets/images/add-card.png';
 import { TProduct } from '../../types';
 import { useNavigate } from 'react-router-dom';
 
@@ -7,13 +7,16 @@ interface ProductCardProps {
     product: TProduct;
 }
 
-const ProductCard : React.FC<ProductCardProps>  = ({ product }) => {
-
-    const navigate = useNavigate()
+const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
+    const navigate = useNavigate();
 
     const productDetails = () => {
-        navigate(`/product/${product._id}`)
-    }
+        navigate(`/product/${product._id}`);
+    };
+
+    const handleAddToCardFunction = (event: React.MouseEvent) => {
+        event.stopPropagation();
+    };
 
     return (
         <Card
@@ -28,9 +31,12 @@ const ProductCard : React.FC<ProductCardProps>  = ({ product }) => {
             onClick={productDetails}
             className="overflow-hidden"
         >
-            <div className="absolute top-[35%] right-3 p-2 rounded-full ">
-                <img className='w-[40px]' src={card} alt="" />
-            </div>
+            <button
+                className="absolute cursor-pointer top-[35%] right-3 p-2 rounded-full"
+                onClick={handleAddToCardFunction}
+            >
+                <img className="w-[40px]" src={card} alt="" />
+            </button>
             <div className="p-4">
                 <h2 className="text-sm font-medium text-gray-800 truncate">
                     {product.name} - {product.category}
