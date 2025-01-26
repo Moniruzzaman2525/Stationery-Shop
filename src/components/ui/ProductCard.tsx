@@ -33,7 +33,7 @@ const ProductCard : React.FC<ProductCardProps>  = ({ product }) => {
             </div>
             <div className="p-4">
                 <h2 className="text-sm font-medium text-gray-800 truncate">
-                    {product.name} - {product.brand}
+                    {product.name} - {product.category}
                 </h2>
                 <p className="text-sm text-gray-600 truncate">
                     {product.description}

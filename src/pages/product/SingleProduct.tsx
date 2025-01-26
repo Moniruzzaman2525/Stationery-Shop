@@ -1,8 +1,12 @@
 import { useParams } from "react-router-dom";
+import { useGetSingleProductQuery } from "../../redux/feathers/product/productApi";
 
 const SingleProduct = () => {
 
-    const {productId} = useParams()
+    const { productId } = useParams()
+    const { data: singleProductData } = useGetSingleProductQuery(productId)
+    console.log(singleProductData)
+
 
     console.log(productId)
 
@@ -29,38 +33,32 @@ const SingleProduct = () => {
             </div>
             <div className="w-full md:w-1/2 flex items-center justify-center">
                 <img
-                    src="https://via.placeholder.com/400x400"
+                    src={singleProductData?.photo}
                     alt="Product"
-                    className="rounded-lg shadow-lg"
+                    className="rounded-lg w-[50%] shadow-lg"
                 />
             </div>
 
             <div className="w-full md:w-1/2 flex flex-col justify-between">
                 <div className="text-sm text-gray-500 mb-2">
-                    <span>Books </span>
+                    <span>Stationery </span>
                     <span className="mx-1">→</span>
-                    <span>Medicine </span>
-                    <span className="mx-1">→</span>
-                    <span className="font-medium text-gray-700">Surgery</span>
+                    <span>{singleProductData?.category} </span>
                 </div>
 
                 <h1 className="text-2xl font-semibold text-gray-800 mb-4">
-                    Brand Name - Product name, its specifications and all other details of it
+                    {singleProductData?.name} - {singleProductData?.brand} - {singleProductData?.category}
                 </h1>
 
                 <p className="text-gray-600 text-sm leading-relaxed mb-6">
-                    Vestibulum eu quam nec neque pellentesque efficitur id eget nisl. Proin porta est convallis lacus
-                    blandit pretium sed non enim. Maecenas lacinia non orci at aliq{' '}
-                    <a href="#" className="text-blue-500 hover:underline">
-                        Read more
-                    </a>
+                    {singleProductData?.description}
                 </p>
 
                 <div className="mb-4">
                     <p className="text-sm text-gray-500 mb-2">
                         <span className="font-medium text-gray-800">SKU:</span> 8901425031926
                     </p>
-                    <p className="text-2xl font-bold text-gray-900">USD $2.00</p>
+                    <p className="text-2xl font-bold text-gray-900">USD ${singleProductData?.price}</p>
                 </div>
 
                 <p className="text-sm text-gray-600 mb-4">
@@ -79,7 +77,7 @@ const SingleProduct = () => {
                         <button className="px-3 py-2 text-gray-500 hover:text-gray-800">+</button>
                     </div>
 
-                    <button className="bg-green-500 text-white px-6 py-2 rounded-lg hover:bg-green-600">
+                    <button className="bg-[#001845] text-white px-6 py-2 rounded-lg">
                         Add to cart
                     </button>
                 </div>
