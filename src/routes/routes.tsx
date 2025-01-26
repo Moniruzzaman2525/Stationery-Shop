@@ -12,6 +12,7 @@ import UserCart from "../pages/UserCart";
 import { routeGenerator } from "../utils/routesGenerator";
 import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
+import AllProduct from "../pages/product/AllProduct";
 
 
 const router = createBrowserRouter([
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
             {
                 path: '/user-cart',
                 element: <ProtectedRoute><UserCart /> </ProtectedRoute>
+            },
+            {
+                path: '/all-products',
+                element: <AllProduct />
             },
         ]
     },

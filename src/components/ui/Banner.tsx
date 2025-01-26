@@ -8,6 +8,7 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { Link } from "react-router-dom";
 
 const Banner = () => {
     return (
@@ -33,11 +34,11 @@ const Banner = () => {
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 flex justify-center items-center mt-[300px]">
-                                <button onClick={() => {
-                                    console.log("object")
-                                }} className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
-                                    <img className="w-[150px] object-cover" src={seeProductArrow} />
-                                </button>
+                                <Link to='/all-products'>
+                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
+                                        <img className="w-[150px] object-cover" src={seeProductArrow} />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -50,11 +51,11 @@ const Banner = () => {
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 flex justify-center items-center mt-[300px]">
-                                <button onClick={() => {
-                                    console.log("object")
-                                }} className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
-                                    <img className="w-[150px] object-cover" src={seeProductArrow} />
-                                </button>
+                                <Link to='/all-products'>
+                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
+                                        <img className="w-[150px] object-cover" src={seeProductArrow} />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </SwiperSlide>
@@ -66,11 +67,11 @@ const Banner = () => {
                                 className="w-full h-full object-cover"
                             />
                             <div className="absolute inset-0 flex justify-center items-center mt-[300px]">
-                                <button onClick={() => {
-                                    console.log("object")
-                                }} className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
-                                    <img className="w-[150px] object-cover" src={seeProductArrow} />
-                                </button>
+                                <Link to='/all-products'>
+                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
+                                        <img className="w-[150px] object-cover" src={seeProductArrow} />
+                                    </button>
+                                </Link>
                             </div>
                         </div>
                     </SwiperSlide>
