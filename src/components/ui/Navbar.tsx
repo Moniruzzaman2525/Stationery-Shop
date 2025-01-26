@@ -10,7 +10,7 @@ const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const user = useAppSelector(selectCurrentUser)
     const dispatch = useAppDispatch()
-   
+
 
     const handleLogout = () => {
         dispatch(logOut())
@@ -58,18 +58,20 @@ const Navbar = () => {
 
             {/* Dropdown Menu for Mobile */}
             {isMenuOpen && (
-                <div className="absolute top-[70px] right-0 bg-[#001845] text-white w-full shadow-md md:hidden">
+                <div className="absolute z-[1] top-[70px] right-0 bg-[#001845] text-white w-full shadow-md md:hidden">
                     <ul className="list-none flex flex-col gap-4 p-4">
-                        <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li>
-                        <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li>
-                        <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li>
-                        <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li>
-                        <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Cart</li>
-                        <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Profile</li>
+                        <Link to="/books"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
+                        <Link to="/art-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
+                        <Link to="/stationery"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
+                        <Link to="/classroom-supplies"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
+                        <Link to="/user-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Cart</li></Link>
+                        <Link to="/dashboard"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Dashboard</li></Link>
                         <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">
-                            <Link to="/login">
+                            {user ? <button onClick={handleLogout} className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
+                                Logout
+                            </button> : <Link to="/login">
                                 Login
-                            </Link>
+                            </Link>}
                         </li>
                     </ul>
                 </div>
