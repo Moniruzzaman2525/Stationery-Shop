@@ -2,6 +2,8 @@ import { Card } from 'antd';
 import card from '../../assets/images/add-card.png';
 import { TProduct } from '../../types';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/feathers/cart/cartSlice';
 
 interface ProductCardProps {
     product: TProduct;
@@ -9,13 +11,14 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const productDetails = () => {
         navigate(`/product/${product._id}`);
     };
 
     const handleAddToCardFunction = (event: React.MouseEvent) => {
         event.stopPropagation();
+        dispatch(addToCart(product))
     };
 
     return (
