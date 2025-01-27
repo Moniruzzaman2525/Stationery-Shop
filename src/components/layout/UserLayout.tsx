@@ -35,6 +35,10 @@ const Layout = () => {
             label: "Address",
         },
         {
+            path: "create-product",
+            label: "Create Product",
+        },
+        {
             path: "manage-order",
             label: "Manage Order",
         },

@@ -8,7 +8,7 @@ function App() {
   const location = useLocation();
 
   return (
-    <>
+    <div className="md:px-16">
       <Navbar />
       {location.pathname === '/' && (
         <>
@@ -18,7 +18,7 @@ function App() {
         </>
       )}
       <Outlet />
-    </>
+    </ div>
   );
 }
 

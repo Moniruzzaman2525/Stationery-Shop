@@ -1,11 +1,11 @@
-import { Card, message } from 'antd';
-import card from '../../assets/images/add-card.png';
-import { TProduct } from '../../types';
-import { useNavigate } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
-import { addToCart } from '../../redux/feathers/cart/cartSlice';
-import { useAppSelector } from '../../redux/hooks';
-import { useCurrentToken } from '../../redux/feathers/auth/authSlice';
+import { Card, message, Tooltip } from "antd";
+import cardIcon from "../../assets/images/add-card.png";
+import { TProduct } from "../../types";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/feathers/cart/cartSlice";
+import { useAppSelector } from "../../redux/hooks";
+import { useCurrentToken } from "../../redux/feathers/auth/authSlice";
 
 interface ProductCardProps {
     product: TProduct;
@@ -15,17 +15,20 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const isLoggedIn = useAppSelector(useCurrentToken);
-    const productDetails = () => {
+
+    const handleProductDetails = () => {
         navigate(`/product/${product._id}`);
     };
 
-    const handleAddToCartFunction = (event: React.MouseEvent) => {
+    const handleAddToCart = (event: React.MouseEvent) => {
         event.stopPropagation();
+
         if (!isLoggedIn) {
             message.warning("Please log in to add products to the cart.");
             navigate("/login");
             return;
         }
+
         if (!product.stock) {
             message.warning(`Only ${product.stock} items are available in stock.`);
             return;
@@ -40,29 +43,37 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             cover={
                 <img
                     src={product.photo}
-                    alt={product.name}
-                    className="h-48 w-full object-cover relative"
+                    alt={product.name || "Product image"}
+                    className="h-48 w-full object-cover"
                 />
             }
-            onClick={productDetails}
-            className="overflow-hidden"
+            onClick={handleProductDetails}
+            className="overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105"
         >
-            <button
-                className="absolute cursor-pointer top-[35%] right-3 p-2 rounded-full"
-                onClick={handleAddToCartFunction}
-            >
-                <img className="w-[40px]" src={card} alt="" />
-            </button>
+            <Tooltip title="Add to Cart">
+                <button
+                    className="absolute top-4 right-4 cursor-pointer p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition"
+                    onClick={handleAddToCart}
+                >
+                    <img className="w-8" src={cardIcon} alt="Add to cart" />
+                </button>
+            </Tooltip>
             <div className="p-4">
-                <h2 className="text-sm font-medium text-gray-800 truncate">
+                <h2 className="text-xl font-semibold text-gray-800 truncate">
                     {product.name} - {product.category}
                 </h2>
-                <p className="text-sm text-gray-600 truncate">
-                    {product.description}
+                <p className="text-sm text-gray-600 mt-1 truncate">
+                    {product.description || "No description available."}
                 </p>
-                <p className="text-lg font-bold text-gray-800 mt-2">
-                    USD ${product.price} 
+                <p className="text-lg font-bold text-gray-900 mt-3">
+                    ${product.price.toFixed(2)}
                 </p>
+                <button
+                    onClick={handleAddToCart}
+                   className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition"
+                >
+                    Add to Cart
+                </button>
             </div>
         </Card>
     );

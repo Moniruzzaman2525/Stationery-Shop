@@ -62,8 +62,8 @@ const ProductPage = () => {
     };
 
     return (
-        <div className="p-6 min-h-screen">
-            <h1 className="text-2xl font-bold text-center mb-6">All Products</h1>
+        <div className="mt-15 min-h-screen">
+            <h1 className="text-2xl font-bold text-center mb-10">All Products</h1>
             {isFetching ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -75,22 +75,23 @@ const ProductPage = () => {
                 </div>
             ) : (
                 <div className="flex flex-col lg:flex-row gap-6">
-                    {/* Filters Section */}
-                    <aside className="bg-white shadow-md rounded-lg p-4 w-full lg:w-1/4">
-                        {/* Search Filter */}
-                        <div className="mb-4">
+                    <aside className="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/4">
+                        {/* Search Section */}
+                        <div className="mb-6">
                             <Input
                                 placeholder="Search by category, brand, etc."
                                 value={searchTerm}
                                 onChange={handleSearch}
-                                className="mb-2"
+                                className="p-2 border border-gray-300 rounded-md focus:border-blue-500 focus:ring focus:ring-blue-200 transition"
                                 allowClear
+                                aria-label="Search by category, brand, or other filters"
                             />
                         </div>
-                        {/* Category Filter */}
-                        <div className="mb-4">
-                            <h3 className="font-semibold text-lg mb-2">Category</h3>
-                            <div className="overflow-y-auto h-30">
+
+                        {/* Category Section */}
+                        <div className="mb-6">
+                            <h3 className="font-semibold text-lg text-gray-800 mb-3">Category</h3>
+                            <div className="overflow-y-auto max-h-40 border rounded-md p-3 bg-gray-50">
                                 {categories.map((category) => {
                                     const isChecked = params.some(
                                         (param) => param.name === "category" && param.value === category
@@ -100,7 +101,8 @@ const ProductPage = () => {
                                             key={category}
                                             checked={isChecked}
                                             onChange={() => handleCategoryChange(category)}
-                                            className="block mb-2"
+                                            className="block text-sm text-gray-700 mb-2 hover:text-gray-900 transition"
+                                            aria-label={`Filter by ${category}`}
                                         >
                                             {category}
                                         </Checkbox>
@@ -108,10 +110,11 @@ const ProductPage = () => {
                                 })}
                             </div>
                         </div>
-                        {/* Availability Filter */}
-                        <div className="mb-4">
-                            <h3 className="font-semibold text-lg mb-2">Availability</h3>
-                            <div className="overflow-y-auto h-20">
+
+                        {/* Availability Section */}
+                        <div className="mb-6">
+                            <h3 className="font-semibold text-lg text-gray-800 mb-3">Availability</h3>
+                            <div className="overflow-y-auto max-h-32 border rounded-md p-3 bg-gray-50">
                                 {availabilityOptions.map((option) => {
                                     const isChecked = params.some(
                                         (param) => param.name === "availability" && param.value === option
@@ -121,7 +124,8 @@ const ProductPage = () => {
                                             key={option}
                                             checked={isChecked}
                                             onChange={() => handleAvailabilityChange(option)}
-                                            className="block mb-2"
+                                            className="block text-sm text-gray-700 mb-2 hover:text-gray-900 transition"
+                                            aria-label={`Filter by ${option}`}
                                         >
                                             {option}
                                         </Checkbox>
@@ -129,9 +133,10 @@ const ProductPage = () => {
                                 })}
                             </div>
                         </div>
-                        {/* Price Range Filter */}
-                        <div className="mb-4">
-                            <h3 className="font-semibold text-lg mb-2">Price Range (USD)</h3>
+
+                        {/* Price Range Section */}
+                        <div className="mb-6">
+                            <h3 className="font-semibold text-lg text-gray-800 mb-3">Price Range (USD)</h3>
                             <Slider
                                 range
                                 min={1}
@@ -140,14 +145,16 @@ const ProductPage = () => {
                                 value={priceRange}
                                 onChange={(value) => setPriceRange(value as [number, number])}
                                 onAfterChange={(value) => handlePriceChange(value as [number, number])}
+                                className="text-blue-500"
                             />
-                            <div className="flex justify-between text-sm mt-2">
+                            <div className="flex justify-between text-sm text-gray-600 mt-2">
                                 <span>USD {priceRange[0]}</span>
                                 <span>USD {priceRange[1]}</span>
                             </div>
                         </div>
                     </aside>
-                    {/* Products Section */}
+
+
                     <main className="w-full lg:w-3/4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {products?.data?.map((product, index) => (

@@ -17,6 +17,7 @@ import Order from "../pages/user/Order";
 import Address from "../pages/user/Address";
 import ManageOrder from "../pages/admin/ManageOrder";
 import ManageUser from "../pages/admin/ManageUser";
+import CreateProduct from "../pages/admin/CreateProduct";
 
 
 const router = createBrowserRouter([
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
             {
                 path: 'address',
                 element: <Address />
+            },
+            {
+                path: 'create-product',
+                element: <CreateProduct />
             },
             {
                 path: 'manage-order',

@@ -11,7 +11,6 @@ type TInputProps = {
 }
 
 const SPInput = ({ type, name, label, placeholder, style, disabled }: TInputProps) => {
-    console.log(style)
     return (
         <div>
             <Controller

@@ -22,20 +22,21 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
 
     return (
         <div className="flex flex-col md:flex-row items-center justify-between bg-white p-4 shadow rounded-lg space-y-4 md:space-y-0 md:space-x-4">
-            <div className="flex items-center space-x-4">
+            <div className="flex items-center w-full justify-between md:!justify-start gap-[30px] md:gap-[20px]">
                 <img
                     src={item.photo}
                     alt={item.name}
-                    className="w-20 h-20 object-cover rounded-lg"
+                    className="w-20 md:w-30 h-20 md:h-30 object-cover rounded-lg"
                 />
-                <div className="text-center md:text-left">
-                    <h2 className="text-lg font-semibold">{item.name}</h2>
+                <div className="text-center md:text-left flex-1">
+                    <h2 className="text-lg md:text-[20px] font-semibold">{item.name}</h2>
                     <p className="text-sm text-gray-500">{item.brand}</p>
-                    <p className="text-sm text-gray-500">Price: ${item.price.toFixed(2)}</p>
+                    <p className="text-sm md:text-[20px] text-gray-500">Price: ${item.price.toFixed(2)}</p>
                 </div>
             </div>
+
             <div className="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
-                <div className="flex items-center space-x-2">
+                <div className="flex items-center gap-[10px]">
                     <Button onClick={handleDecrease} disabled={item.quantity <= 1}>
                         -
                     </Button>

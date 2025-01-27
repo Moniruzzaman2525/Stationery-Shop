@@ -26,7 +26,7 @@ const BannerProduct = () => {
             </div>}
             <div className="text-center mt-6">
                 <button
-                    className="px-4 cursor-pointer py-2 bg-[#001845] !text-white rounded-lg shadow"
+                    className="px-4 cursor-pointer py-3 bg-[#001845] !text-white rounded-lg shadow"
                     onClick={() => navigate("/all-products")}
                 >
                     View All
