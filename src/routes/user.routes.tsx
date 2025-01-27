@@ -4,10 +4,17 @@ import UserDashboard from "../pages/user/UserDashboard";
 
 
 export const userPaths = [
+   
     {
         name: 'Dashboard',
-        path: 'dashboard',
-        element: <UserDashboard />
+        children: [
+            {
+                name: 'Profile',
+                path: 'view-Profile',
+                element: <UserDashboard />
+            }
+
+        ]
     },
     {
         name: 'Order Management',
@@ -16,7 +23,7 @@ export const userPaths = [
                 name: 'See All Order',
                 path: 'see-order',
                 element: <Order />
-            },
+            }
 
         ]
     },
