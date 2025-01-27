@@ -2,7 +2,7 @@ import React from 'react';
 import { Table, Tag, Switch, Skeleton } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
-import { useGetAllUserQuery } from '../../redux/feathers/admin/adminApi';
+import { useBlockUserMutation, useGetAllUserQuery } from '../../redux/feathers/admin/adminApi';
 
 interface User {
     _id: string;
@@ -25,11 +25,14 @@ interface User {
 }
 
 const ManageUsers: React.FC = () => {
-    const { data: allUsers, isLoading, isError } = useGetAllUserQuery(undefined);
-    // const [updateUser] = useUpdateUserMutation();
+    const { data: allUsers, isLoading, isError, refetch } = useGetAllUserQuery(undefined);
+    const [blockUser] = useBlockUserMutation();
 
-    const handleBlockToggle = async () => {
-        // Handle block/unblock user logic here
+    const handleBlockToggle = async (id: string) => {
+        const res = await blockUser(id)
+        if (res) {
+            refetch()
+        }
     };
 
     if (isError) {
@@ -75,7 +78,7 @@ const ManageUsers: React.FC = () => {
             render: (_, user: User) => (
                 <Switch
                     checked={!user.isBlocked}
-                    onChange={() => handleBlockToggle()}
+                    onChange={() => handleBlockToggle(user?._id)}
                     checkedChildren="Active"
                     unCheckedChildren="Blocked"
                 />

@@ -22,9 +22,14 @@ const adminApi = baseApi.injectEndpoints({
                 return response.data
             }
         }),
-        
+        blockUser: builder.mutation({
+            query: (userId) => ({
+                url: `/admin//users/${userId}/block`,
+                method: 'PATCH',
+            }),
+        }),
 
     })
 })
 
-export const { useGetAllOrderQuery, useGetAllUserQuery } = adminApi
+export const { useGetAllOrderQuery, useGetAllUserQuery, useBlockUserMutation } = adminApi
