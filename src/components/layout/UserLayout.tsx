@@ -67,8 +67,6 @@ const Layout = () => {
         }
     };
 
-
-
     return (
         <div className="flex h-screen overflow-hidden">
             <aside

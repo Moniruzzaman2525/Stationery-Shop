@@ -9,8 +9,6 @@ import ClassRoomSupplies from "../pages/product/ClassRoomSupplies";
 import { ProtectedRoute } from "../components/layout/ProtectedRoute";
 import UserLayout from "../components/layout/UserLayout";
 import UserCart from "../pages/user/UserCart";
-import { routeGenerator } from "../utils/routesGenerator";
-import { adminPaths } from "./admin.routes";
 import AllProduct from "../pages/product/AllProduct";
 import SingleProduct from "../pages/product/SingleProduct";
 import Payment from "../pages/payment/Payment";
@@ -69,11 +67,6 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <ProtectedRoute><UserLayout /> </ProtectedRoute>,
-        children: routeGenerator(adminPaths)
-    },
-    {
-        path: '/dashboard',
-        element: <ProtectedRoute><UserLayout /> </ProtectedRoute>,
         children: [
             {
                 path: 'update-Profile',
@@ -85,6 +78,14 @@ const router = createBrowserRouter([
             },
             {
                 path: 'address',
+                element: <Address />
+            },
+            {
+                path: 'manage-order',
+                element: <Address />
+            },
+            {
+                path: 'Manage Order',
                 element: <Address />
             },
         ],
