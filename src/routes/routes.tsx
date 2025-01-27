@@ -15,6 +15,8 @@ import Payment from "../pages/payment/Payment";
 import UserDashboard from "../pages/user/UserDashboard";
 import Order from "../pages/user/Order";
 import Address from "../pages/user/Address";
+import ManageOrder from "../pages/admin/ManageOrder";
+import ManageUser from "../pages/admin/ManageUser";
 
 
 const router = createBrowserRouter([
@@ -82,11 +84,11 @@ const router = createBrowserRouter([
             },
             {
                 path: 'manage-order',
-                element: <Address />
+                element: <ManageOrder />
             },
             {
                 path: 'Manage Order',
-                element: <Address />
+                element: <ManageUser />
             },
         ],
     },
