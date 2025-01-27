@@ -1,33 +1,73 @@
 import { useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { useAppSelector } from "../../redux/hooks";
-import { selectCurrentUser } from "../../redux/feathers/auth/authSlice";
-import { sidebarItemsGenerator } from "../../utils/sidebarItemsGenerator";
-import { adminPaths } from "../../routes/admin.routes";
-import { userPaths } from "../../routes/user.routes";
-import { TSlideBarItem } from "../../types";
+import { Link, Outlet, useNavigate } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "../../redux/hooks";
+import { logOut, selectCurrentUser } from "../../redux/feathers/auth/authSlice";
 import logo from '../../assets/images/logo1.png'
-
-const userRole = {
-    ADMIN: "admin",
-    USER: "user",
-};
 
 const Layout = () => {
     const user = useAppSelector(selectCurrentUser);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const [openSubmenuIndex, setOpenSubmenuIndex] = useState<number | null>(null);
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
-    const sidebarItems: TSlideBarItem[] =
-        user?.role === userRole.ADMIN
-            ? sidebarItemsGenerator(adminPaths)
-            : user?.role === userRole.USER
-                ? sidebarItemsGenerator(userPaths)
-                : [];
+    const userItems = [
+        {
+            path: "update-Profile",
+            label: "My Profile",
+        },
+        {
+            path: "address",
+            label: "Address",
+        },
+        {
+            path: "see-order",
+            label: "View Order",
+        },
+        
+    ]
+    const adminItems = [
+        {
+            path: "update-Profile",
+            label: "My Profile",
+        },
+        {
+            path: "address",
+            label: "Address",
+        },
+        {
+            path: "manage-order",
+            label: "Manage Order",
+        },
+        {
+            path: "manage-user",
+            label: "Manage user",
+        },
+       
+    ]
 
-    const handleSubmenuToggle = (index: number) => {
-        setOpenSubmenuIndex(index === openSubmenuIndex ? null : index);
+    const getMenuItems = (role: string) => {
+        switch (role) {
+            case "admin":
+                return adminItems;
+            case "user":
+            default:
+                return userItems;
+        }
     };
+    
+    
+    const menuItems = getMenuItems(user?.role ?? "user");
+
+    const handleLogout = async () => {
+        try {
+            await dispatch(logOut()); 
+            navigate('/'); 
+        } catch (error) {
+            console.error('Error during logout:', error);
+        }
+    };
+
+
 
     return (
         <div className="flex h-screen overflow-hidden">
@@ -48,30 +88,15 @@ const Layout = () => {
                     </button>
                 </div>
                 <nav>
-                    {sidebarItems.map((item, index) => (
-                        item && ( 
-                            <div key={item.key} className="mb-2">
+                    {menuItems.map((item, index) => (
+                        item && (
+                            <div key={index} className="mb-2">
                                 <div
-                                    onClick={() => handleSubmenuToggle(index)}
+
                                     className="block p-2 rounded-lg hover:bg-gray-700 cursor-pointer flex justify-between items-center"
                                 >
-                                    <span>{item.label}</span>
-                                    {item.children && (
-                                        <span>{openSubmenuIndex === index ? "-" : "+"}</span>
-                                    )}
+                                    <Link to={item.path}> <span>{item.label}</span></Link>
                                 </div>
-                                {item.children && openSubmenuIndex === index && (
-                                    <div className="ml-4">
-                                        {item.children.map(
-                                            (subItem) =>
-                                                subItem && (
-                                                    <div key={subItem.key} className="mb-1">
-                                                        {subItem.label}
-                                                    </div>
-                                                )
-                                        )}
-                                    </div>
-                                )}
                             </div>
                         )
                     ))}
@@ -87,7 +112,7 @@ const Layout = () => {
                     >
                         ☰
                     </button>
-                    <button className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500 cursor-pointer">
+                    <button onClick={handleLogout} className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500 cursor-pointer">
                         Log out
                     </button>
                 </header>

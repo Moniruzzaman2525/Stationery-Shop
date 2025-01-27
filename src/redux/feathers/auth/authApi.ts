@@ -1,3 +1,4 @@
+import { TResponseRedux } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -16,7 +17,23 @@ const authApi = baseApi.injectEndpoints({
                 body: userInfo
             }),
         }),
+        updateUser: builder.mutation({
+            query: (userInfo) => ({
+                url: '/auth/update-profile',
+                method: 'PATCH',
+                body: userInfo
+            }),
+        }),
+        getMe: builder.query({
+            query: () => ({
+                url: `/auth/me`,
+                method: 'GET',
+            }),
+            transformResponse: (response: TResponseRedux<any>) => {
+                return response.data
+            }
+        }),
     })
 })
 
-export const { useRegistrationMutation, useLoginMutation } = authApi
+export const { useRegistrationMutation, useLoginMutation, useGetMeQuery, useUpdateUserMutation } = authApi

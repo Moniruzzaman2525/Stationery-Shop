@@ -7,15 +7,17 @@ type TInputProps = {
     label?: string;
     placeholder?: string;
     style?: React.CSSProperties;
+    disabled?: boolean;
 }
 
-const SPInput = ({ type, name, label, placeholder, style }: TInputProps) => {
+const SPInput = ({ type, name, label, placeholder, style, disabled }: TInputProps) => {
+    console.log(style)
     return (
         <div>
             <Controller
                 name={name} render={({ field, fieldState: { error } }) => (
                     <Form.Item label={label}>
-                        <Input type={type} style={style} id={name} placeholder={placeholder} {...field} size="large" />
+                        <Input type={type} style={style} id={name} placeholder={placeholder} {...field} size="large" disabled={disabled} />
                         <div>
                             {
                                 error ? (<small>{error.message}</small>) : (<small>&nbsp;</small>)

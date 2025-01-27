@@ -29,10 +29,10 @@ interface Order {
 
 const Order = () => {
   const { data: orderData, isLoading } = useGetUserOrderQuery(undefined);
-
+  console.log(orderData)
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-6">Order Management</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">View Your Order</h1>
 
       {isLoading ? (
         <div className="max-w-4xl mx-auto">
@@ -51,7 +51,7 @@ const Order = () => {
       ) : (
         <div className="max-w-4xl mx-auto">
           {orderData?.map((order: Order) => (
-            <Card key={order._id} className="mb-4 shadow-md">
+            <Card key={order._id} className="!mb-4 shadow-md">
               <List.Item.Meta
                 avatar={<Avatar src={order.product.photo} />}
                 title={
@@ -59,7 +59,7 @@ const Order = () => {
                     <span className="text-lg font-semibold">
                       {order.product.name}
                     </span>
-                    <Text type="secondary">Order ID: {order._id}</Text>
+                    <Text type="secondary">Quantity: {order?.product?.quantity}</Text>
                   </div>
                 }
                 description={

@@ -11,10 +11,12 @@ import UserLayout from "../components/layout/UserLayout";
 import UserCart from "../pages/user/UserCart";
 import { routeGenerator } from "../utils/routesGenerator";
 import { adminPaths } from "./admin.routes";
-import { userPaths } from "./user.routes";
 import AllProduct from "../pages/product/AllProduct";
 import SingleProduct from "../pages/product/SingleProduct";
 import Payment from "../pages/payment/Payment";
+import UserDashboard from "../pages/user/UserDashboard";
+import Order from "../pages/user/Order";
+import Address from "../pages/user/Address";
 
 
 const router = createBrowserRouter([
@@ -72,7 +74,20 @@ const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <ProtectedRoute><UserLayout /> </ProtectedRoute>,
-        children: routeGenerator(userPaths)
+        children: [
+            {
+                path: 'update-Profile',
+                element: <UserDashboard />
+            },
+            {
+                path: 'see-order',
+                element: <Order />
+            },
+            {
+                path: 'address',
+                element: <Address />
+            },
+        ],
     },
 
 ])
