@@ -1,18 +1,21 @@
 import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
-import { useAppSelector } from '../../redux/hooks';
-import { usePaymentData } from '../../redux/feathers/order/orderSlice';
+import { useAppDispatch, useAppSelector } from '../../redux/hooks';
+import { clearOrder, usePaymentData } from '../../redux/feathers/order/orderSlice';
 import { message } from 'antd';
 import { useCallbackMutation } from '../../redux/feathers/order/orderApi';
 import { TProduct } from '../../types';
-import { useCurrentCartProduct } from '../../redux/feathers/cart/cartSlice';
+import { clearCart, useCurrentCartProduct } from '../../redux/feathers/cart/cartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const CheckoutForm: React.FC = () => {
   const stripe = useStripe();
   const elements = useElements();
+  const navigate = useNavigate()
+  const dispatch = useAppDispatch()
   const [error, setError] = useState('');
   const [processing, setProcessing] = useState(false);
-const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
+  const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
   const paymentData = useAppSelector(usePaymentData);
   const clientSecret = paymentData?.client_secret;
   const [callback] = useCallbackMutation()
@@ -43,8 +46,13 @@ const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
         paymentData: paymentIntent
       }
       const res = await callback(data)
-      console.log(res)
-      message.success("Order successfully confirmed!");
+      if (res) {
+        dispatch(clearOrder())
+        dispatch(clearCart())
+        message.success("Order successfully confirmed!");
+        navigate('/')
+      }
+
     } else {
       setError('Payment failed. Try again.');
     }
@@ -109,7 +117,7 @@ const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
       <button
         type="submit"
         disabled={!stripe || processing}
-        className="w-full bg-[#001845] text-white py-3 px-4 rounded-lg transition disabled:bg-gray-400"
+        className="w-full cursor-pointer bg-[#001845] text-white py-3 px-4 rounded-lg transition disabled:bg-gray-400"
       >
         {processing ? 'Processing...' : 'Pay Now'}
       </button>
