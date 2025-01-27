@@ -32,6 +32,13 @@ const productApi = baseApi.injectEndpoints({
                 body: userInfo
             })
         }),
+        confirmOrder: builder.mutation({
+            query: (userInfo) => ({
+                url: '/orders/confirm-order',
+                method: 'POST',
+                body: userInfo
+            })
+        }),
         getSingleProduct: builder.query({
             query: (id) => ({
                 url: `/products/${id}`,
@@ -44,4 +51,4 @@ const productApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useCreateProductMutation, useGetAllProductsQuery, useGetSingleProductQuery } = productApi
+export const { useCreateProductMutation, useGetAllProductsQuery, useGetSingleProductQuery, useConfirmOrderMutation } = productApi

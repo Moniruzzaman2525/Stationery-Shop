@@ -9,10 +9,12 @@ import { useDispatch } from "react-redux";
 import { TProduct } from "../../types";
 import { Empty, message } from "antd";
 import { Link } from "react-router-dom";
+import { useConfirmOrderMutation } from "../../redux/feathers/product/productApi";
 
 const UserCart = () => {
     const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
     const dispatch = useDispatch();
+    const [confirmOrderProduct] = useConfirmOrderMutation()
 
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
@@ -24,32 +26,37 @@ const UserCart = () => {
         dispatch(removeFromCart(id));
     };
 
-    const checkStockAvailability = async (): Promise<boolean> => {
+    const checkStockAvailability = async (
+        cart: TProduct[]
+    ) => {
         try {
-            const response = await fetch("/api/check-stock", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ cart }),
-            });
-            const result = await response.json();
-            if (result.success && result.inStock) {
-                return true;
-            } else {
-                message.error("Some items are out of stock. Please update your cart.");
+            const outOfStockItems = cart.filter((item) => item.quantity > (item.inStock ?? 0))
+
+            if (outOfStockItems.length > 0) {
+                const outOfStockDetails = outOfStockItems
+                    .map((item) => `${item.name} (Qty: ${item.quantity}, Available: ${item.inStock})`)
+                    .join(", ");
+                message.error(`Out of stock: ${outOfStockDetails}. Please update your cart.`);
                 return false;
             }
+            return true
+
         } catch (error) {
+            console.error("Error checking stock:", error);
             message.error("Failed to check stock availability. Please try again.");
             return false;
         }
     };
 
+
     const confirmOrder = async () => {
-        const isStockAvailable = await checkStockAvailability();
+        const isStockAvailable = await checkStockAvailability(cart);
+
         if (isStockAvailable) {
             console.log("Order confirmed:", cart);
+            const data = {}
+            const res = await confirmOrderProduct(data)
+            console.log(res)
             message.success("Order successfully confirmed!");
         } else {
             console.log("Order not confirmed. Stock issue.");
