@@ -1,6 +1,7 @@
 import React from 'react';
 import { useGetAllOrderQuery } from "../../redux/feathers/admin/adminApi";
 import { Table, Tag, Skeleton } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
 
 interface Order {
@@ -24,11 +25,12 @@ const ManageOrder: React.FC = () => {
         return <div className="flex items-center justify-center h-screen text-xl text-red-500">Error fetching orders</div>;
     }
 
-    const columns = [
+    const columns: ColumnsType<Order> = [
         {
             title: 'Order ID',
             dataIndex: '_id',
             key: '_id',
+            responsive: ['md'],
         },
         {
             title: 'Product Name',
@@ -81,7 +83,12 @@ const ManageOrder: React.FC = () => {
             {isLoading ? (
                 <Skeleton active paragraph={{ rows: 10 }} />
             ) : (
-                <Table columns={columns} dataSource={dataSource} pagination={{ pageSize: 5 }} />
+                <Table
+                    columns={columns}
+                    dataSource={dataSource}
+                    pagination={{ pageSize: 5 }}
+                    scroll={{ x: '100%' }}
+                />
             )}
         </div>
     );

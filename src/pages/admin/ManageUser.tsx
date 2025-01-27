@@ -1,90 +1,110 @@
 import React from 'react';
-import { useGetAllOrderQuery } from "../../redux/feathers/admin/adminApi";
-import { Table, Tag, Skeleton } from 'antd';
+import { Table, Tag, Switch, Skeleton } from 'antd';
+import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
+import { useGetAllUserQuery } from '../../redux/feathers/admin/adminApi';
 
-interface Order {
+interface User {
     _id: string;
-    product: {
-        name: string;
-        price: number;
-    };
-    totalAmount: number;
-    paymentStatus: string;
-    user: {
-        name: string;
-    };
-    orderDate: string;
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    isBlocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+    age?: string;
+    gender?: string;
+    phone?: string;
+    currentCity?: string;
+    currentCountry?: string;
+    currentStreet?: string;
+    permanentCity?: string;
+    permanentCountry?: string;
+    permanentStreet?: string;
 }
 
-const ManageUser: React.FC = () => {
-    const { data: allOrder, isLoading, isError } = useGetAllOrderQuery(undefined);
+const ManageUsers: React.FC = () => {
+    const { data: allUsers, isLoading, isError } = useGetAllUserQuery(undefined);
+    // const [updateUser] = useUpdateUserMutation();
+
+    const handleBlockToggle = async () => {
+        // Handle block/unblock user logic here
+    };
 
     if (isError) {
-        return <div className="flex items-center justify-center h-screen text-xl text-red-500">Error fetching orders</div>;
+        return <div className="flex items-center justify-center h-screen text-xl text-red-500">Error fetching users</div>;
     }
 
-    const columns = [
+    const columns: ColumnsType<User> = [
         {
-            title: 'Order ID',
-            dataIndex: '_id',
-            key: '_id',
+            title: 'User ID',
+            dataIndex: 'id',
+            key: 'id',
+            responsive: ['md'],
         },
         {
-            title: 'Product Name',
-            dataIndex: ['product', 'name'],
-            key: 'productName',
+            title: 'Name',
+            dataIndex: 'name',
+            key: 'name',
         },
         {
-            title: 'Price',
-            dataIndex: ['product', 'price'],
-            key: 'price',
-            render: (price: number) => `$${price}`,
+            title: 'Email',
+            dataIndex: 'email',
+            key: 'email',
         },
         {
-            title: 'Total Amount',
-            dataIndex: 'totalAmount',
-            key: 'totalAmount',
-            render: (amount: number) => `$${amount}`,
-        },
-        {
-            title: 'Payment Status',
-            dataIndex: 'paymentStatus',
-            key: 'paymentStatus',
-            render: (status: string) => (
-                <Tag color={status === 'succeeded' ? 'green' : 'red'}>
-                    {status.toUpperCase()}
-                </Tag>
+            title: 'Role',
+            dataIndex: 'role',
+            key: 'role',
+            render: (role: string) => (
+                <Tag color={role === 'admin' ? 'blue' : 'green'}>{role.toUpperCase()}</Tag>
             ),
         },
         {
-            title: 'User',
-            dataIndex: ['user', 'name'],
-            key: 'user',
+            title: 'Status',
+            dataIndex: 'isBlocked',
+            key: 'isBlocked',
+            render: (isBlocked: boolean) => (
+                <Tag color={isBlocked ? 'red' : 'green'}>{isBlocked ? 'Blocked' : 'Active'}</Tag>
+            ),
         },
         {
-            title: 'Order Date',
-            dataIndex: 'orderDate',
-            key: 'orderDate',
-            render: (date: string) => new Date(date).toLocaleString(),
+            title: 'Action',
+            key: 'action',
+            render: (_, user: User) => (
+                <Switch
+                    checked={!user.isBlocked}
+                    onChange={() => handleBlockToggle()}
+                    checkedChildren="Active"
+                    unCheckedChildren="Blocked"
+                />
+            ),
         },
     ];
 
-    const dataSource = allOrder?.map((order: Order, index: number) => ({
+    const dataSource = allUsers?.map((user: User, index: number) => ({
         key: index,
-        ...order,
+        ...user,
     }));
 
     return (
         <div className="p-4 min-h-screen bg-gray-50">
-            <h1 className="text-2xl font-bold mb-4">Manage User</h1>
+            <h1 className="text-2xl font-bold mb-4">Manage Users</h1>
             {isLoading ? (
-                <Skeleton active paragraph={{ rows: 10 }} />
+                <div className="">
+                    <Skeleton active paragraph={{ rows: 10 }} />
+                </div>
             ) : (
-                <Table columns={columns} dataSource={dataSource} pagination={{ pageSize: 5 }} />
+                <Table
+                    columns={columns}
+                    dataSource={dataSource}
+                    pagination={{ pageSize: 5 }}
+                    scroll={{ x: '100%' }}
+                />
             )}
         </div>
     );
 };
 
-export default ManageUser;
+export default ManageUsers;

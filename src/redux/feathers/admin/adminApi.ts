@@ -5,7 +5,7 @@ const adminApi = baseApi.injectEndpoints({
     endpoints: (builder) => ({
         getAllOrder: builder.query({
             query: () => ({
-                url: `/orders/view-all-order`,
+                url: `/admin/view-all-order`,
                 method: 'GET',
             }),
             transformResponse: (response: TResponseRedux<any>) => {
@@ -15,7 +15,7 @@ const adminApi = baseApi.injectEndpoints({
         
         getAllUser: builder.query({
             query: () => ({
-                url: `/auth/all-user`,
+                url: `/admin/all-user`,
                 method: 'GET',
             }),
             transformResponse: (response: TResponseRedux<any>) => {
@@ -27,4 +27,4 @@ const adminApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetAllOrderQuery } = adminApi
+export const { useGetAllOrderQuery, useGetAllUserQuery } = adminApi
