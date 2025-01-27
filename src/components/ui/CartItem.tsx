@@ -1,8 +1,8 @@
 import { Button, InputNumber } from "antd";
-import { CartItemType } from "../../pages/user/UserCart";
+import { TProduct } from "../../types";
 
 type CartItemProps = {
-    item: CartItemType;
+    item: TProduct;
     onUpdateQuantity: (id: string, quantity: number) => void;
     onRemove: (id: string) => void;
 };
@@ -41,7 +41,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
                     </Button>
                     <InputNumber
                         min={1}
-                        max={item.inStock || 0} // Default to 0 if inStock is undefined
+                        max={item.inStock || 0}
                         value={item.quantity}
                         className="w-20"
                         onChange={(value) => {

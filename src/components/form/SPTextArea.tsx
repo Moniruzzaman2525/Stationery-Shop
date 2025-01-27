@@ -19,7 +19,7 @@ const SPTextarea = ({ name, label, placeholder, style }: TTextareaProps) => {
                 render={({ field, fieldState: { error } }) => (
                     <Form.Item label={label}>
                         <TextArea
-                            style={{ ...style, height: "150px", resize: "none" }} 
+                            style={{ ...style, height: "100px", resize: "none" }} 
                             id={name}
                             placeholder={placeholder}
                             {...field}

@@ -80,7 +80,7 @@ const Layout = () => {
             </aside>
 
             <main className="flex-1 bg-gray-100 overflow-auto">
-                <header className="flex justify-between items-center mb-5 p-4 bg-white shadow-md">
+                <header className="flex justify-between items-center mb-12 p-4 bg-white shadow-md">
                     <button
                         className="md:hidden bg-gray-800 text-white px-4 py-2 rounded-lg"
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}

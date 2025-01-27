@@ -37,9 +37,9 @@ const CreateProduct = () => {
     };
 
     return (
-        <div className="flex flex-col justify-center items-center min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center min-h-screen bg-gray-100">
             <h1 className="text-xl md:text-3xl font-bold mb-6 text-center text-gray-800">
-                Create a stationery Product
+                Add a stationery Product
             </h1>
             <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
                 <SPForm onSubmit={onSubmit}>
@@ -51,15 +51,17 @@ const CreateProduct = () => {
                             <div>
                                 <Controller
                                     name="photo"
-                                    render={({ field: { onChange, ...field } }) => (
+                                    render={({ field: { onChange, ref } }) => (
                                         <div className="mb-4">
-                                            <label className="block text-gray-700 font-medium mb-2">Product Photo</label>
+                                            <label className="block text-gray-700 font-medium mb-2">
+                                                Product Photo
+                                            </label>
                                             <input
                                                 type="file"
                                                 className="w-full border border-gray-300 rounded-lg p-2"
-                                                {...field}
+                                                ref={ref}
                                                 onChange={(e) => {
-                                                    const file = e.target.files?.[0];
+                                                    const file = e.target.files?.[0]; 
                                                     if (file) {
                                                         onChange(file);
                                                     }
@@ -69,11 +71,13 @@ const CreateProduct = () => {
                                     )}
                                 />
                             </div>
+
                         </div>
                         <div>
                             <SPInput type="text" name="brand" label="Brand Name" />
-                            <SPTextarea name="description" label="Description" />
                             <SPInput type="text" name="quantity" label="Quantity" />
+                            <SPInput type="text" name="inStock" label="In Stock" />
+                            <SPTextarea name="description" label="Description" />
                         </div>
                     </div>
                     <div className="mt-6">

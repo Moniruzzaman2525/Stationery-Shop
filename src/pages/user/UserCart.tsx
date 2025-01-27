@@ -1,24 +1,16 @@
-import { removeFromCart, useCurrentCartProduct } from "../../redux/feathers/cart/cartSlice";
+import { removeFromCart, updateQuantity, useCurrentCartProduct } from "../../redux/feathers/cart/cartSlice";
 import { useAppSelector } from "../../redux/hooks";
 import { Button } from "antd";
 import CartItem from "../../components/ui/CartItem";
 import { useDispatch } from "react-redux";
-export type CartItemType = {
-    _id: string;
-    name: string;
-    brand: string;
-    price: number;
-    photo: string;
-    quantity: number;
-    inStock: number;
-};
+import { TProduct } from "../../types";
 const UserCart = () => {
-    const cart = useAppSelector(useCurrentCartProduct) as CartItemType[]
+    const cart = useAppSelector(useCurrentCartProduct) as TProduct[]
     const dispatch = useDispatch()
 
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
     const handleUpdateQuantity = (id: string, quantity: number): void => {
-        console.log(`Update Item: ${id}, New Quantity: ${quantity}`);
+        dispatch(updateQuantity({id, quantity}))
     };
 
     const handleRemoveItem = (id: string): void => {

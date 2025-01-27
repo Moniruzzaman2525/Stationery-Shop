@@ -10,5 +10,4 @@ export type TProduct = {
   stock?: boolean
   quantity: number;
   inStock?: number;
-  sku?: string;
 }
