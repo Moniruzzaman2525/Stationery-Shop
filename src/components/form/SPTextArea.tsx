@@ -25,7 +25,7 @@ const SPTextarea = ({ name, label, placeholder, style }: TTextareaProps) => {
                             {...field}
                         />
                         <div>
-                            {error ? <small>{error.message}</small> : <small>&nbsp;</small>}
+                            {error ? <small className="text-red-500">{error.message}</small> : <small>&nbsp;</small>}
                         </div>
                     </Form.Item>
                 )}

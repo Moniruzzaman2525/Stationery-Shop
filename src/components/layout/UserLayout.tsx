@@ -1,53 +1,29 @@
 import { useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut, selectCurrentUser } from "../../redux/feathers/auth/authSlice";
-import logo from '../../assets/images/logo1.png'
+import logo from '../../assets/images/logo1.png';
 
 const Layout = () => {
     const user = useAppSelector(selectCurrentUser);
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-    const dispatch = useAppDispatch()
-    const navigate = useNavigate()
+    const dispatch = useAppDispatch();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     const userItems = [
-        {
-            path: "update-Profile",
-            label: "My Profile",
-        },
-        {
-            path: "address",
-            label: "Address",
-        },
-        {
-            path: "see-order",
-            label: "View Order",
-        },
-        
-    ]
+        { path: "update-Profile", label: "My Profile" },
+        { path: "address", label: "Address" },
+        { path: "see-order", label: "View Order" },
+    ];
+
     const adminItems = [
-        {
-            path: "update-Profile",
-            label: "My Profile",
-        },
-        {
-            path: "address",
-            label: "Address",
-        },
-        {
-            path: "create-product",
-            label: "Create Product",
-        },
-        {
-            path: "manage-order",
-            label: "Manage Order",
-        },
-        {
-            path: "manage-user",
-            label: "Manage user",
-        },
-       
-    ]
+        { path: "update-Profile", label: "My Profile" },
+        { path: "address", label: "Address" },
+        { path: "create-product", label: "Add Product" },
+        { path: "manage-order", label: "Manage Order" },
+        { path: "manage-user", label: "Manage User" },
+    ];
 
     const getMenuItems = (role: string) => {
         switch (role) {
@@ -58,14 +34,13 @@ const Layout = () => {
                 return userItems;
         }
     };
-    
-    
+
     const menuItems = getMenuItems(user?.role ?? "user");
 
     const handleLogout = async () => {
         try {
-            await dispatch(logOut()); 
-            navigate('/'); 
+            await dispatch(logOut());
+            navigate('/');
         } catch (error) {
             console.error('Error during logout:', error);
         }
@@ -74,8 +49,9 @@ const Layout = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             <aside
-                className={`fixed z-50 bg-gray-800 text-white w-64 p-4 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-                    } transition-transform duration-300 md:relative md:translate-x-0`}
+                className={`fixed z-50 bg-gray-800 text-white w-64 p-4 transform ${
+                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                } transition-transform duration-300 md:relative md:translate-x-0`}
             >
                 <div className="mb-6 flex justify-between items-center">
                     <Link to="/" className="flex items-center text-white gap-2 no-underline">
@@ -93,17 +69,20 @@ const Layout = () => {
                     {menuItems.map((item, index) => (
                         item && (
                             <div key={index} className="mb-2">
-                                <div
-
-                                    className="block p-2 rounded-lg hover:bg-gray-700 cursor-pointer flex justify-between items-center"
+                                <Link
+                                    to={item.path}
+                                    className={`block p-2 rounded-lg cursor-pointer flex justify-between items-center ${
+                                        location.pathname.includes(item.path)
+                                            ? "bg-gray-700 text-white"
+                                            : "hover:bg-gray-700 text-gray-300"
+                                    }`}
                                 >
-                                    <Link to={item.path}> <span>{item.label}</span></Link>
-                                </div>
+                                    {item.label}
+                                </Link>
                             </div>
                         )
                     ))}
                 </nav>
-
             </aside>
 
             <main className="flex-1 bg-gray-100 overflow-auto">
@@ -114,11 +93,14 @@ const Layout = () => {
                     >
                         ☰
                     </button>
-                    <button onClick={handleLogout} className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500 cursor-pointer">
+                    <button
+                        onClick={handleLogout}
+                        className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500 cursor-pointer"
+                    >
                         Log out
                     </button>
                 </header>
-                <div className="">
+                <div>
                     <Outlet />
                 </div>
             </main>

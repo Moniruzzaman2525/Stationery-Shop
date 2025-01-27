@@ -43,9 +43,11 @@ const Login = () => {
             navigate(from);
             hide();
             message.success("Login successfully!", 2);
-        } catch (err) {
+        } catch (err: any) {
             hide();
-            message.error("Failed to login!", 2);
+            const errorMessage =
+                err?.data?.message || err?.message || "An unexpected error occurred.";
+            message.error(errorMessage, 2);
         }
     };
 
