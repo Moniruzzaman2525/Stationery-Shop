@@ -1,6 +1,6 @@
-
 import { useGetAllProductsQuery } from '../../redux/feathers/product/productApi';
 import { Empty, Skeleton } from 'antd';
+import { Link } from 'react-router-dom';
 import ProductCard from './ProductCard';
 
 interface CategoryItemProps {
@@ -33,8 +33,13 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => {
                     ))}
                 </div>
             ) : (
-                <div className="flex justify-center items-center h-40">
-                    <Empty description="No Books products available" />
+                <div className="flex flex-col justify-center items-center h-40">
+                    <Empty description={`No ${item} products available`} />
+                    <Link to="/all-products" className="mt-4">
+                        <button className="bg-[#001845] cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
+                            View All Products
+                        </button>
+                    </Link>
                 </div>
             )}
         </div>
