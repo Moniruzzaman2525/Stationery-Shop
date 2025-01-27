@@ -60,8 +60,6 @@ const UserCart = () => {
                 dispatch(setPaymentData(res?.data));
                 navigate('/payment');
             }
-            
-            message.success("Order successfully confirmed!");
         } else {
             console.log("Order not confirmed. Stock issue.");
         }

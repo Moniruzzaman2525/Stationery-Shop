@@ -2,17 +2,20 @@ import React, { useState } from 'react';
 import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import { useAppSelector } from '../../redux/hooks';
 import { usePaymentData } from '../../redux/feathers/order/orderSlice';
+import { message } from 'antd';
+import { useCallbackMutation } from '../../redux/feathers/order/orderApi';
+import { TProduct } from '../../types';
+import { useCurrentCartProduct } from '../../redux/feathers/cart/cartSlice';
 
 const CheckoutForm: React.FC = () => {
   const stripe = useStripe();
   const elements = useElements();
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [processing, setProcessing] = useState(false);
-
+const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
   const paymentData = useAppSelector(usePaymentData);
   const clientSecret = paymentData?.client_secret;
-  console.log(paymentData)
+  const [callback] = useCallbackMutation()
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -35,7 +38,13 @@ const CheckoutForm: React.FC = () => {
     if (stripeError) {
       setError(stripeError.message || 'Payment failed. Try again.');
     } else if (paymentIntent && paymentIntent.status === 'succeeded') {
-      setSuccess('Payment succeeded!');
+      const data = {
+        cart: cart,
+        paymentData: paymentIntent
+      }
+      const res = await callback(data)
+      console.log(res)
+      message.success("Order successfully confirmed!");
     } else {
       setError('Payment failed. Try again.');
     }
@@ -105,7 +114,6 @@ const CheckoutForm: React.FC = () => {
         {processing ? 'Processing...' : 'Pay Now'}
       </button>
       {error && <p className="text-red-500 text-center">{error}</p>}
-      {success && <p className="text-green-500 text-center">{success}</p>}
     </form>
   );
 };
