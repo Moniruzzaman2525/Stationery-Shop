@@ -23,17 +23,24 @@ const SingleProduct = () => {
 
     const handleAddToCart = () => {
         if (!isLoggedIn) {
-            message.warning("Please log in to add products to the cart."); 
+            message.warning("Please log in to add products to the cart.");
             localStorage.setItem("redirectAfterLogin", location.pathname);
             navigate("/login");
             return;
         }
+
         if (singleProductData) {
+            if (!singleProductData.stock) {
+                message.warning(`Only ${singleProductData.stock} items are available in stock.`);
+                return;
+            }
+
             dispatch(addToCart({ product: singleProductData, quantity }));
-            message.success("Product added to cart!"); 
+            message.success("Product added to cart!");
             setQuantity(1);
         }
     };
+
 
     if (isFetching) {
         return (

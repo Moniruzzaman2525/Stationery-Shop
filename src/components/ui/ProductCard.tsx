@@ -26,6 +26,10 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             navigate("/login"); 
             return;
         }
+        if (!product.stock) {
+            message.warning(`Only ${product.stock} items are available in stock.`);
+            return;
+        }
         dispatch(addToCart({ product, quantity: 1 }));
         message.success("Product added to cart!"); 
     };
