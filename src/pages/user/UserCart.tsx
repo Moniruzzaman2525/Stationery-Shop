@@ -91,13 +91,13 @@ const UserCart: React.FC = () => {
                         <div className="flex flex-col sm:flex-row justify-center sm:justify-between items-center mt-4 gap-4">
                             <Link to="/all-products" className="w-full sm:w-auto">
                                 <button
-                                    className="w-full sm:w-auto bg-[#001845] text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition"
+                                    className="w-full sm:w-auto bg-[#001845] !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition"
                                 >
                                     Continue Shopping
                                 </button>
                             </Link>
                             <button
-                                className="w-full sm:w-auto bg-[#001845] text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition"
+                                className="w-full sm:w-auto bg-[#001845] !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition"
                                 onClick={confirmOrder}
                             >
                                 Confirm Order

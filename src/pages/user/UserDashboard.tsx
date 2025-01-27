@@ -104,7 +104,7 @@ const UserDashboard = () => {
                                 <button
                                     type="submit"
                                     disabled={isUpdating}
-                                    className={`w-full cursor-pointer py-3 text-white rounded-lg transition ${isUpdating ? 'bg-gray-500' : 'bg-[#001845] hover:bg-[#00296b]'}`}
+                                    className={`w-full cursor-pointer py-3 !text-white rounded-lg transition ${isUpdating ? 'bg-gray-500' : 'bg-[#001845] hover:bg-[#00296b]'}`}
                                 >
                                     {isUpdating ? "Saving..." : "Save Changes"}
                                 </button>
@@ -127,7 +127,7 @@ const UserDashboard = () => {
                             <div className="mt-6">
                                 <button
                                     onClick={() => setIsEditMode(true)}
-                                    className="w-full cursor-pointer py-3 bg-[#001845] text-white rounded-lg hover:bg-[#00296b] transition"
+                                    className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg hover:bg-[#00296b] transition"
                                 >
                                     Edit Profile
                                 </button>

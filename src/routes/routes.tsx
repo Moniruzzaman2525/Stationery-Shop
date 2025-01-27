@@ -87,7 +87,7 @@ const router = createBrowserRouter([
                 element: <ManageOrder />
             },
             {
-                path: 'Manage Order',
+                path: 'manage-user',
                 element: <ManageUser />
             },
         ],

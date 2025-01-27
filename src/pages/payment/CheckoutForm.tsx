@@ -117,7 +117,7 @@ const CheckoutForm: React.FC = () => {
       <button
         type="submit"
         disabled={!stripe || processing}
-        className="w-full cursor-pointer bg-[#001845] text-white py-3 px-4 rounded-lg transition disabled:bg-gray-400"
+        className="w-full cursor-pointer bg-[#001845] !text-white py-3 px-4 rounded-lg transition disabled:bg-gray-400"
       >
         {processing ? 'Processing...' : 'Pay Now'}
       </button>

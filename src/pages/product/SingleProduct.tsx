@@ -173,7 +173,7 @@ const SingleProduct = () => {
                         </button>
                     </div> */}
                     <button
-                        className="bg-[#001845] cursor-pointer text-white px-6 py-2 rounded-lg"
+                        className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg"
                         onClick={handleAddToCart}
                     >
                         Add to cart

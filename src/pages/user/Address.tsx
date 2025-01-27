@@ -128,7 +128,7 @@ const Address = () => {
                             <button
                                 type="submit"
                                 disabled={isUpdating}
-                                className={`w-full cursor-pointer py-3 text-white rounded-lg transition ${
+                                className={`w-full cursor-pointer py-3 !text-white rounded-lg transition ${
                                     isUpdating ? "bg-gray-500" : "bg-[#001845] hover:bg-[#00296b]"
                                 }`}
                             >
@@ -165,7 +165,7 @@ const Address = () => {
                         <div className="mt-6">
                             <button
                                 onClick={() => setIsEditMode(true)}
-                                className="w-full cursor-pointer py-3 bg-[#001845] text-white rounded-lg hover:bg-[#00296b] transition"
+                                className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg hover:bg-[#00296b] transition"
                             >
                                 Edit Address
                             </button>

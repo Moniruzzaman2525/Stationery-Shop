@@ -83,7 +83,7 @@ const CreateProduct = () => {
                     <div className="mt-6">
                         <button
                             type="submit"
-                            className="w-full cursor-pointer py-3 bg-[#001845] text-white rounded-lg hover:bg-[#00296b] transition"
+                            className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg hover:bg-[#00296b] transition"
                             disabled={uploading}
                         >
                             {uploading ? "Uploading..." : "Submit"}

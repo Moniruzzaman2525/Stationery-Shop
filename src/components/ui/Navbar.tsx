@@ -17,10 +17,10 @@ const Navbar = () => {
 
     }
     return (
-        <nav className="flex justify-between items-center bg-[#001845] px-6 py-3 h-[70px] rounded-lg text-white shadow-md">
+        <nav className="flex justify-between items-center bg-[#001845] px-6 py-3 h-[70px] rounded-lg !text-white shadow-md">
 
             <div className="flex items-center gap-2">
-                <Link to="/" className="flex items-center text-white gap-2 no-underline">
+                <Link to="/" className="flex items-center !text-white gap-2 no-underline">
                     <img src={logo} alt="Logo" className="h-10 object-contain" />
                     <h2 className="text-lg font-bold hidden md:block">nsbooks.ae</h2>
                 </Link>
@@ -45,7 +45,7 @@ const Navbar = () => {
 
             <div className="hidden md:flex items-center gap-4">
                 <Link to='/user-cart'><img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
-                <Link to='/dashboard'><img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
+                <Link to='/dashboard/update-Profile'><img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
                 {!user ? <Link to="/login">
                     <button className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500 cursor-pointer">
                         Login
@@ -58,14 +58,14 @@ const Navbar = () => {
 
             {/* Dropdown Menu for Mobile */}
             {isMenuOpen && (
-                <div className="absolute z-[1] top-[70px] right-0 bg-[#001845] text-white w-full shadow-md md:hidden">
+                <div className="absolute z-[1] top-[70px] right-0 bg-[#001845] !text-white w-full shadow-md md:hidden">
                     <ul className="list-none flex flex-col gap-4 p-4">
                         <Link to="/books"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
                         <Link to="/art-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
                         <Link to="/stationery"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
                         <Link to="/classroom-supplies"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
                         <Link to="/user-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Cart</li></Link>
-                        <Link to="/dashboard"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Dashboard</li></Link>
+                        <Link to="/dashboard/update-Profile"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Dashboard</li></Link>
                         <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">
                             {user ? <button onClick={handleLogout} className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
                                 Logout

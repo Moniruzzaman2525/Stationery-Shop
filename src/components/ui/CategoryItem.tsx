@@ -36,7 +36,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => {
                 <div className="flex flex-col justify-center items-center h-40">
                     <Empty description={`No ${item} products available`} />
                     <Link to="/all-products" className="mt-4">
-                        <button className="bg-[#001845] cursor-pointer text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
+                        <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
                             View All Products
                         </button>
                     </Link>
