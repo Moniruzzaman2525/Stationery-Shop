@@ -1,3 +1,4 @@
+import { TResponseRedux } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const productApi = baseApi.injectEndpoints({
@@ -9,8 +10,17 @@ const productApi = baseApi.injectEndpoints({
                 body: userInfo
             })
         }),
-       
+        getUserOrder: builder.query({
+            query: () => ({
+                url: `/orders`,
+                method: 'GET',
+            }),
+            transformResponse: (response: TResponseRedux<any>) => {
+                return response.data
+            }
+        }),
+
     })
 })
 
-export const { useCallbackMutation } = productApi
+export const { useCallbackMutation, useGetUserOrderQuery } = productApi

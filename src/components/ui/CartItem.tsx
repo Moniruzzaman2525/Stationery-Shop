@@ -21,20 +21,20 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
     };
 
     return (
-        <div className="flex items-center justify-between bg-white p-4 shadow rounded-lg">
-            <div className="flex items-center">
+        <div className="flex flex-col md:flex-row items-center justify-between bg-white p-4 shadow rounded-lg space-y-4 md:space-y-0 md:space-x-4">
+            <div className="flex items-center space-x-4">
                 <img
                     src={item.photo}
                     alt={item.name}
                     className="w-20 h-20 object-cover rounded-lg"
                 />
-                <div className="ml-4">
+                <div className="text-center md:text-left">
                     <h2 className="text-lg font-semibold">{item.name}</h2>
                     <p className="text-sm text-gray-500">{item.brand}</p>
                     <p className="text-sm text-gray-500">Price: ${item.price.toFixed(2)}</p>
                 </div>
             </div>
-            <div className="flex items-center space-x-4">
+            <div className="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
                 <div className="flex items-center space-x-2">
                     <Button onClick={handleDecrease} disabled={item.quantity <= 1}>
                         -

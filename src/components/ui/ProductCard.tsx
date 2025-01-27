@@ -22,8 +22,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const handleAddToCartFunction = (event: React.MouseEvent) => {
         event.stopPropagation();
         if (!isLoggedIn) {
-            message.warning("Please log in to add products to the cart."); 
-            navigate("/login"); 
+            message.warning("Please log in to add products to the cart.");
+            navigate("/login");
             return;
         }
         if (!product.stock) {
@@ -31,7 +31,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             return;
         }
         dispatch(addToCart({ product, quantity: 1 }));
-        message.success("Product added to cart!"); 
+        message.success("Product added to cart!");
     };
 
     return (
@@ -61,7 +61,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                     {product.description}
                 </p>
                 <p className="text-lg font-bold text-gray-800 mt-2">
-                    USD ${product.price}
+                    USD ${product.price} 
                 </p>
             </div>
         </Card>
