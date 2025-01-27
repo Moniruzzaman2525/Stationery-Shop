@@ -14,6 +14,7 @@ import { adminPaths } from "./admin.routes";
 import { userPaths } from "./user.routes";
 import AllProduct from "../pages/product/AllProduct";
 import SingleProduct from "../pages/product/SingleProduct";
+import Payment from "../pages/payment/Payment";
 
 
 const router = createBrowserRouter([
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
             {
                 path: '/product/:productId',
                 element: <SingleProduct />
+            },
+            {
+                path: '/payment',
+                element: <Payment />
             },
         ]
     },

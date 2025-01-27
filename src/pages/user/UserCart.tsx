@@ -8,14 +8,15 @@ import CartItem from "../../components/ui/CartItem";
 import { useDispatch } from "react-redux";
 import { TProduct } from "../../types";
 import { Empty, message } from "antd";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useConfirmOrderMutation } from "../../redux/feathers/product/productApi";
+import { setPaymentData } from "../../redux/feathers/order/orderSlice";
 
 const UserCart = () => {
     const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
     const dispatch = useDispatch();
     const [confirmOrderProduct] = useConfirmOrderMutation()
-
+    const navigate = useNavigate();
     const totalPrice = cart.reduce((total, item) => total + item.price * item.quantity, 0);
 
     const handleUpdateQuantity = (id: string, quantity: number): void => {
@@ -53,10 +54,13 @@ const UserCart = () => {
         const isStockAvailable = await checkStockAvailability(cart);
 
         if (isStockAvailable) {
-            console.log("Order confirmed:", cart);
-            const data = {}
-            const res = await confirmOrderProduct(data)
-            console.log(res)
+            const data = {price: totalPrice}
+            const res = await confirmOrderProduct(data).unwrap()
+            if (res) {
+                dispatch(setPaymentData(res?.data));
+                navigate('/payment');
+            }
+            
             message.success("Order successfully confirmed!");
         } else {
             console.log("Order not confirmed. Stock issue.");
