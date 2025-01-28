@@ -1,8 +1,8 @@
 import { MailOutlined, PhoneOutlined, EnvironmentOutlined } from "@ant-design/icons";
-import SPForm from "../components/form/SPForm";
+import SPForm from "../../components/form/SPForm";
 import { FieldValues } from "react-hook-form";
-import SPInput from "../components/form/SPInput";
-import SPTextarea from "../components/form/SPTextArea";
+import SPInput from "../../components/form/SPInput";
+import SPTextarea from "../../components/form/SPTextArea";
 
 
 const ContactUsPage: React.FC = () => {

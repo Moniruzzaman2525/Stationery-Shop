@@ -18,8 +18,10 @@ import Address from "../pages/user/Address";
 import ManageOrder from "../pages/admin/ManageOrder";
 import ManageUser from "../pages/admin/ManageUser";
 import CreateProduct from "../pages/admin/CreateProduct";
-import AboutPage from "../pages/AboutPage";
-import ContactUsPage from "../pages/ContactUsPage";
+import AboutPage from "../pages/others/AboutPage";
+import ContactUsPage from "../pages/others/ContactUsPage";
+import BlogPage from "../pages/others/BlogPage";
+import SingleBlogPage from "../pages/others/SingleBlogPage";
 
 
 const router = createBrowserRouter([
@@ -66,6 +68,14 @@ const router = createBrowserRouter([
             {
                 path: '/contact-us',
                 element: <ContactUsPage />
+            },
+            {
+                path: '/blog',
+                element: <BlogPage />
+            },
+            {
+                path: '/blog/:blobId',
+                element: <SingleBlogPage />
             },
         ]
     },
