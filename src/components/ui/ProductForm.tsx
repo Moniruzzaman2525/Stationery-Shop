@@ -1,13 +1,14 @@
-import { FieldValues } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 import { useState } from "react";
-import { uploadImageToImgBB } from "../../utils/uploadImageToImgBB";
-import { useCreateProductMutation } from "../../redux/feathers/product/productApi";
 import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
 import { SPSelect } from "../../components/form/SPSelect";
 import SPTextarea from "../../components/form/SPTextArea";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { productSchema } from "../../schema/product.schema";
+import { updateProductSchema } from "../../schema/product.schema";
+import { Switch } from "antd";
+import { useUpdateProductMutation } from "../../redux/feathers/admin/adminApi";
+import { useNavigate, useParams } from "react-router-dom";
 
 const categoryOption = [
     { value: "Books", label: "Books" },
@@ -17,31 +18,29 @@ const categoryOption = [
 ];
 
 interface ProductFormProps {
-    initialData?: FieldValues; 
-    isUpdate?: boolean; 
-    onSuccess?: () => void; 
+    initialData?: FieldValues;
+    isUpdate?: boolean;
 }
 
-const ProductForm: React.FC<ProductFormProps> = ({ initialData, isUpdate = false, onSuccess }) => {
+const ProductForm: React.FC<ProductFormProps> = ({ initialData, isUpdate = false }) => {
     const [uploading, setUploading] = useState(false);
-    const [addProduct] = useCreateProductMutation();
-    // const [updateProduct] = useUpdateProductMutation();
+    const [updateProduct] = useUpdateProductMutation();
+    const { productId } = useParams()
+    const navigate = useNavigate()
 
     const onSubmit = async (data: FieldValues) => {
         try {
             setUploading(true);
-            if (data.photo && data.photo instanceof File) {
-                const imageUrl = await uploadImageToImgBB(data.photo);
-                if (imageUrl) data.photo = imageUrl;
+            const dataP = {
+                productData: data,
+                id: productId
             }
-            if (isUpdate && initialData?._id) {
-                // await updateProduct({ id: initialData._id, ...data }).unwrap();
-            } else {
-                await addProduct(data).unwrap();
+            const res = await updateProduct(dataP)
+            if (res) {
+                navigate('/dashboard/manage-product', { state: { refresh: true } });
             }
 
-            // Success Callback
-            if (onSuccess) onSuccess();
+
         } catch (error) {
             console.error("Error submitting form:", error);
         } finally {
@@ -56,16 +55,31 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, isUpdate = false
             </h1>
             <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
                 <SPForm
-                    resolver={zodResolver(productSchema)}
+                    resolver={zodResolver(updateProductSchema)}
                     onSubmit={onSubmit}
-                    defaultValues={initialData} 
+                    defaultValues={initialData}
                 >
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
                             <SPInput type="text" name="name" label="Product Name" />
                             <SPInput type="text" name="price" label="Price" />
                             <SPSelect name="category" label="Category" options={categoryOption} />
-                            
+                            <div className="mt-4">
+                                <label className="block text-gray-700 font-medium mb-2">Availability</label>
+                                <Controller
+                                    name="stock"
+                                    defaultValue={initialData?.stock || false}
+                                    render={({ field }) => (
+                                        <Switch
+                                            checked={field.value}
+                                            onChange={(checked) => field.onChange(checked)}
+                                            checkedChildren="stock"
+                                            unCheckedChildren="Out of Stock"
+                                        />
+                                    )}
+                                />
+                            </div>
+
                         </div>
                         <div>
                             <SPInput type="text" name="brand" label="Brand Name" />

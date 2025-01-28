@@ -1,9 +1,9 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button, Table, Skeleton, TableColumnsType, TableProps, Popconfirm } from "antd";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetAllProductsQuery } from "../../redux/feathers/product/productApi";
 import { TProduct, TQueryParam } from "../../types";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export type TTableData = Pick<
   TProduct,
@@ -12,7 +12,8 @@ export type TTableData = Pick<
 
 export const ManageProduct = () => {
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
-  const { data: semesterData, isFetching } = useGetAllProductsQuery(params);
+  const location = useLocation();
+  const { data: semesterData, isFetching, refetch } = useGetAllProductsQuery(params);
   const navigate = useNavigate()
 
   const tableData: readonly TTableData[] | undefined = semesterData?.data?.map(
@@ -26,9 +27,19 @@ export const ManageProduct = () => {
       stock,
     })
   );
+  
+  useEffect(() => {
+      if (location.state?.refresh) {
+          refetch()
+      }
+  }, [location]);
 
+  
   const updateProduct = (id: string) => {
     navigate(`/dashboard/update-product/${id}`);
+  }
+
+  const deleteProduct = (id: string) => {
 
   }
 
@@ -64,7 +75,7 @@ export const ManageProduct = () => {
       title: "Price",
       dataIndex: "price",
       key: "price",
-      render: (price: number) => `$${price.toFixed(2)}`, // Format price with two decimal places
+      render: (price: number) => `$${price.toFixed(2)}`,
     },
     {
       title: "Stock",
@@ -77,16 +88,16 @@ export const ManageProduct = () => {
       key: "action",
       render: (_, record) => (
         <div className="flex items-center space-x-2">
-          <Button onClick={() => updateProduct(record._id)} type="primary">Update</Button>
+          <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition" onClick={() => updateProduct(record._id)}>Update</button>
           <Popconfirm
             title="Are you sure to delete this product?"
-            onConfirm={() => console.log("Deleted:", record._id)}
+            onConfirm={() => deleteProduct(record._id)}
             okText="Yes"
             cancelText="No"
           >
-            <Button type="primary" danger>
+            <button className="bg-[#001845] cursor-pointer !ml-4 !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
               Delete
-            </Button>
+            </button>
           </Popconfirm>
         </div>
       ),

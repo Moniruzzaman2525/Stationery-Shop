@@ -6,13 +6,10 @@ const UpdateProduct = () => {
     const { productId } = useParams();
     const { data: productData, isLoading } = useGetSingleProductQuery(productId);
 
-    const handleSuccess = () => {
-        console.log("Product updated successfully!");
-    };
 
     if (isLoading) return <p>Loading...</p>;
 
-    return <ProductForm initialData={productData} isUpdate={true} onSuccess={handleSuccess} />;
+    return <ProductForm initialData={productData} isUpdate={true} />;
 };
 
 export default UpdateProduct;
