@@ -18,7 +18,7 @@ const CategoryItem: React.FC<CategoryItemProps> = ({ item }) => {
     return (
         <div>
             {isFetching ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-h-[calc(72vh-64px-50px)] lg:grid-cols-6 gap-6">
                     {Array.from({ length: 6 }).map((_, index) => (
                         <div key={index} className="p-4">
                             <Skeleton.Avatar active size="large" shape="square" className="mb-2" />

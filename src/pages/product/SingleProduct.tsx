@@ -36,10 +36,10 @@ const SingleProduct = () => {
     if (isFetching) {
         return (
             <div className="flex flex-col md:flex-row gap-8 p-8">
-                <div className="w-full md:w-1/2 flex items-center justify-center">
+                <div className="w-full min-h-[calc(72vh-64px-50px)] md:w-1/2 flex items-center justify-center">
                     <Skeleton.Image style={{ width: 200, height: 200 }} />
                 </div>
-                <div className="w-full md:w-1/2">
+                <div className="w-full min-h-[calc(72vh-64px-50px)] md:w-1/2 flex items-center justify-center ">
                     <Skeleton active paragraph={{ rows: 6 }} />
                 </div>
             </div>
