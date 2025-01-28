@@ -19,6 +19,7 @@ import ManageOrder from "../pages/admin/ManageOrder";
 import ManageUser from "../pages/admin/ManageUser";
 import CreateProduct from "../pages/admin/CreateProduct";
 import AboutPage from "../pages/AboutPage";
+import ContactUsPage from "../pages/ContactUsPage";
 
 
 const router = createBrowserRouter([
@@ -61,6 +62,10 @@ const router = createBrowserRouter([
             {
                 path: '/about-us',
                 element: <AboutPage />
+            },
+            {
+                path: '/contact-us',
+                element: <ContactUsPage />
             },
         ]
     },

@@ -17,7 +17,7 @@ const SPInput = ({ type, name, label, placeholder, style, disabled, suffix }: TI
             <Controller
                 name={name} render={({ field, fieldState: { error } }) => (
                     <Form.Item label={label}>
-                        <Input type={type} style={style} id={name} placeholder={placeholder} {...field} size="large" disabled={disabled} suffix={suffix}  />
+                        <Input type={type} style={style} id={name} placeholder={placeholder} {...field} size="large" disabled={disabled} suffix={suffix} />
                         <div>
                             {
                                 error ? (<small className="text-red-500">{error.message}</small>) : (<small>&nbsp;</small>)
