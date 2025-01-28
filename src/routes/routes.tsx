@@ -34,7 +34,7 @@ const router = createBrowserRouter([
                 element: <Books />
             },
             {
-                path: '/art-cart',
+                path: '/art-craft',
                 element: <ArtAndCraft />
             },
             {

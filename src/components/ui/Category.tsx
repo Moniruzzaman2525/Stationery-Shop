@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 
 const categories = [
     { id: 1, image: books, label: "Books", path: '/books' },
-    { id: 2, image: artAndCraft, label: "Art And Craft", path: '/art-cart' },
+    { id: 2, image: artAndCraft, label: "Art And Craft", path: '/art-craft' },
     { id: 3, image: stationery, label: "Stationery", path: '/stationery' },
     { id: 4, image: classRoom, label: "Classroom Supplies", path: '/classroom-supplies' },
 ];
