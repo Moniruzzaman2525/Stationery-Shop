@@ -56,10 +56,10 @@ const Navbar = () => {
             </div>
 
             <ul className="list-none hidden md:flex gap-8 mb-0 text-sm font-medium">
-                <Link to="/books"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
-                <Link to="/art-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
-                <Link to="/stationery"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
-                <Link to="/classroom-supplies"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
+                <Link to="/"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Home</li></Link>
+                <Link to="/blogs"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Blogs</li></Link>
+                <Link to="/about-us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">About Us</li></Link>
+                <Link to="/contact-us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Contact Us</li></Link>
             </ul>
 
             <div className="hidden md:flex items-center gap-4 relative">
@@ -88,10 +88,10 @@ const Navbar = () => {
             {isMenuOpen && (
                 <div className="absolute z-50 top-[70px] right-0 bg-[#001845] text-white w-full shadow-md md:hidden">
                     <ul className="list-none flex flex-col gap-4 p-4">
-                        <Link onClick={handleMenuClose} to="/books"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
-                        <Link onClick={handleMenuClose} to="/art-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
-                        <Link onClick={handleMenuClose} to="/stationery"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
-                        <Link onClick={handleMenuClose} to="/classroom-supplies"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
+                        <Link onClick={handleMenuClose} to="/"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Home</li></Link>
+                        <Link onClick={handleMenuClose} to="/blogs"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Blogs</li></Link>
+                        <Link onClick={handleMenuClose} to="/about-us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">About Us</li></Link>
+                        <Link onClick={handleMenuClose} to="/Contact Us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Contact Us</li></Link>
                         <Link onClick={handleMenuClose} to="/user-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Cart</li></Link>
                         <Link onClick={handleMenuClose} to="/dashboard/update-Profile"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Dashboard</li></Link>
                         <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">
