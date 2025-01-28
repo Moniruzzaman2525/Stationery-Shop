@@ -1,6 +1,6 @@
 import React from 'react';
-import { useGetAllOrderQuery } from "../../redux/feathers/admin/adminApi";
-import { Table, Tag, Skeleton, Button, message, Popconfirm } from 'antd';
+import { useConfirmUserOrderMutation, useGetAllOrderQuery } from "../../redux/feathers/admin/adminApi";
+import { Table, Tag, Skeleton, message, Popconfirm } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
 
@@ -12,7 +12,7 @@ interface Order {
     };
     totalAmount: number;
     paymentStatus: string;
-    status: string; // Assuming you have a 'status' field for order status
+    status: string;
     user: {
         name: string;
     };
@@ -20,15 +20,20 @@ interface Order {
 }
 
 const ManageOrder: React.FC = () => {
-    const { data: allOrder, isLoading, isError } = useGetAllOrderQuery(undefined);
+    const { data: allOrder, isLoading, isError, refetch } = useGetAllOrderQuery(undefined);
+    const [confirmUserOrder] = useConfirmUserOrderMutation()
 
     const handleApprove = async (orderId: string) => {
-        // try {
-        //     await updateOrderStatus({ id: orderId, status: 'Shipping' }).unwrap();
-        //     message.success('Order status updated to "Shipping".');
-        // } catch (error) {
-        //     message.error('Failed to update order status.');
-        // }
+        try {
+            const res = await confirmUserOrder(orderId)
+            if (res) {
+                message.success('Order status updated to "Shipping".');
+                refetch()
+            }
+        } catch (error) {
+            console.log(error)
+            message.error('Failed to update order status.');
+        }
     };
 
     if (isError) {

@@ -24,7 +24,13 @@ const adminApi = baseApi.injectEndpoints({
         }),
         blockUser: builder.mutation({
             query: (userId) => ({
-                url: `/admin//users/${userId}/block`,
+                url: `/admin/users/${userId}/block`,
+                method: 'PATCH',
+            }),
+        }),
+        confirmUserOrder: builder.mutation({
+            query: (userId) => ({
+                url: `/admin/order/${userId}/confirm`,
                 method: 'PATCH',
             }),
         }),
@@ -32,4 +38,4 @@ const adminApi = baseApi.injectEndpoints({
     })
 })
 
-export const { useGetAllOrderQuery, useGetAllUserQuery, useBlockUserMutation } = adminApi
+export const { useGetAllOrderQuery, useGetAllUserQuery, useBlockUserMutation, useConfirmUserOrderMutation } = adminApi
