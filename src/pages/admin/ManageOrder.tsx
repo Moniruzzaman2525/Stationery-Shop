@@ -1,6 +1,6 @@
 import React from 'react';
 import { useGetAllOrderQuery } from "../../redux/feathers/admin/adminApi";
-import { Table, Tag, Skeleton } from 'antd';
+import { Table, Tag, Skeleton, Button, message, Popconfirm } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
 
@@ -12,6 +12,7 @@ interface Order {
     };
     totalAmount: number;
     paymentStatus: string;
+    status: string; // Assuming you have a 'status' field for order status
     user: {
         name: string;
     };
@@ -21,17 +22,20 @@ interface Order {
 const ManageOrder: React.FC = () => {
     const { data: allOrder, isLoading, isError } = useGetAllOrderQuery(undefined);
 
+    const handleApprove = async (orderId: string) => {
+        // try {
+        //     await updateOrderStatus({ id: orderId, status: 'Shipping' }).unwrap();
+        //     message.success('Order status updated to "Shipping".');
+        // } catch (error) {
+        //     message.error('Failed to update order status.');
+        // }
+    };
+
     if (isError) {
         return <div className="flex items-center justify-center h-screen text-xl text-red-500">Error fetching orders</div>;
     }
 
     const columns: ColumnsType<Order> = [
-        {
-            title: 'Order ID',
-            dataIndex: '_id',
-            key: '_id',
-            responsive: ['md'],
-        },
         {
             title: 'Product Name',
             dataIndex: ['product', 'name'],
@@ -60,6 +64,16 @@ const ManageOrder: React.FC = () => {
             ),
         },
         {
+            title: 'Order Status',
+            dataIndex: 'status',
+            key: 'status',
+            render: (status: string) => (
+                <Tag color={status === 'Pending' ? 'blue' : 'green'}>
+                    {status?.toUpperCase()}
+                </Tag>
+            ),
+        },
+        {
             title: 'User',
             dataIndex: ['user', 'name'],
             key: 'user',
@@ -69,6 +83,26 @@ const ManageOrder: React.FC = () => {
             dataIndex: 'orderDate',
             key: 'orderDate',
             render: (date: string) => new Date(date).toLocaleString(),
+        },
+        {
+            title: 'Action',
+            key: 'action',
+            render: (_, order: Order) => (
+                order.status === 'Pending' ? (
+                    <Popconfirm
+                        title="Approve this order?"
+                        onConfirm={() => handleApprove(order._id)}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <Button type="primary" >
+                            Approve
+                        </Button>
+                    </Popconfirm>
+                ) : (
+                    <Tag color="green">Shipped</Tag>
+                )
+            ),
         },
     ];
 

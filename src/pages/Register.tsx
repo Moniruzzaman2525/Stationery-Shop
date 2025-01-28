@@ -30,15 +30,16 @@ const Register = () => {
 
         try {
             const res = await registration(data).unwrap();
-            const user = verifyToken(res.data.accessToken) as TUser;
+            const user = verifyToken(res.data.token) as TUser;
             dispatch(
                 setUser({
                     user: user,
-                    token: res.data.accessToken,
+                    token: res.data.token,
                 })
             );
             const from = location.state?.from?.pathname || "/";
             navigate(from);
+            hide();
             message.success("Registration successful!", 2);
         } catch (err: any) {
             hide();
@@ -90,7 +91,7 @@ const Register = () => {
                     }
                     style={inputStyle}
                 />
-                <Text
+                {/* <Text
                     type="secondary"
                     style={{
                         fontSize: "12px",
@@ -100,7 +101,7 @@ const Register = () => {
                 >
                     Password must be at least 10 characters and include 1 uppercase
                     letter, 1 special character, and 1 numeric digit.
-                </Text>
+                </Text> */}
                 <SPInput
                     type={confirmPasswordVisible ? "text" : "password"}
                     name="confirmPassword"
