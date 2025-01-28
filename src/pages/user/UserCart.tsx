@@ -97,7 +97,7 @@ const UserCart: React.FC = () => {
                                 </button>
                             </Link>
                             <button
-                               className="bg-[#001845] cursor-pointer !text-white px-6 py-3 rounded-lg hover:bg-[#003366] transition"
+                                className="bg-[#001845] cursor-pointer !text-white px-6 py-3 rounded-lg hover:bg-[#003366] transition"
                                 onClick={confirmOrder}
                             >
                                 Confirm Order
@@ -106,8 +106,13 @@ const UserCart: React.FC = () => {
                     </div>
                 </div>
             ) : (
-                <div className="flex justify-center items-center h-40">
+                <div className="flex flex-col justify-center items-center h-100">
                     <Empty description="Your cart is empty" />
+                    <Link to="/all-products" className="mt-4">
+                        <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
+                            Continue Shopping
+                        </button>
+                    </Link>
                 </div>
             )}
         </div>

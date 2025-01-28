@@ -11,3 +11,27 @@ export type TProduct = {
   quantity: number;
   inStock?: number;
 }
+
+
+export type TOrder = {
+  _id: string;
+  product: TProduct;
+  totalAmount: number;
+  currency: string;
+  paymentId: string;
+  status: 'Pending' | 'Shipped';
+  paymentStatus: string;
+  user: {
+    _id: string;
+    id: string;
+    name: string;
+    email: string;
+    role: string;
+    isBlocked: boolean;
+    createdAt: string;
+    updatedAt: string;
+  };
+  orderDate: string;
+  createdAt: string;
+  updatedAt: string;
+}

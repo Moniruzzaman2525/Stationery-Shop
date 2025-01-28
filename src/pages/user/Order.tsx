@@ -1,39 +1,22 @@
-import React from "react";
-import { Skeleton, Avatar, List, Card, Typography } from "antd";
+import { Skeleton, Avatar, List, Card, Empty } from "antd";
+import { Link } from "react-router-dom";
 import { useGetUserOrderQuery } from "../../redux/feathers/order/orderApi";
-import { TProduct } from "../../types";
+import OrderCart from "../../components/ui/OrderCart";
+import { TOrder } from "../../types";
 
-const { Text } = Typography;
 
-interface Order {
-  _id: string;
-  product: TProduct;
-  totalAmount: number;
-  currency: string;
-  paymentId: string;
-  status: 'Pending' | 'Shipped';
-  paymentStatus: string;
-  user: {
-    _id: string;
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    isBlocked: boolean;
-    createdAt: string;
-    updatedAt: string;
-  };
-  orderDate: string;
-  createdAt: string;
-  updatedAt: string;
-}
+
 
 const Order = () => {
   const { data: orderData, isLoading } = useGetUserOrderQuery(undefined);
-  console.log(orderData)
+
+  const isEmpty = !orderData || orderData.length === 0;
+
   return (
     <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-2xl font-bold text-center mb-6">View Your Order</h1>
+      <h1 className="text-2xl font-bold text-center mb-6">
+        {isEmpty ? "You have no orders yet" : "View Your Order"}
+      </h1>
 
       {isLoading ? (
         <div className="max-w-4xl mx-auto">
@@ -49,38 +32,19 @@ const Order = () => {
             </Card>
           ))}
         </div>
+      ) : isEmpty ? (
+        <div className="flex flex-col justify-center items-center h-100">
+          <Empty description="You have no orders yet" />
+          <Link to="/all-products" className="mt-4">
+            <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
+              Continue Shopping
+            </button>
+          </Link>
+        </div>
       ) : (
         <div className="max-w-4xl mx-auto">
-          {orderData?.map((order: Order) => (
-            <Card key={order._id} className="!mb-4 shadow-md">
-              <List.Item.Meta
-                avatar={<Avatar src={order.product.photo} />}
-                title={
-                  <div className="flex justify-between items-center">
-                    <span className="text-lg font-semibold">
-                      {order.product.name}
-                    </span>
-                    <Text type="secondary">Quantity: {order?.product?.quantity}</Text>
-                  </div>
-                }
-                description={
-                  <div className="mt-2">
-                    <p>
-                      <Text strong>Customer Name:</Text> {order.user.name}
-                    </p>
-                    <p>
-                      <Text strong>Price:</Text> ${order.product.price}
-                    </p>
-                    <p>
-                      <Text strong>Order Date:</Text> {new Date(order.orderDate).toLocaleDateString()}
-                    </p>
-                    <p>
-                      <Text strong>Status:</Text> {order.status}
-                    </p>
-                  </div>
-                }
-              />
-            </Card>
+          {orderData.map((order: TOrder) => (
+            <OrderCart order={order} />
           ))}
         </div>
       )}
