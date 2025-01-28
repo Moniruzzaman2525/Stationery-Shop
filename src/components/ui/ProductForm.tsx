@@ -49,7 +49,7 @@ const ProductForm: React.FC<ProductFormProps> = ({ initialData, isUpdate = false
     };
 
     return (
-        <div className="flex flex-col items-center min-h-screen bg-gray-100 mt-10">
+        <div className="flex flex-col items-center min-h-screen bg-[#F9F9FB] mt-10">
             <h1 className="text-xl md:text-3xl font-bold mb-6 text-center text-gray-800">
                 {isUpdate ? "Update Product" : "Add a Product"}
             </h1>

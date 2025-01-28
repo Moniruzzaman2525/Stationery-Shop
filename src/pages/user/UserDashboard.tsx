@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import { FieldValues } from "react-hook-form";
+import { Controller, FieldValues } from "react-hook-form";
 import { Skeleton } from "antd";
 import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
@@ -18,7 +18,6 @@ const UserDashboard = () => {
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
     const onSubmit = async (data: FieldValues) => {
-        console.log(data)
         try {
             const userData = {
                 profileData: Object.fromEntries(
@@ -38,7 +37,7 @@ const UserDashboard = () => {
             const res = await updateUser(userData);
             if (res) {
                 setIsEditMode(false);
-                refetch(); // Refresh user data after update
+                refetch(); 
             } else {
                 throw new Error("User update failed");
             }
@@ -49,7 +48,7 @@ const UserDashboard = () => {
 
     if (isFetching) {
         return (
-            <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
+            <div className="flex flex-col items-center mt-10 min-h-screen bg-[#F9F9FB]">
                 <Skeleton.Avatar active size="large" shape="square" className="mb-2" />
                 <Skeleton active paragraph={{ rows: 2 }} />
             </div>
@@ -58,7 +57,7 @@ const UserDashboard = () => {
 
     return (
         <div>
-            <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
+            <div className="flex flex-col items-center mt-10 min-h-screen bg-[#F9F9FB]">
                 <h1 className="text-xl md:text-3xl font-bold mb-6 text-center text-gray-800">
                     {isEditMode ? "Edit Your Profile" : "Your Profile"}
                 </h1>
@@ -127,7 +126,7 @@ const UserDashboard = () => {
                         </SPForm>
                     ) : (
                         <div>
-                            <UserProfile setIsEditMode={setIsEditMode} getMeData={getMeData} />
+                           <UserProfile setIsEditMode={setIsEditMode} getMeData={getMeData ?? null} />
                         </div>
                     )}
                 </div>

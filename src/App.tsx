@@ -4,6 +4,7 @@ import Banner from "./components/ui/Banner";
 import Category from "./components/ui/Category";
 import BannerProduct from "./components/ui/BannerProduct";
 import Footer from "./components/ui/Footer";
+import ShoppingInfo from "./components/ui/ShoppingInfo";
 
 function App() {
   const location = useLocation();
@@ -14,6 +15,7 @@ function App() {
       {location.pathname === '/' && (
         <>
           <Banner />
+          <ShoppingInfo />
           <BannerProduct />
           <Category />
         </>

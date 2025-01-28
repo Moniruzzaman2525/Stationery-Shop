@@ -1,4 +1,4 @@
-import { TResponseRedux } from "../../../types";
+import { TResponseRedux, TUser } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const authApi = baseApi.injectEndpoints({
@@ -29,7 +29,7 @@ const authApi = baseApi.injectEndpoints({
                 url: `/auth/me`,
                 method: 'GET',
             }),
-            transformResponse: (response: TResponseRedux<any>) => {
+            transformResponse: (response: TResponseRedux<TUser>) => {
                 return response.data
             }
         }),

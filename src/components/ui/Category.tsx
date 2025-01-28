@@ -13,9 +13,11 @@ const categories = [
 
 const Category = () => {
     return (
-        <div className="py-26 px-6 md:px-40">
-            <h1 className="text-[20px] font-bold text-center mb-2">Featured Category</h1>
-            <p className="text-[15px] text-center mb-6">Get Your Desired Product from Featured Category!</p>
+        <div className="py-18 px-6 bg-[#F9F9FB] md:px-40">
+            <div className='mb-10 '>
+                <h1 className="text-[20px] font-bold text-center mb-2">Featured Category</h1>
+                <p className="text-[15px] text-center">Get Your Desired Product from Featured Category!</p>
+            </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
                 {categories.map((category) => (

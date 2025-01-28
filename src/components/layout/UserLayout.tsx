@@ -84,7 +84,7 @@ const Layout = () => {
                 </nav>
             </aside>
 
-            <main className="flex-1 bg-gray-100 overflow-auto">
+            <main className="flex-1 bg-[#F9F9FB] overflow-auto">
                 <header className="flex justify-between items-center p-4 bg-white shadow-md">
                     <button
                         className="md:hidden bg-gray-800 !text-white px-4 py-2 rounded-lg"

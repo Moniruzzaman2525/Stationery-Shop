@@ -1,4 +1,4 @@
-import { TResponseRedux } from "../../../types";
+import { TOrder, TResponseRedux } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const productApi = baseApi.injectEndpoints({
@@ -15,7 +15,7 @@ const productApi = baseApi.injectEndpoints({
                 url: `/orders`,
                 method: 'GET',
             }),
-            transformResponse: (response: TResponseRedux<any>) => {
+            transformResponse: (response: TResponseRedux<TOrder[]>) => {
                 return response.data
             }
         }),

@@ -14,7 +14,6 @@ const ProductPage = () => {
     const categories: string[] = ["Books", "Art and Craft", "Stationery", "Classroom Supplies"];
     const availabilityOptions: string[] = ["In Stock", "Out of Stock"];
 
-    // Debounced update for search parameters
     const debouncedUpdateParams = useCallback(
         debounce((value: string) => {
             setParams((prevParams) => {
@@ -25,14 +24,12 @@ const ProductPage = () => {
         []
     );
 
-    // Handle search input changes
     const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         setSearchTerm(value);
         debouncedUpdateParams(value);
     };
 
-    // Handle category filter toggle
     const handleCategoryChange = (category: string) => {
         setParams((prevParams) => {
             const exists = prevParams.some((param) => param.name === "category" && param.value === category);
@@ -42,7 +39,6 @@ const ProductPage = () => {
         });
     };
 
-    // Handle availability filter toggle
     const handleAvailabilityChange = (availability: string) => {
         setParams((prevParams) => {
             const exists = prevParams.some((param) => param.name === "availability" && param.value === availability);
@@ -52,7 +48,6 @@ const ProductPage = () => {
         });
     };
 
-    // Handle price range filter change
     const handlePriceChange = (value: [number, number]) => {
         setPriceRange(value);
         setParams((prevParams) => {
@@ -62,7 +57,7 @@ const ProductPage = () => {
     };
 
     return (
-        <div className="py-24 min-h-screen px-6 md:px-40">
+        <div className="py-24 bg-[#F9F9FB] min-h-screen px-6 md:px-40">
             <h1 className="text-2xl font-bold text-center mb-10">All Products</h1>
             {isFetching ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
@@ -76,7 +71,6 @@ const ProductPage = () => {
             ) : (
                 <div className="flex flex-col lg:flex-row gap-6">
                     <aside className="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/4">
-                        {/* Search Section */}
                         <div className="mb-6">
                             <Input
                                 placeholder="Search by category, brand, etc."
@@ -88,7 +82,6 @@ const ProductPage = () => {
                             />
                         </div>
 
-                        {/* Category Section */}
                         <div className="mb-6">
                             <h3 className="font-semibold text-lg text-gray-800 mb-3">Category</h3>
                             <div className="overflow-y-auto max-h-40 border rounded-md p-3 bg-gray-50">
@@ -111,7 +104,6 @@ const ProductPage = () => {
                             </div>
                         </div>
 
-                        {/* Availability Section */}
                         <div className="mb-6">
                             <h3 className="font-semibold text-lg text-gray-800 mb-3">Availability</h3>
                             <div className="overflow-y-auto max-h-32 border rounded-md p-3 bg-gray-50">
@@ -134,7 +126,6 @@ const ProductPage = () => {
                             </div>
                         </div>
 
-                        {/* Price Range Section */}
                         <div className="mb-6">
                             <h3 className="font-semibold text-lg text-gray-800 mb-3">Price Range (USD)</h3>
                             <Slider

@@ -17,7 +17,7 @@ const SingleBlogPage = () => {
 
 
   return (
-    <div className="bg-gray-100 px-6 md:px-40 py-24">
+    <div className="bg-[#F9F9FB] px-6 md:px-40 py-24">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         {isLoading ? (
           <Skeleton.Image active className="w-full h-64 object-cover" />
@@ -43,7 +43,7 @@ const SingleBlogPage = () => {
               <h1 className="text-3xl font-bold text-gray-800 mb-4">
                 {blog?.title}
               </h1>
-              <p className="text-gray-500 text-sm mb-6">{formatDate(blog.date)}</p>
+              <p className="text-gray-500 text-sm mb-6">{formatDate(blog?.date ?? '')}</p>
               <p className="text-gray-600 leading-relaxed mb-6">
                 {blog?.description}
               </p>

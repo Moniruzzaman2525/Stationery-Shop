@@ -43,7 +43,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             {product?.inStock && product.inStock > 0 ? (
                 <Tooltip title="Add to Cart">
                     <button
-                        className="absolute top-4 right-4 cursor-pointer p-2 rounded-full bg-white shadow-md hover:bg-gray-100 transition"
+                        className="absolute top-4 right-4 cursor-pointer p-2 rounded-full bg-white shadow-md hover:bg-[#F9F9FB] transition"
                         onClick={handleAddToCart}
                     >
                         <img className="w-8" src={cardIcon} alt="Add to cart" />

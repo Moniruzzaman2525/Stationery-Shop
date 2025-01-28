@@ -60,7 +60,7 @@ const UserCart = () => {
     };
 
     return (
-        <div className="min-h-[calc(100vh-64px-50px)] flex flex-col px-6 md:px-40 py-24 bg-gray-100">
+        <div className="min-h-[calc(100vh-64px-50px)]  flex flex-col px-6 md:px-40 py-24 bg-[#F9F9FB]">
             <h1 className="text-2xl font-bold text-center mb-6">Shopping Cart</h1>
             <div className="flex-grow">
                 {isLoading ? (

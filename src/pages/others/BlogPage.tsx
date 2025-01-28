@@ -22,7 +22,7 @@ const BlogPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen px-6 md:px-40 py-24">
+    <div className="bg-[#F9F9FB] min-h-screen px-6 md:px-40 py-24">
       <div className="max-w-full mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">Our Blog</h1>

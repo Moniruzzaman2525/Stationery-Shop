@@ -21,6 +21,8 @@ export const productSchema = z.object({
         .or(z.string().refine((val) => !isNaN(parseInt(val, 10)), "Stock must be a valid number")),
 
 });
+
+
 export const updateProductSchema = z.object({
     name: z.string({ required_error: 'Product Name is required' }),
     stock: z.boolean().optional(),

@@ -9,7 +9,6 @@ const adminApi = baseApi.injectEndpoints({
                 method: 'GET',
             }),
             transformResponse: (response: TResponseRedux<TOrder[]>) => {
-                console.log(response)
                 return {
                     data: response.data,
                     meta: response.meta

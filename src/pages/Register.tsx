@@ -91,17 +91,6 @@ const Register = () => {
                     }
                     style={inputStyle}
                 />
-                {/* <Text
-                    type="secondary"
-                    style={{
-                        fontSize: "12px",
-                        display: "block",
-                        marginBottom: "15px",
-                    }}
-                >
-                    Password must be at least 10 characters and include 1 uppercase
-                    letter, 1 special character, and 1 numeric digit.
-                </Text> */}
                 <SPInput
                     type={confirmPasswordVisible ? "text" : "password"}
                     name="confirmPassword"

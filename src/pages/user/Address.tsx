@@ -30,7 +30,7 @@ const Address = () => {
 
     if (isFetching) {
         return (
-            <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
+            <div className="flex flex-col items-center mt-10 min-h-screen bg-[#F9F9FB]">
                 <Skeleton.Avatar active size="large" shape="square" className="mb-2" />
                 <Skeleton active paragraph={{ rows: 2 }} />
             </div>
@@ -39,7 +39,7 @@ const Address = () => {
     
 
     return (
-        <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
+        <div className="flex flex-col items-center mt-10 min-h-screen bg-[#F9F9FB]">
             <h1 className="text-xl md:text-3xl font-bold mb-6 text-center text-gray-800">
                 {isEditMode ? "Edit Your Address" : "Your Address"}
             </h1>

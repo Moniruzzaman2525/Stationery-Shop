@@ -9,9 +9,11 @@ const BannerProduct = () => {
     const displayedProducts = products?.data?.slice(0, 6);
 
     return (
-        <div className="mt-10 px-6 md:px-40 md:px-40">
-            <h1 className="text-[20px] font-bold text-center mb-2">Featured Products</h1>
-            <p className="text-[15px] text-center mb-6">Check & Get Your Desired Product!</p>
+        <div className="py-18 px-6 md:px-40 md:px-40">
+            <div className="mb-10">
+                <h1 className="text-[20px] font-bold text-center mb-2">Featured Products</h1>
+                <p className="text-[15px] text-center ">Check & Get Your Desired Product!</p>
+            </div>
             {isFetching ? <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div key={index} className="p-4">
