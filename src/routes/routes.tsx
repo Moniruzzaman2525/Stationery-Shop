@@ -22,6 +22,8 @@ import AboutPage from "../pages/others/AboutPage";
 import ContactUsPage from "../pages/others/ContactUsPage";
 import BlogPage from "../pages/others/BlogPage";
 import SingleBlogPage from "../pages/others/SingleBlogPage";
+import { ManageProduct } from "../pages/admin/ManageProduct";
+import UpdateProduct from "../pages/admin/UpdateProduct";
 
 
 const router = createBrowserRouter([
@@ -115,6 +117,14 @@ const router = createBrowserRouter([
             {
                 path: 'manage-user',
                 element: <ManageUser />
+            },
+            {
+                path: 'manage-product',
+                element: <ManageProduct />
+            },
+            {
+                path: 'update-product/:productId',
+                element: <UpdateProduct />
             },
         ],
     },

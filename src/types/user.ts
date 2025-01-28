@@ -1,19 +1,21 @@
-export type TUser = {
-    _id: string;
+
+
+export interface TUser {
     id: string;
+    _id?: string;
     name: string;
-    email: string;
-    role: string;
-    isBlocked: boolean;
-    createdAt: string;
-    updatedAt: string;
     age?: string;
-    gender?: string;
+    gender?: 'Male' | 'Female';
+    blood?: "A+" | "A-" | "B+" | "B-" | "AB+" | "AB-" | "O+" | "O-";
     phone?: string;
-    currentCity?: string;
+    email: string;
     currentCountry?: string;
+    currentCity?: string;
     currentStreet?: string;
-    permanentCity?: string;
     permanentCountry?: string;
+    permanentCity?: string;
     permanentStreet?: string;
+    password: string;
+    role?: 'admin' | 'user';
+    isBlocked?: boolean
 }

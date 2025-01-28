@@ -21,6 +21,7 @@ interface Order {
 
 const ManageOrder = () => {
     const { data: allOrder, isLoading, isError, refetch } = useGetAllOrderQuery(undefined);
+    console.log(allOrder)
     const [confirmUserOrder] = useConfirmUserOrderMutation()
 
     const handleApprove = async (orderId: string) => {

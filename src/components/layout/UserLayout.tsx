@@ -24,6 +24,7 @@ const Layout = () => {
         { path: "create-product", label: "Add Product" },
         { path: "manage-order", label: "Manage Order" },
         { path: "manage-user", label: "Manage User" },
+        { path: "manage-product", label: "Manage Product" },
     ];
 
     const getMenuItems = (role: string) => {

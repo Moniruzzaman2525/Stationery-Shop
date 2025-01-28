@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useGetMeQuery, useUpdateUserMutation } from "../../redux/feathers/auth/authApi";
 import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
@@ -12,7 +12,6 @@ const Address = () => {
     const { data: getMeData, isFetching, refetch } = useGetMeQuery(undefined);
     const [isEditMode, setIsEditMode] = useState(false);
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
-    const [isSameAddress, setIsSameAddress] = useState(false);
 
     const onSubmit = async (data: FieldValues) => {
         try {
@@ -37,7 +36,7 @@ const Address = () => {
             </div>
         );
     }
-
+    
 
     return (
         <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
@@ -48,7 +47,6 @@ const Address = () => {
                 {isEditMode ? (
                     <SPForm resolver={zodResolver(addressSchema)} onSubmit={onSubmit} defaultValues={getMeData}>
                         <div className="space-y-1">
-                            {/* Current Address Section */}
                             <div>
                                 <h2 className="text-lg font-bold text-gray-800 !mb-6">Current Address</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -76,49 +74,32 @@ const Address = () => {
                                 </div>
                             </div>
 
-                            {/* Checkbox for Same Address */}
-                            {/* <div className="flex gap-4 mt-[-12px] items-center">
-                                <input
-                                    type="checkbox"
-                                    id="sameAddress"
-                                    checked={isSameAddress}
-                                    onChange={(e) => setIsSameAddress(e.target.checked)}
-                                    className="mr-2"
-                                />
-                                <label htmlFor="sameAddress" className="text-gray-800">
-                                    Permanent address is the same as current address
-                                </label>
-                            </div> */}
-
-                            {/* Permanent Address Section */}
-                            {!isSameAddress && (
-                                <div className="mt-[-12px]">
-                                    <h2 className="text-lg  font-bold text-gray-800 !mb-6">Permanent Address</h2>
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <div>
-                                            <SPInput
-                                                type="text"
-                                                name="permanentCountry"
-                                                label="Country"
-                                            />
-                                        </div>
-                                        <div className="mt-[-40px] md:mt-0">
-                                            <SPInput
-                                                type="text"
-                                                name="permanentCity"
-                                                label="Select District"
-                                            />
-                                        </div>
-                                        <div className="col-span-1 mt-[-40px] md:col-span-2">
-                                            <SPInput
-                                                type="text"
-                                                name="permanentStreet"
-                                                label="Street Address"
-                                            />
-                                        </div>
+                            <div className="mt-[-12px]">
+                                <h2 className="text-lg  font-bold text-gray-800 !mb-6">Permanent Address</h2>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <SPInput
+                                            type="text"
+                                            name="permanentCountry"
+                                            label="Country"
+                                        />
+                                    </div>
+                                    <div className="mt-[-40px] md:mt-0">
+                                        <SPInput
+                                            type="text"
+                                            name="permanentCity"
+                                            label="Select District"
+                                        />
+                                    </div>
+                                    <div className="col-span-1 mt-[-40px] md:col-span-2">
+                                        <SPInput
+                                            type="text"
+                                            name="permanentStreet"
+                                            label="Street Address"
+                                        />
                                     </div>
                                 </div>
-                            )}
+                            </div>
                         </div>
 
                         <div className="">

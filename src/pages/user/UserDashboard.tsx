@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { useState } from "react";
-import { Controller, FieldValues } from "react-hook-form";
+import { FieldValues } from "react-hook-form";
 import { Skeleton } from "antd";
 import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
@@ -10,6 +10,7 @@ import { useGetMeQuery, useUpdateUserMutation } from "../../redux/feathers/auth/
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "../../schema/profile.schema";
 import { uploadImageToImgBB } from "../../utils/uploadImageToImgBB";
+import UserProfile from "../../components/ui/UserProfile";
 
 const UserDashboard = () => {
     const { data: getMeData, isFetching, refetch } = useGetMeQuery(undefined);
@@ -87,7 +88,7 @@ const UserDashboard = () => {
                                             options={bloodOption}
                                         />
                                     </div>
-                                    
+
                                 </div>
                                 <div>
                                     <div className="mt-[-3px]">
@@ -126,26 +127,7 @@ const UserDashboard = () => {
                         </SPForm>
                     ) : (
                         <div>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div>
-                                    <p className="text-gray-700 font-medium mb-2">Name: {getMeData?.name || "N/A"}</p>
-                                    <p className="text-gray-700 font-medium mb-2">Age Range: {getMeData?.age || "N/A"}</p>
-                                    <p className="text-gray-700 font-medium mb-2">Blood Group: {getMeData?.blood || "N/A"}</p>
-                                </div>
-                                <div>
-                                    <p className="text-gray-700 font-medium mb-2">Email: {getMeData?.email || "N/A"}</p>
-                                    <p className="text-gray-700 font-medium mb-2">Gender: {getMeData?.gender || "N/A"}</p>
-                                    <p className="text-gray-700 font-medium mb-2">Phone: {getMeData?.phone || "N/A"}</p>
-                                </div>
-                            </div>
-                            <div className="mt-6">
-                                <button
-                                    onClick={() => setIsEditMode(true)}
-                                    className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg  transition"
-                                >
-                                    Edit Profile
-                                </button>
-                            </div>
+                            <UserProfile setIsEditMode={setIsEditMode} getMeData={getMeData} />
                         </div>
                     )}
                 </div>
