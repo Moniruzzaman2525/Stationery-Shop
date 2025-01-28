@@ -19,7 +19,7 @@ interface Order {
     orderDate: string;
 }
 
-const ManageOrder: React.FC = () => {
+const ManageOrder = () => {
     const { data: allOrder, isLoading, isError, refetch } = useGetAllOrderQuery(undefined);
     const [confirmUserOrder] = useConfirmUserOrderMutation()
 

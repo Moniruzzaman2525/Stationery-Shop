@@ -70,7 +70,7 @@ const router = createBrowserRouter([
                 element: <ContactUsPage />
             },
             {
-                path: '/blog',
+                path: '/blogs',
                 element: <BlogPage />
             },
             {

@@ -3,6 +3,7 @@ import Navbar from "./components/ui/Navbar";
 import Banner from "./components/ui/Banner";
 import Category from "./components/ui/Category";
 import BannerProduct from "./components/ui/BannerProduct";
+import Footer from "./components/ui/Footer";
 
 function App() {
   const location = useLocation();
@@ -18,6 +19,8 @@ function App() {
         </>
       )}
       <Outlet />
+
+      <Footer />
     </ div>
   );
 }

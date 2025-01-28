@@ -5,13 +5,13 @@ import SPInput from "../../components/form/SPInput";
 import SPTextarea from "../../components/form/SPTextArea";
 
 
-const ContactUsPage: React.FC = () => {
+const ContactUsPage = () => {
     const onSubmit = (data: FieldValues) => {
         console.log(data)
     };
 
     return (
-        <div className="bg-gradient-to-b py-24 from-blue-50 to-white min-h-screen flex items-center justify-center px-6 md:px-30">
+        <div className="bg-gradient-to-b py-24 from-blue-50 to-white min-h-screen flex items-center justify-center px-6 md:px-40">
             <div className="max-w-5xl w-full bg-white shadow-lg rounded-lg overflow-hidden">
                 <div className="grid grid-cols-1 md:grid-cols-2">
                     <div className="bg-[#001845] text-white p-6 md:p-10 flex flex-col justify-center">

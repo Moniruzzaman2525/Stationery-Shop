@@ -17,7 +17,7 @@ const SingleBlogPage = () => {
 
 
   return (
-    <div className="bg-gray-100 min-h-screen px-6 md:px-30 py-24">
+    <div className="bg-gray-100 min-h-screen px-6 md:px-40 py-24">
       <div className="max-w-4xl mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
         {isLoading ? (
           <Skeleton.Image active className="w-full h-64 object-cover" />

@@ -1,30 +1,12 @@
-import React from 'react';
 import { Table, Tag, Skeleton, Popconfirm } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
 import { useBlockUserMutation, useGetAllUserQuery } from '../../redux/feathers/admin/adminApi';
+import { TUser } from '../../types';
 
-interface User {
-    _id: string;
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    isBlocked: boolean;
-    createdAt: string;
-    updatedAt: string;
-    age?: string;
-    gender?: string;
-    phone?: string;
-    currentCity?: string;
-    currentCountry?: string;
-    currentStreet?: string;
-    permanentCity?: string;
-    permanentCountry?: string;
-    permanentStreet?: string;
-}
 
-const ManageUsers: React.FC = () => {
+
+const ManageUsers = () => {
     const { data: allUsers, isLoading, isError, refetch } = useGetAllUserQuery(undefined);
     const [blockUser] = useBlockUserMutation();
 
@@ -43,7 +25,7 @@ const ManageUsers: React.FC = () => {
         return <div className="flex items-center justify-center h-screen text-xl text-red-500">Error fetching users</div>;
     }
 
-    const columns: ColumnsType<User> = [
+    const columns: ColumnsType<TUser> = [
         {
             title: 'User ID',
             dataIndex: 'id',
@@ -79,7 +61,7 @@ const ManageUsers: React.FC = () => {
         {
             title: 'Action',
             key: 'action',
-            render: (_, user: User) => (
+            render: (_, user: TUser) => (
                 user.isBlocked  ? (
                     <Popconfirm
                         title="Un Block this user?"
@@ -109,7 +91,7 @@ const ManageUsers: React.FC = () => {
         },
     ];
 
-    const dataSource = allUsers?.map((user: User, index: number) => ({
+    const dataSource = allUsers?.map((user: TUser, index: number) => ({
         key: index,
         ...user,
     }));

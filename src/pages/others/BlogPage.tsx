@@ -22,8 +22,8 @@ const BlogPage = () => {
   };
 
   return (
-    <div className="bg-gray-100 min-h-screen px-6 md:px-30 py-24">
-      <div className="max-w-7xl mx-auto">
+    <div className="bg-gray-100 min-h-screen px-6 md:px-40 py-24">
+      <div className="max-w-full mx-auto">
         <div className="text-center mb-12">
           <h1 className="text-4xl font-bold text-gray-800">Our Blog</h1>
           <p className="text-gray-600 mt-2">

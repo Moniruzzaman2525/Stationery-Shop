@@ -8,7 +8,7 @@ import { TProduct } from '../../types';
 import { clearCart, useCurrentCartProduct } from '../../redux/feathers/cart/cartSlice';
 import { useNavigate } from 'react-router-dom';
 
-const CheckoutForm: React.FC = () => {
+const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
   const navigate = useNavigate()

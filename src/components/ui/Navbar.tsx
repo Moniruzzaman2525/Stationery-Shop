@@ -36,7 +36,7 @@ const Navbar = () => {
     };
 
     return (
-        <nav className="fixed top-0 left-0 w-full bg-[#001845] text-white px-6 md:px-30 py-3 h-[70px] shadow-md z-50 flex justify-between items-center">
+        <nav className="fixed top-0 left-0 w-full bg-[#001845] text-white px-6 md:px-40 py-3 h-[70px] shadow-md z-50 flex justify-between items-center">
             <div className="flex items-center gap-2">
                 <Link to="/" className="flex items-center text-white gap-2 no-underline">
                     <img src={logo} alt="Logo" className="h-10 object-contain" />
