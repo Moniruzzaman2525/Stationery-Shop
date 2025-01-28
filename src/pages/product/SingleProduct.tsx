@@ -23,7 +23,7 @@ const SingleProduct = () => {
 
         if (singleProductData) {
             if (!singleProductData.stock) {
-                message.warning(`Only ${singleProductData.stock} items are available in stock.`);
+                message.warning(`This items are available in stock.`);
                 return;
             }
 
@@ -87,12 +87,14 @@ const SingleProduct = () => {
                     <h1 className="text-[20px] font-semibold text-gray-800 mb-4">
                         Category: {singleProductData?.category || "Category"}
                     </h1>
+                    <h1 className="text-[20px] font-semibold text-gray-800 mb-4">
+                        In Stock: : {singleProductData?.inStock || "Category"}
+                    </h1>
 
                     <div className="mb-6">
                         <p
-                            className={`text-gray-600 text-sm leading-relaxed ${
-                                isExpanded ? "" : "line-clamp-3"
-                            }`}
+                            className={`text-gray-600 text-sm leading-relaxed ${isExpanded ? "" : "line-clamp-3"
+                                }`}
                         >
                             {singleProductData?.description || "No description available for this product."}
                         </p>
