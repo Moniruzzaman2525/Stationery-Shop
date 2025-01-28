@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { Button, Table, Skeleton, TableColumnsType, TableProps, Popconfirm } from "antd";
+import { Table, Skeleton, TableColumnsType, TableProps, Popconfirm } from "antd";
 import { useEffect, useState } from "react";
 import { useGetAllProductsQuery } from "../../redux/feathers/product/productApi";
 import { TProduct, TQueryParam } from "../../types";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useDeleteProductMutation } from "../../redux/feathers/admin/adminApi";
 
 export type TTableData = Pick<
   TProduct,
@@ -14,6 +15,7 @@ export const ManageProduct = () => {
   const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
   const location = useLocation();
   const { data: semesterData, isFetching, refetch } = useGetAllProductsQuery(params);
+  const [deleteProduct] = useDeleteProductMutation()
   const navigate = useNavigate()
 
   const tableData: readonly TTableData[] | undefined = semesterData?.data?.map(
@@ -27,19 +29,23 @@ export const ManageProduct = () => {
       stock,
     })
   );
-  
-  useEffect(() => {
-      if (location.state?.refresh) {
-          refetch()
-      }
-  }, [location]);
 
-  
+  useEffect(() => {
+    if (location.state?.refresh) {
+      refetch()
+    }
+  }, [location, refetch]);
+
+
   const updateProduct = (id: string) => {
     navigate(`/dashboard/update-product/${id}`);
   }
 
-  const deleteProduct = (id: string) => {
+  const deleteProductFn = async (id: string) => {
+    const res = await deleteProduct(id)
+    if (res) {
+      refetch()
+    }
 
   }
 
@@ -91,7 +97,7 @@ export const ManageProduct = () => {
           <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition" onClick={() => updateProduct(record._id)}>Update</button>
           <Popconfirm
             title="Are you sure to delete this product?"
-            onConfirm={() => deleteProduct(record._id)}
+            onConfirm={() => deleteProductFn(record._id)}
             okText="Yes"
             cancelText="No"
           >

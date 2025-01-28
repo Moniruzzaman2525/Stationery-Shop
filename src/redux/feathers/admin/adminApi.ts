@@ -1,4 +1,4 @@
-import { TResponseRedux } from "../../../types";
+import { TOrder, TResponseRedux, TUser } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const adminApi = baseApi.injectEndpoints({
@@ -8,7 +8,7 @@ const adminApi = baseApi.injectEndpoints({
                 url: `/admin/view-all-order`,
                 method: 'GET',
             }),
-            transformResponse: (response: TResponseRedux<any>) => {
+            transformResponse: (response: TResponseRedux<TOrder>) => {
                 return response.data
             }
         }),
@@ -18,7 +18,7 @@ const adminApi = baseApi.injectEndpoints({
                 url: `/admin/all-user`,
                 method: 'GET',
             }),
-            transformResponse: (response: TResponseRedux<any>) => {
+            transformResponse: (response: TResponseRedux<TUser>) => {
                 return response.data
             }
         }),
@@ -54,8 +54,14 @@ const adminApi = baseApi.injectEndpoints({
                 method: 'PATCH',
             }),
         }),
+        deleteProduct: builder.mutation({
+            query: (userId) => ({
+                url: `/products/${userId}`,
+                method: 'DELETE',
+            }),
+        }),
 
     })
 })
 
-export const { useGetAllOrderQuery, useGetAllUserQuery, useBlockUserMutation, useConfirmUserOrderMutation, useUpdateProductMutation } = adminApi
+export const { useGetAllOrderQuery, useGetAllUserQuery, useBlockUserMutation, useConfirmUserOrderMutation, useUpdateProductMutation, useDeleteProductMutation } = adminApi
