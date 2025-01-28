@@ -15,7 +15,6 @@ import Payment from "../pages/payment/Payment";
 import UserDashboard from "../pages/user/UserDashboard";
 import Order from "../pages/user/Order";
 import Address from "../pages/user/Address";
-import ManageOrder from "../pages/admin/ManageOrder";
 import ManageUser from "../pages/admin/ManageUser";
 import CreateProduct from "../pages/admin/CreateProduct";
 import AboutPage from "../pages/others/AboutPage";
@@ -24,6 +23,7 @@ import BlogPage from "../pages/others/BlogPage";
 import SingleBlogPage from "../pages/others/SingleBlogPage";
 import { ManageProduct } from "../pages/admin/ManageProduct";
 import UpdateProduct from "../pages/admin/UpdateProduct";
+import ManageOrder from "../pages/admin/ManageOrder";
 
 
 const router = createBrowserRouter([

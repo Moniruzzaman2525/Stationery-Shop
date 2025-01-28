@@ -70,7 +70,7 @@ const Footer = () => {
 
       <div className="border-t border-gray-700 mt-8 pt-4 text-center">
         <p className="text-gray-400 text-sm">
-          &copy; {new Date().getFullYear()} Stationery Shop. All rights
+          &copy; {new Date().getFullYear()} NS Book Shop Shop. All rights
           reserved.
         </p>
         <div className="flex justify-center space-x-4 mt-4">

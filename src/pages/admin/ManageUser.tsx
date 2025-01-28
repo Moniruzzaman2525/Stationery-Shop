@@ -62,10 +62,10 @@ const ManageUsers = () => {
             title: 'Action',
             key: 'action',
             render: (_, user: TUser) => (
-                user.isBlocked  ? (
+                user.isBlocked ? (
                     <Popconfirm
                         title="Un Block this user?"
-                        onConfirm={() => handleBlockToggle(user._id, 'un-block')}
+                        onConfirm={() =>  user._id && handleBlockToggle(user?._id, 'un-block')}
                         okText="Yes"
                         cancelText="No"
                     >
@@ -77,12 +77,13 @@ const ManageUsers = () => {
                 ) : (
                     <Popconfirm
                         title="Block this user?"
-                        onConfirm={() => handleBlockToggle(user._id, 'block')}
+                        onConfirm={() => user._id && handleBlockToggle(user._id, "block")}
                         okText="Yes"
                         cancelText="No"
                     >
                         <button
-                            className="px-4 cursor-pointer py-2 bg-[#001845] !text-white rounded-lg shadow">
+                            className="px-4 cursor-pointer py-2 bg-[#001845] !text-white rounded-lg shadow"
+                        >
                             Block
                         </button>
                     </Popconfirm>

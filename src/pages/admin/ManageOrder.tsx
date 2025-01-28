@@ -1,4 +1,3 @@
-import React from 'react';
 import { useConfirmUserOrderMutation, useGetAllOrderQuery } from "../../redux/feathers/admin/adminApi";
 import { Table, Tag, Skeleton, message, Popconfirm } from 'antd';
 import { ColumnsType } from 'antd/es/table';
@@ -21,7 +20,6 @@ interface Order {
 
 const ManageOrder = () => {
     const { data: allOrder, isLoading, isError, refetch } = useGetAllOrderQuery(undefined);
-    console.log(allOrder)
     const [confirmUserOrder] = useConfirmUserOrderMutation()
 
     const handleApprove = async (orderId: string) => {
@@ -113,7 +111,7 @@ const ManageOrder = () => {
         },
     ];
 
-    const dataSource = allOrder?.map((order: Order, index: number) => ({
+    const dataSource = allOrder?.data?.map((order: Order, index: number) => ({
         key: index,
         ...order,
     }));

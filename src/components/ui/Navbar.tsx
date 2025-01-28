@@ -57,6 +57,7 @@ const Navbar = () => {
 
             <ul className="list-none hidden md:flex gap-8 mb-0 text-sm font-medium">
                 <Link to="/"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Home</li></Link>
+                <Link to="/all-products"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Products</li></Link>
                 <Link to="/blogs"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Blogs</li></Link>
                 <Link to="/about-us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">About Us</li></Link>
                 <Link to="/contact-us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Contact Us</li></Link>
@@ -89,6 +90,7 @@ const Navbar = () => {
                 <div className="absolute z-50 top-[70px] right-0 bg-[#001845] text-white w-full shadow-md md:hidden">
                     <ul className="list-none flex flex-col gap-4 p-4">
                         <Link onClick={handleMenuClose} to="/"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Home</li></Link>
+                        <Link onClick={handleMenuClose} to="/all-products"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Products</li></Link>
                         <Link onClick={handleMenuClose} to="/blogs"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Blogs</li></Link>
                         <Link onClick={handleMenuClose} to="/about-us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">About Us</li></Link>
                         <Link onClick={handleMenuClose} to="/Contact Us"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Contact Us</li></Link>

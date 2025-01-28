@@ -1,4 +1,4 @@
-import { TOrder, TResponseRedux, TUser } from "../../../types";
+import {  TOrder, TResponseRedux, TUser } from "../../../types";
 import { baseApi } from "../../api/baseApi";
 
 const adminApi = baseApi.injectEndpoints({
@@ -8,8 +8,12 @@ const adminApi = baseApi.injectEndpoints({
                 url: `/admin/view-all-order`,
                 method: 'GET',
             }),
-            transformResponse: (response: TResponseRedux<TOrder>) => {
-                return response.data
+            transformResponse: (response: TResponseRedux<TOrder[]>) => {
+                console.log(response)
+                return {
+                    data: response.data,
+                    meta: response.meta
+                }
             }
         }),
         
@@ -18,7 +22,7 @@ const adminApi = baseApi.injectEndpoints({
                 url: `/admin/all-user`,
                 method: 'GET',
             }),
-            transformResponse: (response: TResponseRedux<TUser>) => {
+            transformResponse: (response: TResponseRedux<TUser[]>) => {
                 return response.data
             }
         }),

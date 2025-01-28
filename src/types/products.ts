@@ -1,3 +1,5 @@
+import { TUser } from "./user";
+
 export type TProduct = {
   _id: string;
   name: string;
@@ -21,16 +23,7 @@ export type TOrder = {
   paymentId: string;
   status: 'Pending' | 'Shipped';
   paymentStatus: string;
-  user: {
-    _id: string;
-    id: string;
-    name: string;
-    email: string;
-    role: string;
-    isBlocked: boolean;
-    createdAt: string;
-    updatedAt: string;
-  };
+  user: TUser;
   orderDate: string;
   createdAt: string;
   updatedAt: string;

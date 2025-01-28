@@ -7,7 +7,7 @@ const AboutPage = () => {
             <section className="text-center mb-12">
                 <h1 className="text-3xl font-bold text-gray-800 mb-4">About Us</h1>
                 <p className="text-gray-600 text-base max-w-3xl mx-auto">
-                    Welcome to <span className="font-bold">Stationery Shop</span>, your go-to destination for high-quality stationery and office supplies.
+                    Welcome to <span className="font-bold">NS Book Shop</span>, your go-to destination for high-quality stationery and office supplies.
                     We take pride in providing products that inspire creativity and enhance productivity.
                 </p>
             </section>
