@@ -1,5 +1,5 @@
 import React from 'react';
-import { Table, Tag, Switch, Skeleton } from 'antd';
+import { Table, Tag, Skeleton, Popconfirm } from 'antd';
 import { ColumnsType } from 'antd/es/table';
 import 'antd/dist/reset.css';
 import { useBlockUserMutation, useGetAllUserQuery } from '../../redux/feathers/admin/adminApi';
@@ -28,8 +28,12 @@ const ManageUsers: React.FC = () => {
     const { data: allUsers, isLoading, isError, refetch } = useGetAllUserQuery(undefined);
     const [blockUser] = useBlockUserMutation();
 
-    const handleBlockToggle = async (id: string) => {
-        const res = await blockUser(id)
+    const handleBlockToggle = async (id: string, status: string) => {
+        const data = {
+            id,
+            status
+        }
+        const res = await blockUser(data)
         if (res) {
             refetch()
         }
@@ -76,12 +80,31 @@ const ManageUsers: React.FC = () => {
             title: 'Action',
             key: 'action',
             render: (_, user: User) => (
-                <Switch
-                    checked={!user.isBlocked}
-                    onChange={() => handleBlockToggle(user?._id)}
-                    checkedChildren="Active"
-                    unCheckedChildren="Blocked"
-                />
+                user.isBlocked  ? (
+                    <Popconfirm
+                        title="Un Block this user?"
+                        onConfirm={() => handleBlockToggle(user._id, 'un-block')}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <button
+                            className="px-4 cursor-pointer py-2 bg-[#001845] !text-white rounded-lg shadow">
+                            UnBlock
+                        </button>
+                    </Popconfirm>
+                ) : (
+                    <Popconfirm
+                        title="Block this user?"
+                        onConfirm={() => handleBlockToggle(user._id, 'block')}
+                        okText="Yes"
+                        cancelText="No"
+                    >
+                        <button
+                            className="px-4 cursor-pointer py-2 bg-[#001845] !text-white rounded-lg shadow">
+                            Block
+                        </button>
+                    </Popconfirm>
+                )
             ),
         },
     ];

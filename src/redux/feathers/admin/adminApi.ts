@@ -23,11 +23,20 @@ const adminApi = baseApi.injectEndpoints({
             }
         }),
         blockUser: builder.mutation({
-            query: (userId) => ({
-                url: `/admin/users/${userId}/block`,
-                method: 'PATCH',
-            }),
+            query: (data) => {
+                const userId = data.id; 
+                const status = {
+                    status: data.status
+                }
+
+                return {
+                    url: `/admin/users/${userId}/block`,
+                    method: 'PATCH',
+                    body: status,
+                };
+            },
         }),
+        
         confirmUserOrder: builder.mutation({
             query: (userId) => ({
                 url: `/admin/order/${userId}/confirm`,
