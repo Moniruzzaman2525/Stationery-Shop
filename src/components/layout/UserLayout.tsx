@@ -49,17 +49,17 @@ const Layout = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             <aside
-                className={`fixed z-50 bg-gray-800 text-white w-64 p-4 transform ${
+                className={`fixed z-50 bg-gray-800 !text-white w-64 p-4 transform ${
                     isSidebarOpen ? "translate-x-0" : "-translate-x-full"
                 } transition-transform duration-300 md:relative md:translate-x-0`}
             >
                 <div className="mb-6 flex justify-between items-center">
-                    <Link to="/" className="flex items-center text-white gap-2 no-underline">
+                    <Link to="/" className="flex items-center !text-white gap-2 no-underline">
                         <img src={logo} alt="Logo" className="h-10 object-contain" />
                         <h2 className="text-lg font-bold hidden md:block">nsbooks.ae</h2>
                     </Link>
                     <button
-                        className="md:hidden text-white"
+                        className="md:hidden !text-white"
                         onClick={() => setIsSidebarOpen(false)}
                     >
                         ✕
@@ -73,7 +73,7 @@ const Layout = () => {
                                     to={item.path}
                                     className={`block p-2 rounded-lg cursor-pointer flex justify-between items-center ${
                                         location.pathname.includes(item.path)
-                                            ? "bg-gray-700 text-white"
+                                            ? "bg-gray-700 !text-white"
                                             : "hover:bg-gray-700 text-gray-300"
                                     }`}
                                 >
@@ -88,7 +88,7 @@ const Layout = () => {
             <main className="flex-1 bg-gray-100 overflow-auto">
                 <header className="flex justify-between items-center p-4 bg-white shadow-md">
                     <button
-                        className="md:hidden bg-gray-800 text-white px-4 py-2 rounded-lg"
+                        className="md:hidden bg-gray-800 !text-white px-4 py-2 rounded-lg"
                         onClick={() => setIsSidebarOpen(!isSidebarOpen)}
                     >
                         ☰

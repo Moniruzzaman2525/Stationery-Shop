@@ -16,7 +16,7 @@ const Address = () => {
         if (isSameAddress) {
             data.permanentAddress = { ...data.currentAddress };
         }
-    
+
         const flattenedData = {
             currentCountry: data.currentAddress?.country,
             currentCity: data.currentAddress?.city,
@@ -25,9 +25,9 @@ const Address = () => {
             permanentCity: data.permanentAddress?.city,
             permanentStreet: data.permanentAddress?.address,
         };
-    
+
         console.log(flattenedData);
-    
+
         try {
             const res = await updateUser({ profileData: flattenedData });
             if (res) {
@@ -39,8 +39,8 @@ const Address = () => {
             alert("Failed to update profile. Please try again.");
         }
     };
-    
-    
+
+
     if (isFetching) {
         return (
             <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
@@ -58,22 +58,26 @@ const Address = () => {
             <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
                 {isEditMode ? (
                     <SPForm onSubmit={onSubmit} defaultValues={getMeData}>
-                        <div className="space-y-6">
+                        <div className="space-y-1">
                             {/* Current Address Section */}
                             <div>
-                                <h2 className="text-lg font-bold text-gray-800 mb-2">Current Address</h2>
+                                <h2 className="text-lg font-bold text-gray-800 !mb-6">Current Address</h2>
                                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                    <SPInput
-                                        type="text"
-                                        name="currentAddress.country"
-                                        label="Country"
-                                    />
-                                    <SPInput
-                                        type="text"
-                                        name="currentAddress.city"
-                                        label="Select District"
-                                    />
-                                    <div className="col-span-1 md:col-span-2">
+                                    <div>
+                                        <SPInput
+                                            type="text"
+                                            name="currentAddress.country"
+                                            label="Country"
+                                        />
+                                    </div>
+                                    <div className="mt-[-40px] md:mt-0">
+                                        <SPInput
+                                            type="text"
+                                            name="currentAddress.city"
+                                            label="Select District"
+                                        />
+                                    </div>
+                                    <div className="col-span-1 mt-[-40px] md:col-span-2">
                                         <SPInput
                                             type="text"
                                             name="currentAddress.address"
@@ -84,7 +88,7 @@ const Address = () => {
                             </div>
 
                             {/* Checkbox for Same Address */}
-                            <div className="flex items-center">
+                            <div className="flex gap-4 mt-[-12px] items-center">
                                 <input
                                     type="checkbox"
                                     id="sameAddress"
@@ -100,19 +104,23 @@ const Address = () => {
                             {/* Permanent Address Section */}
                             {!isSameAddress && (
                                 <div>
-                                    <h2 className="text-lg font-bold text-gray-800 mb-2">Permanent Address</h2>
+                                    <h2 className="text-lg font-bold text-gray-800 !mb-6">Permanent Address</h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                        <SPInput
-                                            type="text"
-                                            name="permanentAddress.country"
-                                            label="Country"
-                                        />
-                                        <SPInput
-                                            type="text"
-                                            name="permanentAddress.city"
-                                            label="Select District"
-                                        />
-                                        <div className="col-span-1 md:col-span-2">
+                                        <div>
+                                            <SPInput
+                                                type="text"
+                                                name="permanentAddress.country"
+                                                label="Country"
+                                            />
+                                        </div>
+                                        <div className="mt-[-40px] md:mt-0">
+                                            <SPInput
+                                                type="text"
+                                                name="permanentAddress.city"
+                                                label="Select District"
+                                            />
+                                        </div>
+                                        <div className="col-span-1 mt-[-40px] md:col-span-2">
                                             <SPInput
                                                 type="text"
                                                 name="permanentAddress.address"
@@ -124,13 +132,12 @@ const Address = () => {
                             )}
                         </div>
 
-                        <div className="mt-6">
+                        <div className="">
                             <button
                                 type="submit"
                                 disabled={isUpdating}
-                                className={`w-full cursor-pointer py-3 !text-white rounded-lg transition ${
-                                    isUpdating ? "bg-gray-500" : "bg-[#001845] hover:bg-[#00296b]"
-                                }`}
+                                className={`w-full cursor-pointer py-3 !text-white rounded-lg transition ${isUpdating ? "bg-gray-500" : "bg-[#001845] "
+                                    }`}
                             >
                                 {isUpdating ? "Saving..." : "Save Changes"}
                             </button>
@@ -165,7 +172,7 @@ const Address = () => {
                         <div className="mt-6">
                             <button
                                 onClick={() => setIsEditMode(true)}
-                                className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg hover:bg-[#00296b] transition"
+                                className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg  transition"
                             >
                                 Edit Address
                             </button>

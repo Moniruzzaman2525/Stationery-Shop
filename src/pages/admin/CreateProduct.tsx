@@ -21,7 +21,6 @@ const CreateProduct = () => {
     const [addProduct] = useCreateProductMutation();
 
     const onSubmit = async (data: FieldValues) => {
-        console.log(data)
         try {
             setUploading(true);
             if (data.photo) {
@@ -48,10 +47,16 @@ const CreateProduct = () => {
                 <SPForm resolver={zodResolver(productSchema)} onSubmit={onSubmit}>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                         <div>
-                            <SPInput type="text" name="name" label="Product Name" />
-                            <SPInput type="text" name="price" label="Price" />
-                            <SPSelect name="category" label="Category" options={categoryOption} />
-                            <div>
+                            <div className="">
+                                <SPInput type="text" name="name" label="Product Name" />
+                            </div>
+                            <div className="mt-[-15px]">
+                                <SPInput type="text" name="price" label="Price" />
+                            </div>
+                            <div className="mt-[-15px]">
+                                <SPSelect name="category" label="Category" options={categoryOption} />
+                            </div>
+                            <div className="mt-[-15px]">
                                 <Controller
                                     name="photo"
                                     render={({ field: { onChange, ref }, fieldState: { error } }) => (
@@ -67,7 +72,7 @@ const CreateProduct = () => {
                                                 onChange={(e) => {
                                                     const file = e.target.files?.[0];
                                                     if (file) {
-                                                        onChange(file); 
+                                                        onChange(file);
                                                     }
                                                 }}
                                             />
@@ -83,16 +88,24 @@ const CreateProduct = () => {
 
                         </div>
                         <div>
-                            <SPInput type="text" name="brand" label="Brand Name" />
-                            <SPInput type="text" name="quantity" label="Quantity" />
-                            <SPInput type="text" name="inStock" label="In Stock" />
-                            <SPTextarea name="description" label="Description" />
+                            <div className="">
+                                <SPInput type="text" name="brand" label="Brand Name" />
+                            </div>
+                            <div className="mt-[-15px]">
+                                <SPInput type="text" name="quantity" label="Quantity" />
+                            </div>
+                            <div className="mt-[-15px]">
+                                <SPInput type="text" name="inStock" label="In Stock" />
+                            </div>
+                            <div className="mt-[-15px]">
+                                <SPTextarea name="description" label="Description" />
+                            </div>
                         </div>
                     </div>
-                    <div className="mt-6">
+                    <div className="mb-4">
                         <button
                             type="submit"
-                            className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg hover:bg-[#00296b] transition"
+                            className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg  transition"
                             disabled={uploading}
                         >
                             {uploading ? "Uploading..." : "Submit"}

@@ -35,7 +35,7 @@ const Banner = () => {
                             />
                             <div className="absolute inset-0 flex justify-center items-center mt-[300px]">
                                 <Link to='/all-products'>
-                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
+                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] !text-white text-lg rounded-md shadow-md transition">
                                         <img className="w-[150px] object-cover" src={seeProductArrow} />
                                     </button>
                                 </Link>
@@ -52,7 +52,7 @@ const Banner = () => {
                             />
                             <div className="absolute inset-0 flex justify-center items-center mt-[300px]">
                                 <Link to='/all-products'>
-                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
+                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] !text-white text-lg rounded-md shadow-md transition">
                                         <img className="w-[150px] object-cover" src={seeProductArrow} />
                                     </button>
                                 </Link>
@@ -68,7 +68,7 @@ const Banner = () => {
                             />
                             <div className="absolute inset-0 flex justify-center items-center mt-[300px]">
                                 <Link to='/all-products'>
-                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition">
+                                    <button className="px-6 py-6 cursor-pointer bg-[#001845] !text-white text-lg rounded-md shadow-md transition">
                                         <img className="w-[150px] object-cover" src={seeProductArrow} />
                                     </button>
                                 </Link>

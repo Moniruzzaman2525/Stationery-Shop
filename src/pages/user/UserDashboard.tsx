@@ -7,6 +7,8 @@ import SPInput from "../../components/form/SPInput";
 import { SPSelect } from "../../components/form/SPSelect";
 import { ageOption, genderOption } from "../../constants/userConstant";
 import { useGetMeQuery, useUpdateUserMutation } from "../../redux/feathers/auth/authApi";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { profileSchema } from "../../schema/profile.schema";
 
 const UserDashboard = () => {
     const { data: getMeData, isFetching, refetch } = useGetMeQuery(undefined);
@@ -44,30 +46,35 @@ const UserDashboard = () => {
                 </h1>
                 <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
                     {isEditMode ? (
-                        <SPForm onSubmit={onSubmit} defaultValues={getMeData}>
+                        <SPForm resolver={zodResolver(profileSchema)} onSubmit={onSubmit} defaultValues={getMeData}>
                             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                 <div>
-                                    <SPInput
-                                        type="text"
-                                        name="name"
-                                        label="Name"
-                                    />
-                                    <SPSelect
-                                        name="age"
-                                        label="Age Range"
-                                        options={ageOption}
-                                    />
                                     <div>
+                                        <SPInput
+                                            type="text"
+                                            name="name"
+                                            label="Name"
+                                        />
+                                    </div>
+                                    <div className="mt-[-15px]">
+                                        <SPSelect
+                                            name="age"
+                                            label="Age Range"
+                                            options={ageOption}
+                                        />
+                                    </div>
+                                    <div className="mt-[-15px]">
                                         <Controller
                                             name="photo"
-                                            render={({ field: { onChange, ref } }) => (
+                                            render={({ field: { onChange, ref }, fieldState: { error } }) => (
                                                 <div className="mb-4">
                                                     <label className="block text-gray-700 font-medium mb-2">
                                                         Profile Photo
                                                     </label>
                                                     <input
                                                         type="file"
-                                                        className="w-full border border-gray-300 rounded-lg p-2"
+                                                        className={`w-full border rounded-lg p-2 ${error ? "border-red-500" : "border-gray-300"
+                                                            }`}
                                                         ref={ref}
                                                         onChange={(e) => {
                                                             const file = e.target.files?.[0];
@@ -76,35 +83,46 @@ const UserDashboard = () => {
                                                             }
                                                         }}
                                                     />
+                                                    {error && (
+                                                        <small className="text-red-500">
+                                                            {error.message || "This field is required"}
+                                                        </small>
+                                                    )}
                                                 </div>
                                             )}
                                         />
                                     </div>
                                 </div>
                                 <div>
-                                    <SPInput
-                                        disabled={true}
-                                        type="text"
-                                        name="email"
-                                        label="Email"
-                                    />
-                                    <SPSelect
-                                        name="gender"
-                                        label="Gender"
-                                        options={genderOption}
-                                    />
-                                    <SPInput
-                                        type="text"
-                                        name="phone"
-                                        label="Phone"
-                                    />
+                                    <div className="mt-[-3px]">
+                                        <SPInput
+                                            disabled={true}
+                                            type="text"
+                                            name="email"
+                                            label="Email"
+                                        />
+                                    </div>
+                                    <div className="mt-[-10px]">
+                                        <SPSelect
+                                            name="gender"
+                                            label="Gender"
+                                            options={genderOption}
+                                        />
+                                    </div>
+                                    <div className="mt-[-10px]">
+                                        <SPInput
+                                            type="text"
+                                            name="phone"
+                                            label="Phone"
+                                        />
+                                    </div>
                                 </div>
                             </div>
-                            <div className="mt-6">
+                            <div className="mb-3">
                                 <button
                                     type="submit"
                                     disabled={isUpdating}
-                                    className={`w-full cursor-pointer py-3 !text-white rounded-lg transition ${isUpdating ? 'bg-gray-500' : 'bg-[#001845] hover:bg-[#00296b]'}`}
+                                    className={`w-full cursor-pointer py-3 !text-white rounded-lg transition ${isUpdating ? 'bg-gray-500' : 'bg-[#001845] '}`}
                                 >
                                     {isUpdating ? "Saving..." : "Save Changes"}
                                 </button>
@@ -127,7 +145,7 @@ const UserDashboard = () => {
                             <div className="mt-6">
                                 <button
                                     onClick={() => setIsEditMode(true)}
-                                    className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg hover:bg-[#00296b] transition"
+                                    className="w-full cursor-pointer py-3 bg-[#001845] !text-white rounded-lg  transition"
                                 >
                                     Edit Profile
                                 </button>

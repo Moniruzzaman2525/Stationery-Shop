@@ -38,7 +38,7 @@ export const Sidebar = () => {
             style={{ height: '100vh', position: 'sticky', top: '0', left: '0' }}
         >
             <div style={{ color: 'white', height: '4rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                <Link to="/" className="flex items-center text-white gap-2 no-underline">
+                <Link to="/" className="flex items-center !text-white gap-2 no-underline">
                     <img src={logo} alt="Logo" className="h-10 object-contain" />
                     <h2 className="text-lg font-bold hidden md:block">nsbooks.ae</h2>
                 </Link>
