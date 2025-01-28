@@ -5,10 +5,11 @@ import { Skeleton } from "antd";
 import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
 import { SPSelect } from "../../components/form/SPSelect";
-import { ageOption, genderOption } from "../../constants/userConstant";
+import { ageOption, bloodOption, genderOption } from "../../constants/userConstant";
 import { useGetMeQuery, useUpdateUserMutation } from "../../redux/feathers/auth/authApi";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { profileSchema } from "../../schema/profile.schema";
+import { uploadImageToImgBB } from "../../utils/uploadImageToImgBB";
 
 const UserDashboard = () => {
     const { data: getMeData, isFetching, refetch } = useGetMeQuery(undefined);
@@ -16,17 +17,33 @@ const UserDashboard = () => {
     const [updateUser, { isLoading: isUpdating }] = useUpdateUserMutation();
 
     const onSubmit = async (data: FieldValues) => {
-        const userData = {
-            profileData: Object.fromEntries(
-                Object.entries(data).filter(([_, value]) => value !== undefined)
-            )
-        };
-        const res = await updateUser(userData);
-        if (res) {
-            setIsEditMode(false);
-            refetch()
-        }
+        console.log(data)
+        try {
+            const userData = {
+                profileData: Object.fromEntries(
+                    Object.entries(data).filter(([_, value]) => value !== undefined)
+                ),
+            };
 
+            if (data.photo) {
+                const imageUrl = await uploadImageToImgBB(data.photo);
+                if (imageUrl) {
+                    userData.profileData.photo = imageUrl;
+                } else {
+                    throw new Error("Photo upload failed");
+                }
+            }
+
+            const res = await updateUser(userData);
+            if (res) {
+                setIsEditMode(false);
+                refetch(); // Refresh user data after update
+            } else {
+                throw new Error("User update failed");
+            }
+        } catch (error) {
+            console.error("Error updating user data:", error);
+        }
     };
 
     if (isFetching) {
@@ -64,28 +81,13 @@ const UserDashboard = () => {
                                         />
                                     </div>
                                     <div className="mt-[-15px]">
-                                        <Controller
-                                            name="photo"
-                                            render={({ field: { onChange, ref } }) => (
-                                                <div className="mb-4">
-                                                    <label className="block text-gray-700 font-medium mb-2">
-                                                        Profile Photo
-                                                    </label>
-                                                    <input
-                                                        type="file"
-                                                        className="w-full border border-gray-300 rounded-lg p-2"
-                                                        ref={ref}
-                                                        onChange={(e) => {
-                                                            const file = e.target.files?.[0];
-                                                            if (file) {
-                                                                onChange(file);
-                                                            }
-                                                        }}
-                                                    />
-                                                </div>
-                                            )}
+                                        <SPSelect
+                                            name="blood"
+                                            label="Blood Group"
+                                            options={bloodOption}
                                         />
                                     </div>
+                                    
                                 </div>
                                 <div>
                                     <div className="mt-[-3px]">
@@ -103,7 +105,7 @@ const UserDashboard = () => {
                                             options={genderOption}
                                         />
                                     </div>
-                                    <div className="mt-[-10px]">
+                                    <div className="mt-[-17px]">
                                         <SPInput
                                             type="text"
                                             name="phone"
@@ -128,7 +130,7 @@ const UserDashboard = () => {
                                 <div>
                                     <p className="text-gray-700 font-medium mb-2">Name: {getMeData?.name || "N/A"}</p>
                                     <p className="text-gray-700 font-medium mb-2">Age Range: {getMeData?.age || "N/A"}</p>
-                                    <p className="text-gray-700 font-medium mb-2">Profile Photo: {getMeData?.photo ? "Uploaded" : "Not Uploaded"}</p>
+                                    <p className="text-gray-700 font-medium mb-2">Blood Group: {getMeData?.blood || "N/A"}</p>
                                 </div>
                                 <div>
                                     <p className="text-gray-700 font-medium mb-2">Email: {getMeData?.email || "N/A"}</p>

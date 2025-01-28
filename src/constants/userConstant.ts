@@ -10,3 +10,10 @@ export const ageOption = [
     { value: "30-35", label: "30-35" },
     { value: "35+", label: "35+" },
 ]
+export const bloodOption = [
+    { value: "A+", label: "A+" },
+    { value: "A-", label: "A-" },
+    { value: "B+", label: "B+" },
+    { value: "B-", label: "B-" },
+    { value: "AB+", label: "AB+" },
+]

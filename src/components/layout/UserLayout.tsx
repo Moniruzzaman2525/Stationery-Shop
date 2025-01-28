@@ -69,8 +69,8 @@ const Layout = () => {
                 <nav>
                     {menuItems.map((item, index) => (
                         item && (
-                            <Link  className="" to={item.path}>
-                                <div key={index} className={`block p-2 rounded-lg mb-2 cursor-pointer flex justify-between items-center ${location.pathname.includes(item.path)
+                            <Link key={index} className="" to={item.path}>
+                                <div className={`block p-2 rounded-lg mb-2 cursor-pointer flex justify-between items-center ${location.pathname.includes(item.path)
                                         ? "bg-gray-700 !text-white"
                                         : "hover:bg-gray-700 text-gray-300"
                                         }`}>
