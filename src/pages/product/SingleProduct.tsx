@@ -59,7 +59,7 @@ const SingleProduct = () => {
         );
     }
     return (
-        <div className="flex flex-col md:flex-row  gap-8 p-8">
+        <div className="flex  flex-col md:flex-row  gap-8 py-24">
             {/* Product Image */}
             <div className="w-full md:w-1/2 flex items-center justify-center">
                 <img

@@ -18,6 +18,7 @@ import Address from "../pages/user/Address";
 import ManageOrder from "../pages/admin/ManageOrder";
 import ManageUser from "../pages/admin/ManageUser";
 import CreateProduct from "../pages/admin/CreateProduct";
+import AboutPage from "../pages/AboutPage";
 
 
 const router = createBrowserRouter([
@@ -57,6 +58,10 @@ const router = createBrowserRouter([
                 path: '/payment',
                 element: <Payment />
             },
+            {
+                path: '/about-us',
+                element: <AboutPage />
+            },
         ]
     },
     {
@@ -67,6 +72,7 @@ const router = createBrowserRouter([
         path: '/register',
         element: <Register />
     },
+   
     {
         path: '/dashboard',
         element: <ProtectedRoute><UserLayout /> </ProtectedRoute>,

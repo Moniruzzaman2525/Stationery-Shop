@@ -62,7 +62,7 @@ const ProductPage = () => {
     };
 
     return (
-        <div className="mt-15 min-h-screen px-6 md:px-30">
+        <div className="py-24 min-h-screen px-6 md:px-30">
             <h1 className="text-2xl font-bold text-center mb-10">All Products</h1>
             {isFetching ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">

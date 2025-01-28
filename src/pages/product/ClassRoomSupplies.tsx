@@ -4,7 +4,7 @@ const ClassRoomSupplies = () => {
 
 
     return (
-        <div className="pt-10 px-6 md:px-30">
+        <div className="py-24 px-6 md:px-30">
             <h1 className="text-[20px] font-bold text-center mb-4">Classroom Supplies</h1>
             <CategoryItem item="Classroom Supplies" />
         </div>
