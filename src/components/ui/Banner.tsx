@@ -12,7 +12,7 @@ import { Link } from "react-router-dom";
 
 const Banner = () => {
     return (
-        <div className="w-full">
+        <div className="w-full ">
             {/* Desktop Swiper */}
             <div className="hidden md:block">
                 <Swiper

@@ -13,7 +13,7 @@ const categories = [
 
 const Category = () => {
     return (
-        <div className="mt-10">
+        <div className="mt-10 px-6 md:px-30">
             <h1 className="text-[20px] font-bold text-center mb-2">Featured Category</h1>
             <p className="text-[15px] text-center mb-6">Get Your Desired Product from Featured Category!</p>
 

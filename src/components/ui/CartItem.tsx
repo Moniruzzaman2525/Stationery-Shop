@@ -37,8 +37,8 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
 
             <div className="flex flex-col md:flex-row items-center md:space-x-4 space-y-4 md:space-y-0">
                 <div className="flex items-center gap-[10px]">
-                    <Button onClick={handleDecrease} disabled={item.quantity <= 1}>
-                        -
+                    <Button className="" onClick={handleDecrease} disabled={item.quantity <= 1}>
+                        <span className="text-[24px] mt-[-2px]">-</span>
                     </Button>
                     <InputNumber
                         min={1}
@@ -50,7 +50,7 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
                         }}
                     />
                     <Button onClick={handleIncrease} disabled={item.inStock === undefined || item.quantity >= item.inStock}>
-                        +
+                        <span className="text-[24px] mt-[-2px]">+</span>
                     </Button>
                 </div>
                 <Button

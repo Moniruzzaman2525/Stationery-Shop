@@ -17,7 +17,7 @@ const Navbar = () => {
 
     }
     return (
-        <nav className="flex justify-between items-center bg-[#001845] px-6 py-3 h-[70px] rounded-lg !text-white shadow-md">
+        <nav className="flex justify-between items-center bg-[#001845] px-6 md:px-30 py-3 h-[70px !text-white shadow-md">
 
             <div className="flex items-center gap-2">
                 <Link to="/" className="flex items-center !text-white gap-2 no-underline">
@@ -36,7 +36,7 @@ const Navbar = () => {
                 </button>
             </div>
 
-            <ul className="list-none hidden md:flex gap-8 text-sm font-medium">
+            <ul className="list-none hidden md:flex gap-8 !mb-0 text-sm font-medium">
                 <Link to='/books'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
                 <Link to='/art-cart'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
                 <Link to='/stationery'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>

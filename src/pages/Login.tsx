@@ -63,7 +63,7 @@ const Login = () => {
                 style={formStyle}
             >
                 <Title level={3} style={{ textAlign: "center", marginBottom: "40px" }}>
-                    Login In
+                    Log In
                 </Title>
                 <SPInput
                     type="email"
@@ -96,7 +96,7 @@ const Login = () => {
                         marginBottom: "20px",
                     }}
                 >
-                    Login In
+                    Log In
                 </Button>
                 <div style={{ textAlign: "center" }}>
                     <Text type="secondary">

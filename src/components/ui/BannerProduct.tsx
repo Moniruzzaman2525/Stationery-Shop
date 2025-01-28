@@ -9,7 +9,7 @@ const BannerProduct = () => {
     const displayedProducts = products?.data?.slice(0, 6);
 
     return (
-        <div className="pt-10">
+        <div className="mt-10 px-6 md:px-30 md:px-30">
             <h1 className="text-[20px] font-bold text-center mb-2">Featured Products</h1>
             <p className="text-[15px] text-center mb-6">Check & Get Your Desired Product!</p>
             {isFetching ? <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
