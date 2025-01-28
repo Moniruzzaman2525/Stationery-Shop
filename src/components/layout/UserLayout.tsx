@@ -3,6 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut, selectCurrentUser } from "../../redux/feathers/auth/authSlice";
 import logo from '../../assets/images/logo1.png';
+import { clearCart } from "../../redux/feathers/cart/cartSlice";
 
 const Layout = () => {
     const user = useAppSelector(selectCurrentUser);
@@ -40,6 +41,7 @@ const Layout = () => {
     const handleLogout = async () => {
         try {
             await dispatch(logOut());
+            dispatch(clearCart());
             navigate('/');
         } catch (error) {
             console.error('Error during logout:', error);
@@ -49,9 +51,8 @@ const Layout = () => {
     return (
         <div className="flex h-screen overflow-hidden">
             <aside
-                className={`fixed z-50 bg-gray-800 !text-white w-64 p-4 transform ${
-                    isSidebarOpen ? "translate-x-0" : "-translate-x-full"
-                } transition-transform duration-300 md:relative md:translate-x-0`}
+                className={`fixed z-50 bg-gray-800 !text-white w-64 p-4 transform ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"
+                    } transition-transform duration-300 md:relative md:translate-x-0`}
             >
                 <div className="mb-6 flex justify-between items-center">
                     <Link to="/" className="flex items-center !text-white gap-2 no-underline">
@@ -68,18 +69,15 @@ const Layout = () => {
                 <nav>
                     {menuItems.map((item, index) => (
                         item && (
-                            <div key={index} className="mb-2">
-                                <Link
-                                    to={item.path}
-                                    className={`block p-2 rounded-lg cursor-pointer flex justify-between items-center ${
-                                        location.pathname.includes(item.path)
-                                            ? "bg-gray-700 !text-white"
-                                            : "hover:bg-gray-700 text-gray-300"
-                                    }`}
-                                >
+                            <Link  className="" to={item.path}>
+                                <div key={index} className={`block p-2 rounded-lg mb-2 cursor-pointer flex justify-between items-center ${location.pathname.includes(item.path)
+                                        ? "bg-gray-700 !text-white"
+                                        : "hover:bg-gray-700 text-gray-300"
+                                        }`}>
+                                    
                                     {item.label}
-                                </Link>
-                            </div>
+                                </div>
+                            </Link>
                         )
                     ))}
                 </nav>

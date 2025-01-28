@@ -2,20 +2,39 @@ import { useState } from "react";
 import logo from "../../assets/images/logo1.png";
 import cart from "../../assets/images/add-card.png";
 import profile from "../../assets/images/profile.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut, selectCurrentUser } from "../../redux/feathers/auth/authSlice";
+import { clearCart, useCurrentCartProduct } from "../../redux/feathers/cart/cartSlice";
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const user = useAppSelector(selectCurrentUser)
-    const dispatch = useAppDispatch()
+    const user = useAppSelector(selectCurrentUser);
+    const cartValue = useAppSelector(useCurrentCartProduct)
+    const dispatch = useAppDispatch();
+    const location = useLocation();
+    const navigate = useNavigate();
 
+    const handleLogout = async () => {
+        if (location.pathname === "/user-cart") {
+            try {
+                await dispatch(logOut());
+                dispatch(clearCart());
+                navigate('/');
+            } catch (error) {
+                console.error('Error during logout:', error);
+            }
+        } else {
+            dispatch(clearCart());
+            dispatch(logOut());
+            setIsMenuOpen(false);
+        }
 
-    const handleLogout = () => {
-        dispatch(logOut())
+    };
+    const handleMenuClose = () => {
+        setIsMenuOpen(false);
+    };
 
-    }
     return (
         <nav className="flex justify-between items-center bg-[#001845] px-6 md:px-30 py-3 h-[70px !text-white shadow-md">
 
@@ -43,8 +62,15 @@ const Navbar = () => {
                 <Link to='/classroom-supplies'><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
             </ul>
 
-            <div className="hidden md:flex items-center gap-4">
-                <Link to='/user-cart'><img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
+            <div className="hidden md:flex items-center gap-4 relative">
+                <Link to='/user-cart' className="relative">
+                    <img src={cart} alt="Cart" className="h-8 cursor-pointer transition-transform hover:scale-105" />
+                    {cartValue.length > 0 && (
+                        <span className="absolute top-[-10px] right-[-10px] bg-yellow-400 text-[#001845] rounded-full h-5 w-5 text-xs font-bold flex items-center justify-center">
+                            {cartValue.length}
+                        </span>
+                    )}
+                </Link>
                 <Link to='/dashboard/update-Profile'><img src={profile} alt="Profile" className="h-8 cursor-pointer transition-transform hover:scale-105" /></Link>
                 {!user ? <Link to="/login">
                     <button className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500 cursor-pointer">
@@ -55,21 +81,19 @@ const Navbar = () => {
                         Logout
                     </button>}
             </div>
-
-            {/* Dropdown Menu for Mobile */}
             {isMenuOpen && (
                 <div className="absolute z-[1] top-[70px] right-0 bg-[#001845] !text-white w-full shadow-md md:hidden">
                     <ul className="list-none flex flex-col gap-4 p-4">
-                        <Link to="/books"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
-                        <Link to="/art-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
-                        <Link to="/stationery"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
-                        <Link to="/classroom-supplies"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
-                        <Link to="/user-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Cart</li></Link>
-                        <Link to="/dashboard/update-Profile"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Dashboard</li></Link>
+                        <Link onClick={handleMenuClose} to="/books"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Books</li></Link>
+                        <Link onClick={handleMenuClose} to="/art-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Arts and Crafts</li></Link>
+                        <Link onClick={handleMenuClose} to="/stationery"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Stationery</li></Link>
+                        <Link onClick={handleMenuClose} to="/classroom-supplies"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Classroom Supplies</li></Link>
+                        <Link onClick={handleMenuClose} to="/user-cart"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Cart</li></Link>
+                        <Link onClick={handleMenuClose} to="/dashboard/update-Profile"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Dashboard</li></Link>
                         <li className="capitalize cursor-pointer transition-colors hover:text-gray-300">
                             {user ? <button onClick={handleLogout} className="bg-yellow-400 text-[#001845] px-4 py-2 rounded font-bold text-sm transition-colors hover:bg-yellow-500">
                                 Logout
-                            </button> : <Link to="/login">
+                            </button> : <Link onClick={handleMenuClose} to="/login">
                                 Login
                             </Link>}
                         </li>

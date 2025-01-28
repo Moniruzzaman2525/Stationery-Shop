@@ -1,20 +1,16 @@
 import { useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { useGetSingleProductQuery } from "../../redux/feathers/product/productApi";
 import { Skeleton, Alert, message, Button, InputNumber } from "antd";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/feathers/cart/cartSlice";
-import { useAppSelector } from "../../redux/hooks";
-import { useCurrentToken } from "../../redux/feathers/auth/authSlice";
 
 const SingleProduct = () => {
     const { productId } = useParams();
     const { data: singleProductData, isFetching, isError } = useGetSingleProductQuery(productId);
-    const navigate = useNavigate();
     const dispatch = useDispatch();
     const [isExpanded, setIsExpanded] = useState(false);
     const toggleDescription = () => setIsExpanded((prev) => !prev);
-    const isLoggedIn = useAppSelector(useCurrentToken);
     const [quantity, setQuantity] = useState(1);
 
     const handleQuantityChange = (value: number) => {
@@ -24,12 +20,6 @@ const SingleProduct = () => {
     };
 
     const handleAddToCart = () => {
-        if (!isLoggedIn) {
-            message.warning("Please log in to add products to the cart.");
-            localStorage.setItem("redirectAfterLogin", location.pathname);
-            navigate("/login");
-            return;
-        }
 
         if (singleProductData) {
             if (!singleProductData.stock) {

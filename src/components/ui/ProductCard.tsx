@@ -4,8 +4,6 @@ import { TProduct } from "../../types";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/feathers/cart/cartSlice";
-import { useAppSelector } from "../../redux/hooks";
-import { useCurrentToken } from "../../redux/feathers/auth/authSlice";
 
 interface ProductCardProps {
     product: TProduct;
@@ -14,7 +12,6 @@ interface ProductCardProps {
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const isLoggedIn = useAppSelector(useCurrentToken);
 
     const handleProductDetails = () => {
         navigate(`/product/${product._id}`);
@@ -22,13 +19,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
 
     const handleAddToCart = (event: React.MouseEvent) => {
         event.stopPropagation();
-
-        if (!isLoggedIn) {
-            message.warning("Please log in to add products to the cart.");
-            navigate("/login");
-            return;
-        }
-
         if (!product.stock) {
             message.warning(`Only ${product.stock} items are available in stock.`);
             return;

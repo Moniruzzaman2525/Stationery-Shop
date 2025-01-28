@@ -1,5 +1,6 @@
 import { Button, InputNumber } from "antd";
 import { TProduct } from "../../types";
+import { Link } from "react-router-dom";
 
 type CartItemProps = {
     item: TProduct;
@@ -23,11 +24,15 @@ const CartItem: React.FC<CartItemProps> = ({ item, onUpdateQuantity, onRemove })
     return (
         <div className="flex flex-col md:flex-row items-center justify-between bg-white p-4 shadow rounded-lg space-y-4 md:space-y-0 md:space-x-4">
             <div className="flex items-center w-full justify-between md:!justify-start gap-[30px] md:gap-[20px]">
-                <img
-                    src={item.photo}
-                    alt={item.name}
-                    className="w-20 md:w-30 h-20 md:h-30 object-cover rounded-lg"
-                />
+                <Link to={`/product/${item._id}`}>
+                    <img
+                        src={item.photo}
+                        alt={item.name}
+                        className="w-20 md:w-30 h-20 md:h-30 object-cover rounded-lg"
+                    />
+                </Link>
+
+
                 <div className="text-center md:text-left flex-1">
                     <h2 className="text-lg md:text-[20px] font-semibold">{item.name}</h2>
                     <p className="text-sm text-gray-500">{item.brand}</p>
