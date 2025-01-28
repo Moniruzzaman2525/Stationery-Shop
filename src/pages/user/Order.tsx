@@ -11,6 +11,7 @@ interface Order {
   totalAmount: number;
   currency: string;
   paymentId: string;
+  status: 'Pending' | 'Shipped';
   paymentStatus: string;
   user: {
     _id: string;
@@ -74,7 +75,7 @@ const Order = () => {
                       <Text strong>Order Date:</Text> {new Date(order.orderDate).toLocaleDateString()}
                     </p>
                     <p>
-                      <Text strong>Payment Status:</Text> {order.paymentStatus}
+                      <Text strong>Status:</Text> {order.status}
                     </p>
                   </div>
                 }

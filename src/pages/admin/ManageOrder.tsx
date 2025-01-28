@@ -95,9 +95,10 @@ const ManageOrder: React.FC = () => {
                         okText="Yes"
                         cancelText="No"
                     >
-                        <Button type="primary" >
+                        <button
+                            className="px-4 cursor-pointer py-2 bg-[#001845] !text-white rounded-lg shadow">
                             Approve
-                        </Button>
+                        </button>
                     </Popconfirm>
                 ) : (
                     <Tag color="green">Shipped</Tag>
