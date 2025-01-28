@@ -1,10 +1,12 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useGetMeQuery, useUpdateUserMutation } from "../../redux/feathers/auth/authApi";
 import SPForm from "../../components/form/SPForm";
 import SPInput from "../../components/form/SPInput";
 import { FieldValues } from "react-hook-form";
 import { Skeleton } from "antd";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { addressSchema } from "../../schema/address.schema";
 
 const Address = () => {
     const { data: getMeData, isFetching, refetch } = useGetMeQuery(undefined);
@@ -13,23 +15,8 @@ const Address = () => {
     const [isSameAddress, setIsSameAddress] = useState(false);
 
     const onSubmit = async (data: FieldValues) => {
-        if (isSameAddress) {
-            data.permanentAddress = { ...data.currentAddress };
-        }
-
-        const flattenedData = {
-            currentCountry: data.currentAddress?.country,
-            currentCity: data.currentAddress?.city,
-            currentStreet: data.currentAddress?.address,
-            permanentCountry: data.permanentAddress?.country,
-            permanentCity: data.permanentAddress?.city,
-            permanentStreet: data.permanentAddress?.address,
-        };
-
-        console.log(flattenedData);
-
         try {
-            const res = await updateUser({ profileData: flattenedData });
+            const res = await updateUser({ profileData: data });
             if (res) {
                 setIsEditMode(false);
                 refetch();
@@ -41,6 +28,7 @@ const Address = () => {
     };
 
 
+
     if (isFetching) {
         return (
             <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
@@ -50,6 +38,7 @@ const Address = () => {
         );
     }
 
+
     return (
         <div className="flex flex-col items-center mt-10 min-h-screen bg-gray-100">
             <h1 className="text-xl md:text-3xl font-bold mb-6 text-center text-gray-800">
@@ -57,7 +46,7 @@ const Address = () => {
             </h1>
             <div className="w-full max-w-3xl bg-white shadow-md rounded-lg p-6">
                 {isEditMode ? (
-                    <SPForm onSubmit={onSubmit} defaultValues={getMeData}>
+                    <SPForm resolver={zodResolver(addressSchema)} onSubmit={onSubmit} defaultValues={getMeData}>
                         <div className="space-y-1">
                             {/* Current Address Section */}
                             <div>
@@ -66,21 +55,21 @@ const Address = () => {
                                     <div>
                                         <SPInput
                                             type="text"
-                                            name="currentAddress.country"
+                                            name="currentCountry"
                                             label="Country"
                                         />
                                     </div>
                                     <div className="mt-[-40px] md:mt-0">
                                         <SPInput
                                             type="text"
-                                            name="currentAddress.city"
+                                            name="currentCity"
                                             label="Select District"
                                         />
                                     </div>
                                     <div className="col-span-1 mt-[-40px] md:col-span-2">
                                         <SPInput
                                             type="text"
-                                            name="currentAddress.address"
+                                            name="currentStreet"
                                             label="Street Address"
                                         />
                                     </div>
@@ -88,7 +77,7 @@ const Address = () => {
                             </div>
 
                             {/* Checkbox for Same Address */}
-                            <div className="flex gap-4 mt-[-12px] items-center">
+                            {/* <div className="flex gap-4 mt-[-12px] items-center">
                                 <input
                                     type="checkbox"
                                     id="sameAddress"
@@ -99,31 +88,31 @@ const Address = () => {
                                 <label htmlFor="sameAddress" className="text-gray-800">
                                     Permanent address is the same as current address
                                 </label>
-                            </div>
+                            </div> */}
 
                             {/* Permanent Address Section */}
                             {!isSameAddress && (
-                                <div>
-                                    <h2 className="text-lg font-bold text-gray-800 !mb-6">Permanent Address</h2>
+                                <div className="mt-[-12px]">
+                                    <h2 className="text-lg  font-bold text-gray-800 !mb-6">Permanent Address</h2>
                                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                         <div>
                                             <SPInput
                                                 type="text"
-                                                name="permanentAddress.country"
+                                                name="permanentCountry"
                                                 label="Country"
                                             />
                                         </div>
                                         <div className="mt-[-40px] md:mt-0">
                                             <SPInput
                                                 type="text"
-                                                name="permanentAddress.city"
+                                                name="permanentCity"
                                                 label="Select District"
                                             />
                                         </div>
                                         <div className="col-span-1 mt-[-40px] md:col-span-2">
                                             <SPInput
                                                 type="text"
-                                                name="permanentAddress.address"
+                                                name="permanentStreet"
                                                 label="Street Address"
                                             />
                                         </div>

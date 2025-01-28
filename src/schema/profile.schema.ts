@@ -14,7 +14,4 @@ export const profileSchema = z.object({
     phone: z.string({
         required_error: 'Phone Number is required'
     }),
-    photo: z
-        .instanceof(File, { message: "Photo must be a valid file" })
-        .refine((file) => file.size > 0, "A file must be selected"),
 })

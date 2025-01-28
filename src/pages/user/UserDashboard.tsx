@@ -66,15 +66,14 @@ const UserDashboard = () => {
                                     <div className="mt-[-15px]">
                                         <Controller
                                             name="photo"
-                                            render={({ field: { onChange, ref }, fieldState: { error } }) => (
+                                            render={({ field: { onChange, ref } }) => (
                                                 <div className="mb-4">
                                                     <label className="block text-gray-700 font-medium mb-2">
                                                         Profile Photo
                                                     </label>
                                                     <input
                                                         type="file"
-                                                        className={`w-full border rounded-lg p-2 ${error ? "border-red-500" : "border-gray-300"
-                                                            }`}
+                                                        className="w-full border border-gray-300 rounded-lg p-2"
                                                         ref={ref}
                                                         onChange={(e) => {
                                                             const file = e.target.files?.[0];
@@ -83,11 +82,6 @@ const UserDashboard = () => {
                                                             }
                                                         }}
                                                     />
-                                                    {error && (
-                                                        <small className="text-red-500">
-                                                            {error.message || "This field is required"}
-                                                        </small>
-                                                    )}
                                                 </div>
                                             )}
                                         />
