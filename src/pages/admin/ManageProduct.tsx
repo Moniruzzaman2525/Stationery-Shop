@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Table, Skeleton, TableColumnsType, TableProps, Popconfirm } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useGetAllProductsQuery } from "../../redux/feathers/product/productApi";
-import { TProduct, TQueryParam } from "../../types";
+import { TProduct } from "../../types";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useDeleteProductMutation } from "../../redux/feathers/admin/adminApi";
 
@@ -12,9 +12,8 @@ export type TTableData = Pick<
 >;
 
 export const ManageProduct = () => {
-  const [params, setParams] = useState<TQueryParam[] | undefined>(undefined);
   const location = useLocation();
-  const { data: semesterData, isFetching, refetch } = useGetAllProductsQuery(params);
+  const { data: semesterData, isFetching, refetch } = useGetAllProductsQuery(undefined);
   const [deleteProduct] = useDeleteProductMutation()
   const navigate = useNavigate()
 
@@ -128,7 +127,7 @@ export const ManageProduct = () => {
           scroll={{ x: "max-content" }}
           rowKey={(record) => record._id}
           bordered
-          pagination={{ pageSize: 5, showSizeChanger: true }}
+          pagination={{ pageSize: 5}}
           className="rounded-lg shadow-md"
         />
       )}

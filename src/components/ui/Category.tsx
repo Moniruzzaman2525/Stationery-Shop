@@ -23,7 +23,7 @@ const Category = () => {
                 {categories.map((category) => (
                     <Link key={category.id} to={category.path}>
                         <div
-                            className="flex flex-col cursor-pointer items-center text-center bg-white hover:-translate-y-2 hover:shadow-xl rounded-lg p-4"
+                            className="flex flex-col cursor-pointer items-center text-center bg-white transition-transform hover:scale-105 rounded-lg p-4"
                             style={{
                                 boxShadow: "0px 4px 6px rgba(0, 0, 0, 0.1)",
                             }}

@@ -39,25 +39,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
             onClick={handleProductDetails}
             className="overflow-hidden rounded-lg shadow-md transition-transform hover:scale-105"
         >
-            {/* {product?.inStock && product.inStock > 0 ? (
-                <Tooltip title="Add to Cart">
-                    <button
-                        className="absolute top-4 right-4 cursor-pointer p-2 rounded-full bg-white shadow-md hover:bg-[#F9F9FB] transition"
-                        onClick={handleAddToCart}
-                    >
-                        <img className="w-8" src={cardIcon} alt="Add to cart" />
-                    </button>
-                </Tooltip>
-            ) : (
-                <Tooltip title="Out of Stock">
-                    <button
-                        className="absolute top-4 right-4 cursor-not-allowed p-2 rounded-full bg-gray-300 shadow-md"
-                        disabled
-                    >
-                        <img className="w-8 opacity-50" src={cardIcon} alt="Out of stock" />
-                    </button>
-                </Tooltip>
-            )} */}
 
             <div className="p-4">
                 <h2 className="text-xl font-semibold text-gray-800 truncate">

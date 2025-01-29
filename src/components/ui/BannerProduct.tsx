@@ -43,7 +43,7 @@ const BannerProduct = () => {
 
             <div className="text-center mt-6">
                 <button
-                    className="px-4 cursor-pointer py-3 bg-[#001845] !text-white rounded-lg shadow"
+                    className="bg-[#001845] cursor-pointer !text-white px-6 py-3 rounded-lg hover:bg-[#003366] transition"
                     onClick={() => navigate("/all-products")}
                     disabled={!displayedProducts || displayedProducts.length === 0}
                 >

@@ -82,7 +82,7 @@ const TestimonialsPage = () => {
                 {testimonials.map((testimonial) => (
                     <Card
                         key={testimonial.id}
-                        className="shadow-lg p-6 rounded-lg bg-white text-center transition transform hover:-translate-y-2 hover:shadow-xl"
+                        className="shadow-lg p-6 rounded-lg bg-white text-center transition transition-transform hover:scale-105"
                         bordered={false}
                     >
                         <img

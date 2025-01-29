@@ -110,7 +110,7 @@ const ManageUsers = () => {
                     dataSource={dataSource}
                     scroll={{ x: "max-content" }}
                     bordered
-                    pagination={{ pageSize: 5, showSizeChanger: true }}
+                    pagination={{ pageSize: 5 }}
                     className="rounded-lg shadow-md"
                 />
             )}

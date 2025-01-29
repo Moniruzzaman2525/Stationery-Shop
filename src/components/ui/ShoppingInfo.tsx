@@ -1,5 +1,3 @@
-import React from "react";
-
 import freeDelivery from "../../assets/images/free-delivery.png";
 import differentPayment from "../../assets/images/different-payment.png";
 import collect from "../../assets/images/collect.png";

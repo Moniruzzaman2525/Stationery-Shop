@@ -53,7 +53,7 @@ const BlogPage = () => {
                     className="h-48 w-full object-cover"
                   />
                 }
-                className="shadow-md hover:shadow-lg transition duration-300"
+                className="shadow-md transition-transform hover:scale-105 duration-300"
               >
                 <h2 className="text-xl font-bold text-gray-800 truncate">
                   {blog.title}

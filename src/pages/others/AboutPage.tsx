@@ -16,7 +16,7 @@ const AboutPage = () => {
                 <Card
                     title="Our Mission"
                     bordered={false}
-                    className="shadow-md hover:-translate-y-2 hover:shadow-xl transition"
+                    className="shadow-md transition-transform hover:scale-105"
                 >
                     <p>
                         To offer top-notch stationery and craft supplies that fuel creativity, improve organization, and enrich daily life.
@@ -25,7 +25,7 @@ const AboutPage = () => {
                 <Card
                     title="Our Vision"
                     bordered={false}
-                    className="shadow-md hover:-translate-y-2 hover:shadow-xl transition"
+                    className="shadow-md transition-transform hover:scale-105"
                 >
                     <p>
                         To become a trusted name in stationery, celebrated for quality, affordability, and exceptional service.
@@ -45,7 +45,7 @@ const AboutPage = () => {
                         <Card
                             key={index}
                             bordered={false}
-                            className="shadow-md hover:-translate-y-2 hover:shadow-xl transition"
+                            className="shadow-md transition-transform hover:scale-105"
                         >
                             <h3 className="font-bold text-lg text-gray-800">{value.title}</h3>
                             <p className="text-gray-600 mt-2">{value.description}</p>
@@ -60,9 +60,11 @@ const AboutPage = () => {
                     We’d love to hear from you! Reach out for any inquiries, feedback, or suggestions.
                 </p>
                 <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
-                    <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
-                        Contact Us
-                    </button>
+                    <Link to='/contact-us'>
+                        <button className="bg-[#001845] cursor-pointer !text-white px-6 py-2 rounded-lg hover:bg-[#003366] transition">
+                            Contact Us
+                        </button>
+                    </Link>
                     <Link to='/all-products'>
                         <button className="bg-gray-200 cursor-pointer text-gray-800 px-6 py-2 rounded-lg hover:bg-gray-300 transition">
                             Explore Products

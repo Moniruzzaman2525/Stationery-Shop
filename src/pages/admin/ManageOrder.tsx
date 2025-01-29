@@ -128,7 +128,7 @@ const ManageOrder = () => {
                     scroll={{ x: "max-content" }}
                     rowKey={(record) => record._id}
                     bordered
-                    pagination={{ pageSize: 5, showSizeChanger: true }}
+                    pagination={{ pageSize: 5 }}
                     className="rounded-lg shadow-md"
                 />
             )}

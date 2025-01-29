@@ -11,10 +11,9 @@ const ProductPage = () => {
     const [params, setParams] = useState<TQueryParam[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([1, 10000]);
     const [page, setPage] = useState(1)
-    const [limit, setLimit] = useState<number>(8);
     const { data: products, isFetching, isError } = useGetAllProductsQuery(
         [
-            { name: 'limit', value: limit },
+            { name: 'limit', value: 8 },
             { name: 'page', value: page },
             { name: 'sort', value: 'id' },
             ...params]
@@ -182,7 +181,7 @@ const ProductPage = () => {
                         <div className="flex justify-center mt-6">
                             <Pagination
                                 current={page}
-                                pageSize={limit}
+                                pageSize={8}
                                 total={products?.meta?.total || 0}
                                 onChange={handlePageChange}
                                 showSizeChanger={false}
