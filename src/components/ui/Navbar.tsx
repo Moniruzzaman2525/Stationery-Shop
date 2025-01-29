@@ -1,7 +1,7 @@
 import { useState } from "react";
 import logo from "../../assets/images/logo1.png";
 import cart from "../../assets/images/add-card.png";
-import profile from "../../assets/images/profile.png";
+import profile from "../../assets/images/profile-img.png";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/hooks";
 import { logOut, selectCurrentUser } from "../../redux/feathers/auth/authSlice";
