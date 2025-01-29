@@ -15,7 +15,7 @@ const BannerProduct = () => {
 
     return (
         <div className="py-18 px-6 md:px-40">
-            <div className="mb-10">
+            <div className="!mb-10">
                 <h1 className="text-[20px] font-bold text-center mb-2">Featured Products</h1>
                 <p className="text-[15px] text-center">Check & Get Your Desired Product!</p>
             </div>

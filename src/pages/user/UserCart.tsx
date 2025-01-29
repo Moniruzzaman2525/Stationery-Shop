@@ -11,9 +11,12 @@ import { Empty, message, Skeleton } from "antd";
 import { Link, useNavigate } from "react-router-dom";
 import { useConfirmOrderMutation } from "../../redux/feathers/product/productApi";
 import { setPaymentData } from "../../redux/feathers/order/orderSlice";
+import { selectCurrentUser, useCurrentToken } from "../../redux/feathers/auth/authSlice";
 
 const UserCart = () => {
     const cart = useAppSelector(useCurrentCartProduct) as TProduct[];
+    const user = useAppSelector(selectCurrentUser)
+    const token = useAppSelector(useCurrentToken)
     const dispatch = useDispatch();
     const [confirmOrderProduct, { isLoading }] = useConfirmOrderMutation();
     const navigate = useNavigate();
@@ -46,6 +49,10 @@ const UserCart = () => {
     };
 
     const confirmOrder = async () => {
+        if (!user || !token) {
+            message.error('Your are not login');
+            navigate('/login')
+        }
         const isStockAvailable = await checkStockAvailability(cart);
         if (isStockAvailable) {
             const data = { price: totalPrice };

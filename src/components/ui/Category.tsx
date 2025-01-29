@@ -14,7 +14,7 @@ const categories = [
 const Category = () => {
     return (
         <div className="py-18 px-6 bg-[#F9F9FB] md:px-40">
-            <div className='mb-10 '>
+            <div className='!mb-10 '>
                 <h1 className="text-[20px] font-bold text-center mb-2">Featured Category</h1>
                 <p className="text-[15px] text-center">Get Your Desired Product from Featured Category!</p>
             </div>
