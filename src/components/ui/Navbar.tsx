@@ -55,7 +55,7 @@ const Navbar = () => {
                 </button>
             </div>
 
-            <ul className="list-none hidden md:flex gap-8 mb-0 text-sm font-medium">
+            <ul className="list-none hidden md:flex gap-8 !mb-1 text-sm font-medium">
                 <Link to="/"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Home</li></Link>
                 <Link to="/all-products"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Products</li></Link>
                 <Link to="/blogs"><li className="capitalize cursor-pointer transition-colors hover:text-gray-300">Blogs</li></Link>

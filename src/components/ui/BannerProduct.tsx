@@ -4,9 +4,14 @@ import { useNavigate } from "react-router-dom";
 import { Empty, Skeleton } from "antd";
 
 const BannerProduct = () => {
+
     const { data: products, isFetching, isError } = useGetAllProductsQuery(undefined);
     const navigate = useNavigate();
-    const displayedProducts = products?.data?.slice(0, 6);
+
+    const displayedProducts = products?.data
+        ? [...products.data].sort(() => Math.random() - 0.5).slice(0, 6)
+        : [];
+
 
     return (
         <div className="py-18 px-6 md:px-40">
