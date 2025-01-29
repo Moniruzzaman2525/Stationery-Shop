@@ -8,7 +8,7 @@ import ProductCard from "../../components/ui/ProductCard";
 const ProductPage = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [params, setParams] = useState<TQueryParam[]>([]);
-    const [priceRange, setPriceRange] = useState<[number, number]>([1, 60]);
+    const [priceRange, setPriceRange] = useState<[number, number]>([1, 10000]);
     const { data: products, isFetching } = useGetAllProductsQuery(params);
 
     const categories: string[] = ["Books", "Art and Craft", "Stationery", "Classroom Supplies"];
@@ -131,7 +131,7 @@ const ProductPage = () => {
                             <Slider
                                 range
                                 min={1}
-                                max={60}
+                                max={10000}
                                 step={1}
                                 value={priceRange}
                                 onChange={(value) => setPriceRange(value as [number, number])}

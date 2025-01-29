@@ -44,14 +44,15 @@ Node.js & npm installed
 
 React.js for the frontend
 
-Express.js & MongoDB for the backend (if applicable)
+Typescript, Express.js & Mongoose for the backend (if applicable)
 
 Steps to Run Locally
 
 Clone the repository
 
-git clone https://github.com/yourusername/stationery-shop.git
-cd stationery-shop
+```bash
+git clone https://github.com/Moniruzzaman2525/Stationery-Shop.git for Frontend
+cd Stationery-Shop
 
 Install dependencies
 
@@ -60,22 +61,38 @@ npm install
 Start the development server
 
 npm run dev
+```
 
 Open in browser
 
-http://localhost:3000
+```bash
+http://localhost:5173
+```
+
+```bash
+git clone https://github.com/Moniruzzaman2525/stationery_shop_server.git for Backend
+cd stationery_shop_server
+
+Install dependencies
+
+npm install
+
+Start the development server
+
+npm run start:dev
+```
 
 🛒 Technologies Used
 
-Frontend: React.js, Tailwind CSS
+Frontend: React.js, Typescript, Tailwind CSS, Stripe
 
-Backend: Node.js, Express.js (if applicable)
+Backend: Typescript, Express.js, Mongoose (if applicable)
 
 Database: MongoDB (if applicable)
 
-Authentication: Firebase/Auth0 (if applicable)
+Authentication: JWT (if applicable)
 
-Payment Integration: Stripe/PayPal (if applicable)
+Payment Integration: Stripe (if applicable)
 
 🤝 Contributing
 
@@ -99,9 +116,5 @@ For inquiries or support, reach out to:
 
 📍 Address: 2100 Sherpur, Bangladesh
 
-📜 License
-
-This project is licensed under the MIT License.
-
-Made with ❤️ by NS Book Shop Team
+Made with ❤️ by Md Moniruzzaman
 
