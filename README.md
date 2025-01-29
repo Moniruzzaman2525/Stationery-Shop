@@ -2,6 +2,9 @@
 
 Welcome to NS Book Shop, your one-stop destination for high-quality books, arts and crafts supplies, stationery, and classroom essentials. This project is a web-based platform that provides an easy shopping experience for students, teachers, and art lovers.
 
+🌐 Live Demo
+🔗 Live Link: Visit NS Book Shop ([Replace # with actual live link](https://stationery-shop-dusky.vercel.app/))
+
 🚀 Features
 
 🛍️ Browse & Purchase: Easily explore and purchase products from different categories.
