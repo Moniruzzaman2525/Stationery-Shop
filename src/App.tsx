@@ -5,6 +5,7 @@ import Category from "./components/ui/Category";
 import BannerProduct from "./components/ui/BannerProduct";
 import Footer from "./components/ui/Footer";
 import ShoppingInfo from "./components/ui/ShoppingInfo";
+import TestimonialsPage from "./components/ui/TestimonialsPage";
 
 function App() {
   const location = useLocation();
@@ -18,6 +19,7 @@ function App() {
           <ShoppingInfo />
           <BannerProduct />
           <Category />
+          <TestimonialsPage />
         </>
       )}
       <Outlet />
