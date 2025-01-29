@@ -8,7 +8,8 @@ const productApi = baseApi.injectEndpoints({
                 url: '/orders/callback',
                 method: 'POST',
                 body: userInfo
-            })
+            }),
+            invalidatesTags: ['products']
         }),
         getUserOrder: builder.query({
             query: () => ({

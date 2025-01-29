@@ -11,7 +11,7 @@ export const productSchema = z.object({
     description: z.string({ required_error: 'Product description is required' }),
     photo: z
         .instanceof(File, { message: "Photo must be a valid file" })
-        .refine((file) => file.size > 0, "A file must be selected").optional(),
+        .refine((file) => file.size > 0, "A file must be selected"),
     price: z.number({ required_error: 'Product price is required' })
         .min(0.01, "Price must be greater than 0")
         .or(z.string().refine((val) => !isNaN(parseFloat(val)), "Price must be a valid number")),
