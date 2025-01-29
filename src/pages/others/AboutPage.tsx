@@ -16,7 +16,7 @@ const AboutPage = () => {
                 <Card
                     title="Our Mission"
                     bordered={false}
-                    className="shadow-md hover:shadow-lg transition"
+                    className="shadow-md hover:-translate-y-2 hover:shadow-xl transition"
                 >
                     <p>
                         To offer top-notch stationery and craft supplies that fuel creativity, improve organization, and enrich daily life.
@@ -25,7 +25,7 @@ const AboutPage = () => {
                 <Card
                     title="Our Vision"
                     bordered={false}
-                    className="shadow-md hover:shadow-lg transition"
+                    className="shadow-md hover:-translate-y-2 hover:shadow-xl transition"
                 >
                     <p>
                         To become a trusted name in stationery, celebrated for quality, affordability, and exceptional service.
@@ -45,7 +45,7 @@ const AboutPage = () => {
                         <Card
                             key={index}
                             bordered={false}
-                            className="shadow-md hover:shadow-lg transition"
+                            className="shadow-md hover:-translate-y-2 hover:shadow-xl transition"
                         >
                             <h3 className="font-bold text-lg text-gray-800">{value.title}</h3>
                             <p className="text-gray-600 mt-2">{value.description}</p>

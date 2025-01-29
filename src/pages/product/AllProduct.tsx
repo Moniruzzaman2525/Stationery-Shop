@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useCallback, useState } from "react";
 import { useGetAllProductsQuery } from "../../redux/feathers/product/productApi";
 import { TQueryParam } from "../../types";
-import { Input, Checkbox, Slider, Skeleton } from "antd";
+import { Input, Checkbox, Slider, Skeleton, Empty, Pagination } from "antd";
 import { debounce } from "lodash";
 import ProductCard from "../../components/ui/ProductCard";
 
@@ -9,7 +10,15 @@ const ProductPage = () => {
     const [searchTerm, setSearchTerm] = useState<string>("");
     const [params, setParams] = useState<TQueryParam[]>([]);
     const [priceRange, setPriceRange] = useState<[number, number]>([1, 10000]);
-    const { data: products, isFetching } = useGetAllProductsQuery(params);
+    const [page, setPage] = useState(1)
+    const [limit, setLimit] = useState<number>(8);
+    const { data: products, isFetching, isError } = useGetAllProductsQuery(
+        [
+            { name: 'limit', value: limit },
+            { name: 'page', value: page },
+            { name: 'sort', value: 'id' },
+            ...params]
+    );
 
     const categories: string[] = ["Books", "Art and Craft", "Stationery", "Classroom Supplies"];
     const availabilityOptions: string[] = ["In Stock", "Out of Stock"];
@@ -48,6 +57,8 @@ const ProductPage = () => {
         });
     };
 
+  
+
     const handlePriceChange = (value: [number, number]) => {
         setPriceRange(value);
         setParams((prevParams) => {
@@ -56,9 +67,15 @@ const ProductPage = () => {
         });
     };
 
+    const handlePageChange = (newPage: number) => {
+        setPage(newPage);
+    };
+
+
     return (
         <div className="py-24 bg-[#F9F9FB] min-h-screen px-6 md:px-40">
             <h1 className="text-2xl font-bold text-center mb-10">All Products</h1>
+
             {isFetching ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
                     {Array.from({ length: 6 }).map((_, index) => (
@@ -68,9 +85,20 @@ const ProductPage = () => {
                         </div>
                     ))}
                 </div>
+            ) : isError || !products?.data || products?.data?.length === 0 ? (
+                <div className="flex flex-col items-center justify-center min-h-[50vh]">
+                    <Empty
+                        description={
+                            <span className="text-gray-600 text-lg font-semibold">
+                                No products available
+                            </span>
+                        }
+                    />
+                    <p className="text-gray-500 mt-2">Try adjusting your filters or check back later.</p>
+                </div>
             ) : (
                 <div className="flex flex-col lg:flex-row gap-6">
-                    <aside className="bg-white shadow-lg rounded-lg p-6 w-full lg:w-1/4">
+                    <aside className="bg-white shadow-lg rounded-lg p-6 h-full w-full lg:w-1/4">
                         <div className="mb-6">
                             <Input
                                 placeholder="Search by category, brand, etc."
@@ -145,12 +173,20 @@ const ProductPage = () => {
                         </div>
                     </aside>
 
-
                     <main className="w-full lg:w-3/4">
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                             {products?.data?.map((product, index) => (
                                 <ProductCard product={product} key={index} />
                             ))}
+                        </div>
+                        <div className="flex justify-center mt-6">
+                            <Pagination
+                                current={page}
+                                pageSize={limit}
+                                total={products?.meta?.total || 0}
+                                onChange={handlePageChange}
+                                showSizeChanger={false}
+                            />
                         </div>
                     </main>
                 </div>

@@ -31,7 +31,8 @@ const productApi = baseApi.injectEndpoints({
                 url: '/products',
                 method: 'POST',
                 body: userInfo
-            })
+            }),
+            invalidatesTags: ['products']
         }),
         confirmOrder: builder.mutation({
             query: (userInfo) => ({

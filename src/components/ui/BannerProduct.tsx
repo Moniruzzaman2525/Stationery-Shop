@@ -1,7 +1,7 @@
 import { useGetAllProductsQuery } from "../../redux/feathers/product/productApi";
 import ProductCard from "../../components/ui/ProductCard";
 import { useNavigate } from "react-router-dom";
-import { Skeleton } from "antd";
+import { Empty, Skeleton } from "antd";
 
 const BannerProduct = () => {
     const { data: products, isFetching, isError } = useGetAllProductsQuery(undefined);
@@ -25,9 +25,8 @@ const BannerProduct = () => {
                     ))}
                 </div>
             ) : isError || !displayedProducts || displayedProducts.length === 0 ? (
-                <div className="text-center py-10">
-                    <h2 className="text-gray-600 text-lg font-semibold">No products available at the moment</h2>
-                    <p className="text-gray-500">Please check back later.</p>
+                <div className="flex flex-col justify-center items-center h-100">
+                    <Empty description={`No products available`} />
                 </div>
             ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">

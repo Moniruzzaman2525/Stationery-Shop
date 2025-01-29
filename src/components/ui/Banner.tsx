@@ -54,13 +54,13 @@ const Banner = () => {
 
                 <button
                     onClick={handlePrev}
-                    className="absolute left-5 top-1/2 transform -translate-y-1/2 bg-gray-800 !text-white rounded-full w-10 h-10 flex justify-center items-center z-10"
+                    className="absolute left-5 cursor-pointer top-1/2 transform -translate-y-1/2 bg-gray-800 !text-white rounded-full w-10 h-10 flex justify-center items-center z-10"
                 >
                     &#9664;
                 </button>
                 <button
                     onClick={handleNext}
-                    className="absolute right-5 top-1/2 transform -translate-y-1/2 bg-gray-800 !text-white rounded-full w-10 h-10 flex justify-center items-center z-10"
+                    className="absolute right-5 cursor-pointer top-1/2 transform -translate-y-1/2 bg-gray-800 !text-white rounded-full w-10 h-10 flex justify-center items-center z-10"
                 >
                     &#9654;
                 </button>
