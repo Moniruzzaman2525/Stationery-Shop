@@ -1,4 +1,4 @@
-## 📚 NS Books Shop
+### 📚 NS Books Shop
 
 Welcome to NS Book Shop, your one-stop destination for high-quality books, arts and crafts supplies, stationery, and classroom essentials. This project is a web-based platform that provides an easy shopping experience for students, teachers, and art lovers.
 
