@@ -65,10 +65,10 @@ const Banner = () => {
                     &#9654;
                 </button>
 
-                <div className="absolute bottom-48 left-1/2 transform -translate-x-1/2 z-10">
+                <div className="absolute bottom-40 left-1/2 transform -translate-x-1/2 z-10">
                     <Link to="/all-products">
                         <button className="px-6 py-6 cursor-pointer bg-[#001845] text-white text-lg rounded-md shadow-md transition hover:bg-[#002855]">
-                            <img className="w-[200px] object-cover" src={seeProductArrow} alt="See Products" />
+                            <img className="w-[150px] object-cover" src={seeProductArrow} alt="See Products" />
                         </button>
                     </Link>
                 </div>
