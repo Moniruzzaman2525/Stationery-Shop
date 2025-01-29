@@ -5,7 +5,7 @@ import { toast } from "sonner";
 
 
 const baseQuery = fetchBaseQuery({
-    baseUrl: 'https://stationary-shop-server-c4zetkcsy-moniruzzaman2525s-projects.vercel.app/api',
+    baseUrl: 'https://stationary-shop-server-7b6gtbh8a-moniruzzaman2525s-projects.vercel.app/api',
     credentials: 'include',
     prepareHeaders: (headers, { getState }) => {
         const token = (getState() as RootState).auth.token
@@ -28,7 +28,7 @@ const baseQueryRefreshToken: BaseQueryFn<FetchArgs, BaseQueryApi, DefinitionType
     }
 
     if (result?.error?.status === 401) {
-        const res = await fetch('https://stationary-shop-server-c4zetkcsy-moniruzzaman2525s-projects.vercel.app/api/auth/refresh-token', {
+        const res = await fetch('https://stationary-shop-server-7b6gtbh8a-moniruzzaman2525s-projects.vercel.app/api/auth/refresh-token', {
             method: 'POST',
             credentials: 'include'
         })
