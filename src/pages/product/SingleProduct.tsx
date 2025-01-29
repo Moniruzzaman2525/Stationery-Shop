@@ -59,8 +59,7 @@ const SingleProduct = () => {
         );
     }
     return (
-        <div className="flex bg-[#F9F9FB] flex-col md:flex-row  gap-8 py-24">
-            {/* Product Image */}
+        <div className="flex bg-[#F9F9FB] flex-col md:flex-row  gap-8 px-6 md:px-0 py-24">
             <div className="w-full md:w-1/2 flex items-center justify-center">
                 <img
                     src={singleProductData?.photo || "/placeholder-image.png"}
@@ -69,7 +68,6 @@ const SingleProduct = () => {
                 />
             </div>
 
-            {/* Product Details */}
             <div className="w-full md:w-1/2 flex flex-col justify-between">
                 <div className="flex flex-col flex-grow">
                     <div className="text-sm text-gray-500 mb-2">

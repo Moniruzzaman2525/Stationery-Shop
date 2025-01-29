@@ -82,21 +82,21 @@ const Footer = () => {
             <i className="fab fa-facebook-f"></i>
           </a>
           <a
-            href="#"
+            href="https://x.com/Monir8699"
             className="text-gray-400 hover:text-yellow-400 transition"
             aria-label="Twitter"
           >
             <i className="fab fa-twitter"></i>
           </a>
           <a
-            href="#"
+            href="https://www.instagram.com/monir_2525/"
             className="text-gray-400 hover:text-yellow-400 transition"
             aria-label="Instagram"
           >
             <i className="fab fa-instagram"></i>
           </a>
           <a
-            href="#"
+            href="https://www.linkedin.com/in/moniruzzaman25/"
             className="text-gray-400 hover:text-yellow-400 transition"
             aria-label="LinkedIn"
           >
