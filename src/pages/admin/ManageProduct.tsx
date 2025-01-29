@@ -121,10 +121,10 @@ export const ManageProduct = () => {
         <Skeleton active />
       ) : (
         <Table
-          loading={isFetching}
           columns={columns}
           dataSource={tableData}
           onChange={onChange}
+          loading={isFetching}
           scroll={{ x: "max-content" }}
           rowKey={(record) => record._id}
           bordered

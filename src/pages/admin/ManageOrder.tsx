@@ -125,8 +125,11 @@ const ManageOrder = () => {
                 <Table
                     columns={columns}
                     dataSource={dataSource}
-                    pagination={{ pageSize: 5 }}
-                    scroll={{ x: '100%' }}
+                    scroll={{ x: "max-content" }}
+                    rowKey={(record) => record._id}
+                    bordered
+                    pagination={{ pageSize: 5, showSizeChanger: true }}
+                    className="rounded-lg shadow-md"
                 />
             )}
         </div>
