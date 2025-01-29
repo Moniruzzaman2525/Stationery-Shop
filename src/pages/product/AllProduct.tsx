@@ -56,7 +56,7 @@ const ProductPage = () => {
         });
     };
 
-  
+
 
     const handlePriceChange = (value: [number, number]) => {
         setPriceRange(value);
@@ -83,17 +83,6 @@ const ProductPage = () => {
                             <Skeleton active paragraph={{ rows: 2 }} />
                         </div>
                     ))}
-                </div>
-            ) : isError || !products?.data || products?.data?.length === 0 ? (
-                <div className="flex flex-col items-center justify-center min-h-[50vh]">
-                    <Empty
-                        description={
-                            <span className="text-gray-600 text-lg font-semibold">
-                                No products available
-                            </span>
-                        }
-                    />
-                    <p className="text-gray-500 mt-2">Try adjusting your filters or check back later.</p>
                 </div>
             ) : (
                 <div className="flex flex-col lg:flex-row gap-6">
@@ -172,22 +161,34 @@ const ProductPage = () => {
                         </div>
                     </aside>
 
-                    <main className="w-full lg:w-3/4">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                            {products?.data?.map((product, index) => (
-                                <ProductCard product={product} key={index} />
-                            ))}
-                        </div>
-                        <div className="flex justify-center mt-6">
-                            <Pagination
-                                current={page}
-                                pageSize={8}
-                                total={products?.meta?.total || 0}
-                                onChange={handlePageChange}
-                                showSizeChanger={false}
+                    {isError || !products?.data || products?.data?.length === 0 ? (
+                        <div className="flex flex-col w-[60%] items-center justify-center min-h-[50vh]">
+                            <Empty
+                                description={
+                                    <span className="text-gray-600 text-lg font-semibold">
+                                        No products available
+                                    </span>
+                                }
                             />
-                        </div>
-                    </main>
+                            <p className="text-gray-500 mt-2">Try adjusting your filters or check back later.</p>
+                        </div>) :
+                        (<main className="w-full lg:w-3/4">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                                {products?.data?.map((product, index) => (
+                                    <ProductCard product={product} key={index} />
+                                ))}
+                            </div>
+                            <div className="flex justify-center mt-6">
+                                <Pagination
+                                    current={page}
+                                    pageSize={8}
+                                    total={products?.meta?.total || 0}
+                                    onChange={handlePageChange}
+                                    showSizeChanger={false}
+                                />
+                            </div>
+                        </main>)
+                    }
                 </div>
             )}
         </div>
