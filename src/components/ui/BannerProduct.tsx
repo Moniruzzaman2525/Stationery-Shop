@@ -45,7 +45,6 @@ const BannerProduct = () => {
                 <button
                     className="bg-[#001845] cursor-pointer !text-white px-6 py-3 rounded-lg hover:bg-[#003366] transition"
                     onClick={() => navigate("/all-products")}
-                    disabled={!displayedProducts || displayedProducts.length === 0}
                 >
                     View All
                 </button>
