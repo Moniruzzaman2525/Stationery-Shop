@@ -20,6 +20,7 @@ export type TOrder = {
   product: TProduct;
   totalAmount: number;
   currency: string;
+  quantity?:number;
   paymentId: string;
   status: 'Pending' | 'Shipped';
   paymentStatus: string;

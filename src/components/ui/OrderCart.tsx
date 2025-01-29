@@ -16,7 +16,7 @@ const OrderCart:  React.FC<ProductCardProps> = ({order}) => {
                             <span className="text-lg font-semibold">
                                 {order.product.name}
                             </span>
-                            <Text type="secondary">Quantity: {order?.product?.quantity}</Text>
+                            <Text type="secondary">Quantity: {order?.quantity}</Text>
                         </div>
                     }
                     description={
