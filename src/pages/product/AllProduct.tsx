@@ -161,18 +161,19 @@ const ProductPage = () => {
                         </div>
                     </aside>
 
-                    {isError || !products?.data || products?.data?.length === 0 ? (
-                        <div className="flex flex-col w-[60%] items-center justify-center min-h-[50vh]">
-                            <Empty
-                                description={
-                                    <span className="text-gray-600 text-lg font-semibold">
-                                        No products available
-                                    </span>
-                                }
-                            />
-                            <p className="text-gray-500 mt-2">Try adjusting your filters or check back later.</p>
-                        </div>) :
-                        (<main className="w-full lg:w-3/4">
+
+                    <main className="w-full lg:w-3/4">
+                        {isError || !products?.data || products?.data?.length === 0 ? (
+                            <div className="flex flex-col items-center justify-center min-h-[50vh]">
+                                <Empty
+                                    description={
+                                        <span className="text-gray-600 text-lg font-semibold">
+                                            No products available
+                                        </span>
+                                    }
+                                />
+                                <p className="text-gray-500 mt-2">Try adjusting your filters or check back later.</p>
+                            </div>) : <div>
                             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                                 {products?.data?.map((product, index) => (
                                     <ProductCard product={product} key={index} />
@@ -187,8 +188,8 @@ const ProductPage = () => {
                                     showSizeChanger={false}
                                 />
                             </div>
-                        </main>)
-                    }
+                        </div>}
+                    </main>
                 </div>
             )}
         </div>
