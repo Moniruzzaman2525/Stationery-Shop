@@ -1,9 +1,10 @@
-📚 Stationery Shop
+📚 NS Books Shop
 
 Welcome to NS Book Shop, your one-stop destination for high-quality books, arts and crafts supplies, stationery, and classroom essentials. This project is a web-based platform that provides an easy shopping experience for students, teachers, and art lovers.
 
 🌐 Live Demo
-🔗 Live Link: Visit NS Book Shop ([Replace # with actual live link](https://stationery-shop-dusky.vercel.app/))
+🔗 Live Link: Visit NS Book Shop ([#Ns Books](https://stationery-shop-dusky.vercel.app/))
+🔗 Server Link: Visit NS Book Shop ([#Server](https://stationary-shop-server-chi.vercel.app))
 
 🚀 Features
 
@@ -20,6 +21,7 @@ Welcome to NS Book Shop, your one-stop destination for high-quality books, arts 
 📝 Customer Reviews & Ratings: Users can leave feedback on products.
 
 📞 Contact & Support: Reach out to us via the contact section.
+
 
 📂 Categories
 
@@ -38,6 +40,7 @@ High-quality pens, notebooks, markers, and other writing essentials.
 🏫 Classroom Supplies
 
 All necessary materials for teachers and students, including whiteboards, charts, and organizers.
+
 
 🛠️ Installation & Setup
 
@@ -85,9 +88,10 @@ Start the development server
 npm run start:dev
 ```
 
+
 🛒 Technologies Used
 
-Frontend: React.js, Typescript, Tailwind CSS, Stripe
+Frontend: React.js, Redux, Typescript, Tailwind CSS, Stripe
 
 Backend: Typescript, Express.js, Mongoose (if applicable)
 
@@ -96,6 +100,7 @@ Database: MongoDB (if applicable)
 Authentication: JWT (if applicable)
 
 Payment Integration: Stripe (if applicable)
+
 
 🤝 Contributing
 
@@ -110,6 +115,7 @@ Commit changes (git commit -m 'Add feature')
 Push to GitHub (git push origin feature-name)
 
 Open a Pull Request
+
 
 📞 Contact
 
