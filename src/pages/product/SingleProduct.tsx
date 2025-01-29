@@ -60,13 +60,13 @@ const SingleProduct = () => {
     }
     return (
         <div className="flex bg-[#F9F9FB] flex-col md:flex-row  gap-8 px-6 md:px-0 py-30">
-           <div className="w-full md:w-1/2 flex items-center justify-center md:min-h-[500px]">
-            <img
-                src={singleProductData?.photo || "/placeholder-image.png"}
-                alt={singleProductData?.name || "Product"}
-                className="rounded-lg w-[50%] shadow-lg md:max-h-[500px] object-contain"
-            />
-        </div>
+            <div className="w-full md:w-1/2 flex items-center justify-center">
+                <img
+                    src={singleProductData?.photo ?? "/placeholder-image.png"}
+                    alt={singleProductData?.name ?? "Product Image"}
+                    className="rounded-lg w-full max-w-xs md:max-w-md lg:max-w-lg shadow-lg object-contain h-auto max-h-[500px]"
+                />
+            </div>
 
             <div className="w-full md:w-1/2 flex flex-col justify-between">
                 <div className="flex flex-col flex-grow">

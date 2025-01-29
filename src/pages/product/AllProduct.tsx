@@ -15,7 +15,6 @@ const ProductPage = () => {
         [
             { name: 'limit', value: 8 },
             { name: 'page', value: page },
-            { name: 'sort', value: 'id' },
             ...params]
     );
 
