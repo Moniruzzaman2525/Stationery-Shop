@@ -75,7 +75,7 @@ const Footer = () => {
         </p>
         <div className="flex justify-center space-x-4 mt-4">
           <a
-            href="#"
+            href="https://www.facebook.com/moniruzzaman255/"
             className="text-gray-400 hover:text-yellow-400 transition"
             aria-label="Facebook"
           >

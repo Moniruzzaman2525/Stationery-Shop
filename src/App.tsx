@@ -6,6 +6,8 @@ import BannerProduct from "./components/ui/BannerProduct";
 import Footer from "./components/ui/Footer";
 import ShoppingInfo from "./components/ui/ShoppingInfo";
 import TestimonialsPage from "./components/ui/TestimonialsPage";
+import "@fortawesome/fontawesome-free/css/all.min.css";
+
 
 function App() {
   const location = useLocation();
