@@ -55,7 +55,7 @@ const Login = () => {
         <Row
             justify="center"
             align="middle"
-            style={{ height: "100vh", backgroundColor: "#f9f6f4" }}
+            style={{ height: "100vh", backgroundColor: "#F9F9FB" }}
         >
             <SPForm
                 resolver={zodResolver(loginSchema)}
